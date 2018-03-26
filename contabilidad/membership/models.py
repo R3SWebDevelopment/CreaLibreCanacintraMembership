@@ -132,6 +132,9 @@ class MembershipRequest(MemberInfo):
     member = models.OneToOneField("Member", related_name="request")
     attachment = models.ManyToManyField(AttachedFile)
 
+    def __str__(self):
+        return "{} - {}".format(self.requested_by, self.created_at)
+
 
 class UpdateRequest(MemberInfo):
     member = models.OneToOneField("Member", related_name="update_requests")
