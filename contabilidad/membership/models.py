@@ -39,6 +39,13 @@ FILE_TYPE_CHOICES = (
     (LAST_EMPLOYERS_FEED, "Ultima cuota Patronal"),
 )
 
+
+def get_file_type_label(type):
+    for t in FILE_TYPE_CHOICES:
+        if t[0] == type:
+            return t[1]
+    return None
+
 REQUIRED_FILES = {
     SAT_PERSON_TYPE: [
         OFFICIAL_ID,
@@ -110,6 +117,10 @@ class MemberInfo(models.Model):
 class AttachedFile(models.Model):
     type = models.CharField(max_length=100, choices=FILE_TYPE_CHOICES)
     file = models.FileField(upload_to="attachment")
+
+    def __str__(self):
+        label = get_file_type_label(self.type)
+        return "{} - {}".format(label if label is not None else self.type, self.file.name)
 
 
 class MembershipRequest(MemberInfo):
