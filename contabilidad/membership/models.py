@@ -153,3 +153,4 @@ class Member(MemberInfo):
     registration_year = models.IntegerField(null=True, default=None)
     sector = models.IntegerField(null=True, default=None)
     branch = models.IntegerField(null=True, default=None)
+    rfc = models.CharField(max_length=13, null=True, default=None)
