@@ -159,6 +159,7 @@ class Member(MemberInfo):
     payment_date = models.DateField(null=True, default=None)
     business_contact = models.CharField(max_length=250, null=True, default=None)
     membership_feed = models.DecimalField(null=True, default=None, max_digits=12, decimal_places=2)
+    allowed_person = models.ManyToManyField(User, related_name="members")
 
     def __str__(self):
         return "{}".format(self.rfc)
