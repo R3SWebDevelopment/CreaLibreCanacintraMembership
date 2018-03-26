@@ -144,6 +144,9 @@ class UpdateRequest(MemberInfo):
     attended_by = models.ForeignKey(User, related_name="update_requests_approved")
     validated = models.NullBooleanField(null=True, default=None)
 
+    def __str__(self):
+        return "{} - {} - {}".format(self.member, self.requested_by, self.created_at)
+
 
 class Member(MemberInfo):
     registration_number = models.IntegerField(null=True, default=None)
