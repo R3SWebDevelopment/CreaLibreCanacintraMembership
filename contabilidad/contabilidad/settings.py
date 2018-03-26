@@ -72,9 +72,9 @@ INSTALLED_APPS = [
     'rest_framework_tracking',
     'billing',
     'avatar',
-    'ocr',
+    # 'ocr',
     'anymail',
-    'customer',
+    # 'customer',
     'users',
     'notifications',
 ]
