@@ -154,3 +154,8 @@ class Member(MemberInfo):
     sector = models.IntegerField(null=True, default=None)
     branch = models.IntegerField(null=True, default=None)
     rfc = models.CharField(max_length=13, null=True, default=None)
+    promoter_office = models.CharField(max_length=250, null=True, default=None)
+    promoter_name = models.CharField(max_length=250, null=True, default=None)
+    payment_date = models.DateField(null=True, default=None)
+    business_contact = models.CharField(max_length=250, null=True, default=None)
+    membership_feed = models.DecimalField(null=True, default=None, max_digits=12, decimal_places=2)
