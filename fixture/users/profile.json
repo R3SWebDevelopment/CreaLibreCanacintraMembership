@@ -1,0 +1,42 @@
+[
+  {
+    "model": "users.profile",
+    "pk": 1,
+    "fields": {
+      "mobile_number": {},
+      "user": 2,
+      "notify_by_email": true,
+      "notify_by_sms": false
+    }
+  },
+  {
+    "model": "users.profile",
+    "pk": 2,
+    "fields": {
+      "mobile_number": {},
+      "user": 3,
+      "notify_by_email": true,
+      "notify_by_sms": false
+    }
+  },
+  {
+    "model": "users.profile",
+    "pk": 3,
+    "fields": {
+      "mobile_number": {},
+      "user": 4,
+      "notify_by_email": true,
+      "notify_by_sms": false
+    }
+  },
+  {
+    "model": "users.profile",
+    "pk": 4,
+    "fields": {
+      "mobile_number": {},
+      "user": 1,
+      "notify_by_email": true,
+      "notify_by_sms": false
+    }
+  }
+]
