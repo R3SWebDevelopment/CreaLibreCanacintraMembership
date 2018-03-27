@@ -55,6 +55,10 @@ class LogInSerializer(LoginSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     mobile_number = serializers.JSONField(default={'number': '', 'country_code': ''})
+    is_admin = serializers.SerializerMethodField()
+
+    def get_is_admin(self):
+        return False
 
     class Meta:
         model = Profile
