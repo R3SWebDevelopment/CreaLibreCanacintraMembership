@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_auth.serializers import LoginSerializer, UserDetailsSerializer
 from django.contrib.auth.models import User
+from customer.models import Company
 from users.models import Profile
 from avatar.models import Avatar
 from customer.utils import validate_rfc
@@ -37,6 +38,12 @@ class RegistrationSerializer(RegisterSerializer):
         user.first_name = cleaned_data.get('first_name', '')
         user.last_name = cleaned_data.get('last_name', '')
         user.save()
+        rfc = cleaned_data.get('rfc', '')
+        business_name = cleaned_data.get('business_name', '')
+        company, created = Company.objects.get_or_create(rfc=rfc)
+        company.full_name = business_name
+        company.save()
+        company.collaborators.add(user)
         return user
 
     def get_cleaned_data(self):
