@@ -4,6 +4,7 @@ from rest_auth.serializers import LoginSerializer, UserDetailsSerializer
 from django.contrib.auth.models import User
 from users.models import Profile
 from avatar.models import Avatar
+from customer.utils import validate_rfc
 
 
 class RegistrationSerializer(RegisterSerializer):
@@ -18,6 +19,11 @@ class RegistrationSerializer(RegisterSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+    def validate_rfc(self, value):
+        if not validate_rfc(value):
+            raise serializers.ValidationError("El RFC no tiene el formato adecuado")
+        return value
 
     def save(self, request, *args, **kwargs):
         user = super(RegistrationSerializer, self).save(request)
