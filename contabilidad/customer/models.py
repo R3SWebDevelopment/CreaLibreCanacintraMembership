@@ -11,6 +11,9 @@ class Company(models.Model):
                            help_text=_('Use the following format XXX[X]999999XXX'))
     address = JSONField(default={})
     collaborators = models.ManyToManyField(User, related_name='companies', verbose_name=_('Collaborators'))
+    has_membership = models.BooleanField(default=False)
+    membership_has_expired = models.BooleanField(default=False)
+    expiration_date = models.DateField(null=True, default=None)
 
     class Meta:
         ordering = ['rfc']
