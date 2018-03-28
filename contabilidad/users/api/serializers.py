@@ -9,9 +9,11 @@ from avatar.models import Avatar
 class RegistrationSerializer(RegisterSerializer):
     first_name = serializers.CharField(required=True, write_only=True)
     last_name = serializers.CharField(required=True, write_only=True)
-    country_phone_code = serializers.CharField(required=True, write_only=True, max_length=4)
-    mobile_number = serializers.CharField(required=True, write_only=True, max_length=10)
+    country_phone_code = serializers.CharField(required=False, write_only=True, max_length=4)
+    mobile_number = serializers.CharField(required=False, write_only=True, max_length=10)
     username = serializers.HiddenField(default="SAME")
+    rfc = serializers.CharField(required=True, write_only=True, max_length=13)
+    business_name = serializers.CharField(required=True, write_only=True, max_length=250)
 
     class Meta:
         model = User
