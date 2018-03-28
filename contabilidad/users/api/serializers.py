@@ -54,6 +54,8 @@ class RegistrationSerializer(RegisterSerializer):
             "last_name": self.validated_data.get('last_name', ''),
             "country_phone_code": self.validated_data.get('country_phone_code', ''),
             "mobile_number": self.validated_data.get('mobile_number', ''),
+            "business_name": self.validated_data.get('business_name', ''),
+            "rfc": self.validated_data.get('rfc', ''),
         })
         return cleaned_data
 
