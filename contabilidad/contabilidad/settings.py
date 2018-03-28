@@ -74,7 +74,7 @@ INSTALLED_APPS = [
     'avatar',
     # 'ocr',
     'anymail',
-    # 'customer',
+    'customer',
     'users',
     'notifications',
     'membership',
