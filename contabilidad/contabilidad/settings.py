@@ -50,6 +50,7 @@ PROJECT_ROOT = os.path.dirname(DJANGO_ROOT)
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -81,6 +82,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -335,3 +337,5 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
 
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
