@@ -340,3 +340,9 @@ JWT_AUTH = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+#  Front-End Settings
+
+CLIENT_APP_DOMAIN = os.environ.get('CLIENT_APP_DOMAIN', 'http://localhost:3000')
+FRONT_END_SIGNUP_VERIFICATION_URL = os.environ.get('FRONT_END_SIGNUP_VERIFICATION_URL', '/signup/verification/')
