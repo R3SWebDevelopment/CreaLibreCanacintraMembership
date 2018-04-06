@@ -1,9 +1,13 @@
 from django import template
-from django.contrib.auth.models import User
+from django.conf import settings
 
 register = template.Library()
 
 
 @register.simple_tag
 def get_signup_verification_link(user, key):
-    return 'http://localhost:3000/signup/verification/{}/'.format(key)
+    url = '{domain}{path}{key}/'.format(
+        domain=settings.CLIENT_APP_DOMAIN,
+        path=settings.FRONT_END_SIGNUP_VERIFICATION_URL,
+        key=key)
+    return url
