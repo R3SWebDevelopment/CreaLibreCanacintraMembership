@@ -335,7 +335,7 @@ if USE_CELERY:
     CELERYD_CONCURRENCY = 1
 
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=1800),
 
 }
 
