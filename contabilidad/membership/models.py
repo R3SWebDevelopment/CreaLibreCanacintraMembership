@@ -113,6 +113,16 @@ class MemberInfo(models.Model):
     def required_fields(self):
         return REQUIRED_FILES.get(int(self.sat_taxpayer_type)) if self.sat_taxpayer_type is not None else []
 
+    def setAddress(self, street_name_1=None, street_number=None, apartment_number=None, suburb=None, zip_code=None,
+                   municipality=None, state=None):
+        self.street_name_1 = street_name_1
+        self.street_number = street_number
+        self.apartment_number = apartment_number
+        self.suburb = suburb
+        self.zip_code = zip_code
+        self.municipality = municipality
+        self.state = state
+
 
 class AttachedFile(models.Model):
     type = models.CharField(max_length=100, choices=FILE_TYPE_CHOICES)
