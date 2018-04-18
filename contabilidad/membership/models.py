@@ -144,9 +144,9 @@ class MembershipRequest(MemberInfo):
 class UpdateRequest(MemberInfo):
     member = models.OneToOneField("Member", related_name="update_requests")
     created_at = models.DateTimeField(auto_now_add=True)
-    requested_by = models.ForeignKey(User, related_name="update_requests")
+    requested_by = models.ForeignKey(User, related_name="update_requests", null=True)
     requested_at = models.DateTimeField(null=True, default=None)
-    attended_by = models.ForeignKey(User, related_name="update_requests_approved")
+    attended_by = models.ForeignKey(User, related_name="update_requests_approved", null=True)
     validated = models.NullBooleanField(null=True, default=None)
 
     def __str__(self):
