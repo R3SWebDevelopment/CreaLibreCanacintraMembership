@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.postgres.fields import JSONField
 
 from django.contrib.auth.models import User
+from membership.models import MembershipRequest
 
 
 class Company(models.Model):
@@ -17,7 +18,7 @@ class Company(models.Model):
 
     @property
     def membership_request(self):
-        return None
+        return MembershipRequest.objects.filter(rfc=self.rfc).first()
 
     class Meta:
         ordering = ['rfc']
