@@ -134,7 +134,7 @@ class MembershipRequest(MemberInfo):
     requested_at = models.DateTimeField(null=True, default=None)
     attended_by = models.ForeignKey(User, related_name="membership_requests_approved", null=True)
     validated = models.NullBooleanField(null=True, default=None)
-    member = models.OneToOneField("Member", related_name="request")
+    member = models.OneToOneField("Member", related_name="request", null=True)
     attachment = models.ManyToManyField(AttachedFile)
 
     def __str__(self):
