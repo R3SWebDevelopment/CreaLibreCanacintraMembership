@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.contrib.auth.models import User
+import re
 
 SAT_PERSON_TYPE = 1
 SAT_ORGANIZATION_TYPE = 2
@@ -110,6 +111,30 @@ class MemberInfo(models.Model):
     class Meta:
         abstract = True
 
+    def __figure_sat_taxpayer_type(self):
+        if self.rfc:
+            is_person_pattern = re.compile(r"[A-Z]{4}[0-9]{6}[A-Z0-9]{3}", re.I)
+            is_company_pattern = re.compile(r"[A-Z]{3}[0-9]{6}[A-Z0-9]{3}", re.I)
+            if is_person_pattern.match(self.rfc) is not None:
+                self.sat_taxpayer_type = SAT_PERSON_TYPE
+                self.save()
+            elif is_company_pattern.match(self.rfc) is not None:
+                self.sat_taxpayer_type = SAT_ORGANIZATION_TYPE
+                self.save()
+
+    @property
+    def is_person(self):
+        if self.sat_taxpayer_type is None:
+            self.__figure_sat_taxpayer_type()
+        return self.sat_taxpayer_type == SAT_PERSON_TYPE
+
+    @property
+    def is_company(self):
+        if self.sat_taxpayer_type is None:
+            self.__figure_sat_taxpayer_type()
+        return self.sat_taxpayer_type == SAT_ORGANIZATION_TYPE
+
+
     @property
     def required_fields(self):
         return REQUIRED_FILES.get(int(self.sat_taxpayer_type)) if self.sat_taxpayer_type is not None else []
@@ -139,7 +164,6 @@ class MembershipRequest(MemberInfo):
     registration_year = models.IntegerField(null=True, default=None)
     sector = models.IntegerField(null=True, default=None)
     branch = models.IntegerField(null=True, default=None)
-    rfc = models.CharField(max_length=13, null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     requested_by = models.ForeignKey(User, related_name="membership_requests", null=True)
     requested_at = models.DateTimeField(null=True, default=None)
@@ -169,7 +193,6 @@ class Member(MemberInfo):
     registration_year = models.IntegerField(null=True, default=None)
     sector = models.IntegerField(null=True, default=None)
     branch = models.IntegerField(null=True, default=None)
-    rfc = models.CharField(max_length=13, null=True, default=None)
     promoter_office = models.CharField(max_length=250, null=True, default=None)
     promoter_name = models.CharField(max_length=250, null=True, default=None)
     payment_date = models.DateField(null=True, default=None)
