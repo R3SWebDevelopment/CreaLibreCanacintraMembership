@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import MembershipRequestSerializer
-from ..models import MembershipRequest, Member
+from ..models import MembershipRequest
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 
 
 class MyMembershipRequestView(APIView):
@@ -26,7 +27,15 @@ class MyMembershipRequestView(APIView):
                 object.save()
         return object
 
-    def get(self, request, format=None, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         object = self.get_object(*args, **kwargs)
         serializer = MembershipRequestSerializer(object)
         return Response(serializer.data)
+
+    def patch(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
