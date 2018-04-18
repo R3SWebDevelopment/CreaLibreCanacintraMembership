@@ -66,6 +66,7 @@ REQUIRED_FILES = {
 
 
 class MemberInfo(models.Model):
+    rfc = models.CharField(max_length=13, null=True, default=None)
     sat_taxpayer_type = models.IntegerField(null=True, default=None, choices=SAT_TAXPAYER_TYPE)
     business_name = models.CharField(max_length=250, null=True, default=None)
     trade_name = models.CharField(max_length=250, null=True, default=None)
