@@ -77,7 +77,7 @@ class MemberInfo(models.Model):
     municipality = models.CharField(max_length=250, null=True, default=None)
     state = models.CharField(max_length=250, null=True, default=None)
     # phone Format [{"area_code":"999|99", "number": "9999-9999|999-9999", "extension":["99","999"]}]
-    phone = ArrayField(JSONField())
+    phone = ArrayField(JSONField(), null=True)
     mobile = models.CharField(max_length=14, null=True, default=None)
     main_activity_description = models.CharField(max_length=250, null=True, default=None)
     scian_code = models.CharField(max_length=250, null=True, default=None)
@@ -95,15 +95,15 @@ class MemberInfo(models.Model):
     #   "number": "9999-9999|999-9999",
     #   "extension":["99","999"]
     # }
-    ceo = JSONField()
-    legal_representative = JSONField()
-    main_representative = JSONField()
+    ceo = JSONField(null=True)
+    legal_representative = JSONField(null=True)
+    main_representative = JSONField(null=True)
     # other representative have the same format as the CEO, legal representative and main representative plus additional
     # fields
     # {
     #   "area_name": "AAAAAA AAAAA AAAAA"
     # }
-    other_representative = JSONField()
+    other_representative = JSONField(null=True)
     website = models.URLField(null=True, default=None)
 
     class Meta:
@@ -124,6 +124,11 @@ class AttachedFile(models.Model):
 
 
 class MembershipRequest(MemberInfo):
+    registration_number = models.IntegerField(null=True, default=None)
+    registration_year = models.IntegerField(null=True, default=None)
+    sector = models.IntegerField(null=True, default=None)
+    branch = models.IntegerField(null=True, default=None)
+    rfc = models.CharField(max_length=13, null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     requested_by = models.ForeignKey(User, related_name="membership_requests")
     requested_at = models.DateTimeField(null=True, default=None)
