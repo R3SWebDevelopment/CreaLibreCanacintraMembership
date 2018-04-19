@@ -202,3 +202,18 @@ class Member(MemberInfo):
 
     def __str__(self):
         return "{}".format(self.rfc)
+
+
+class State(models.Model):
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+
+class Municipality(models.Model):
+    state = models.ForeignKey(State, related_name="municipality")
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return "{} - {}".format(self.state, self.name)
