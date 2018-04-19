@@ -206,6 +206,9 @@ class Member(MemberInfo):
 class State(models.Model):
     name = models.CharField(max_length=250)
 
+    class Meta:
+        ordering = ('name', )
+
     def __str__(self):
         return "{}".format(self.name)
 
@@ -213,6 +216,9 @@ class State(models.Model):
 class Municipality(models.Model):
     state = models.ForeignKey(State, related_name="municipality")
     name = models.CharField(max_length=250)
+
+    class Meta:
+        ordering = ('state', 'name')
 
     def __str__(self):
         return "{} - {}".format(self.state, self.name)
