@@ -33,6 +33,9 @@ class MyMembershipRequestView(APIView):
         return Response(serializer.data)
 
     def patch(self, request, *args, **kwargs):
+        print("AQUI")
+        print("request: {}".format(dir(request)))
+        print("DATA: {}".format(request.data))
         object = self.get_object(*args, **kwargs)
         serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
         if serializer.is_valid():

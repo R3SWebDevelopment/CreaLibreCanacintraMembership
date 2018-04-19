@@ -8,9 +8,11 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MembershipRequest
-        fields = '__all__'
+        exclude = ('attachment',)
 
     def validate(self, data):
+        print(data)
+
         is_person = data.get('is_person', None)
         if is_person is not None:
             del data['is_person']
@@ -23,8 +25,6 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
 
         if is_person is not None or is_company is not None:
             data['sat_taxpayer_type'] = SAT_PERSON_TYPE if is_person else SAT_ORGANIZATION_TYPE if is_company else None
-
-        print(data)
 
         return data
 
