@@ -1,4 +1,4 @@
-from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE
+from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality
 from rest_framework import serializers
 
 
@@ -30,3 +30,18 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         return super(MembershipRequestSerializer, self).update(instance, validated_data)
+
+
+class MunicipalitySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Municipality
+        fields = '__all__'
+
+
+class StateSerializer(serializers.ModelSerializer):
+    municipality = MunicipalitySerializer(many=True, source='municipality.all')
+
+    class Meta:
+        model = State
+        fields = '__all__'

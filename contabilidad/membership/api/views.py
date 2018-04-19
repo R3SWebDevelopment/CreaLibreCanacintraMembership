@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import MembershipRequestSerializer
-from ..models import MembershipRequest
+from .serializers import MembershipRequestSerializer, StateSerializer
+from ..models import MembershipRequest, State
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
@@ -42,3 +42,12 @@ class MyMembershipRequestView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StateView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        queryset = State.objects.all()
+        serializer = StateSerializer(queryset, many=True)
+        return Response(serializer.data)
