@@ -134,7 +134,6 @@ class MemberInfo(models.Model):
             self.__figure_sat_taxpayer_type()
         return self.sat_taxpayer_type == SAT_ORGANIZATION_TYPE
 
-
     @property
     def required_fields(self):
         return REQUIRED_FILES.get(int(self.sat_taxpayer_type)) if self.sat_taxpayer_type is not None else []
