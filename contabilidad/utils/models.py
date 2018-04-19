@@ -17,20 +17,20 @@ PROCESS_STATUS_PROGRESS = 3
 PROCESS_STATUS_COMPLETED = 4
 PROCESS_STATUS_ERROR = 5
 
-##
-##                         |---------------------------|
-##                         |  |-----------|            ^
-##                         |  |           ^            |
-##                         |  |           |            |
-##                         |  |         ERROR          |
-##                         |  |           ^            |
-##                         V  V           |            |
-## PROCESS FLOW  NULL --> QUEUED --> PROGRESS --> COMPLETED
-##                         ^  V            |
-##                         |  |            V
-##                         |  |-------->CANCELED
-##                         |                 v
-##                         |-----------------|
+#
+#                         |---------------------------|
+#                         |  |-----------|            ^
+#                         |  |           ^            |
+#                         |  |           |            |
+#                         |  |         ERROR          |
+#                         |  |           ^            |
+#                         V  V           |            |
+# PROCESS FLOW  NULL --> QUEUED --> PROGRESS --> COMPLETED
+#                         ^  V            |
+#                         |  |            V
+#                         |  |-------->CANCELED
+#                         |                 v
+#                         |-----------------|
 
 PROCESS_STATUS = (
     (PROCESS_STATUS_NULL, _('NULL')),
@@ -218,7 +218,6 @@ class CompressFileUpload(models.Model):
     def extract_files(self):
         unzip(self.upload.file, self.get_uncompress_path())
 
-
     def list_uncompressed_files(self):
         base_path = self.get_uncompress_path()
         listed_files = []
@@ -239,10 +238,8 @@ class CompressFileUpload(models.Model):
         self.listed_files = listed_files
         self.save()
 
-
     def get_listed_files(self):
         return self.listed_files or []
-
 
     def set_uncompress_path(self):
         break_counter = 100
@@ -256,14 +253,11 @@ class CompressFileUpload(models.Model):
                 raise Exception(_("Couldn't create uncompress path"))
             break_counter -= 1
 
-
-
     def uncompress_path_exists(self):
         if self.uncompress_path and self.uncompress_path.strip():
             if os.path.exists(self.uncompress_path) and os.path.isdir(self.uncompress_path):
                 return True
         return False
-
 
     class Meta:
         abstract = True
