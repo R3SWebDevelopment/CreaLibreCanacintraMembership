@@ -13,3 +13,11 @@ class Profile(models.Model):
     )
     notify_by_email = models.BooleanField(default=True)
     notify_by_sms = models.BooleanField(default=False)
+
+    @property
+    def is_admin(self):
+        return False
+
+    @property
+    def my_company(self):
+        return self.user.companies.first()
