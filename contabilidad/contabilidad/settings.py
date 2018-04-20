@@ -52,7 +52,7 @@ FIXTURE_DIRS = [
 
 FIXTURES = [
     '{}/auth/user.json'.format(FIXTURE_DIRS[0]),
-    '{}/user/profile.json'.format(FIXTURE_DIRS[0]),
+    '{}/users/profile.json'.format(FIXTURE_DIRS[0]),
     '{}/account/emailaddress.json'.format(FIXTURE_DIRS[0]),
     '{}/sites/site.json'.format(FIXTURE_DIRS[0]),
     '{}/membership/state.json'.format(FIXTURE_DIRS[0]),
