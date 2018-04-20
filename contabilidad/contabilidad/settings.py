@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'users',
     'notifications',
     'membership',
+    'utils',
 ]
 
 MIDDLEWARE = [
