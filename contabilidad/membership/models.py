@@ -239,3 +239,9 @@ class Branch(models.Model):
     sector = models.ForeignKey(Sector, null=False, related_name='branches')
     code = models.CharField(max_length=10, null=False)
     description = models.CharField(max_length=250, null=False)
+
+    class Meta:
+        ordering = ('sector', 'code', 'description')
+
+    def __str__(self):
+        return "{}: {} - {}".format(self.sector, self.code, self.description)
