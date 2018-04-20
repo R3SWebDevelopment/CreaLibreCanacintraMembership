@@ -228,8 +228,14 @@ class Sector(models.Model):
     code = models.CharField(max_length=3, null=False)
     description = models.CharField(max_length=250, null=False)
 
+    class Meta:
+        ordering = ('code', 'description')
+
+    def __str__(self):
+        return "{} - {}".format(self.code, self.description)
+
 
 class Branch(models.Model):
     sector = models.ForeignKey(Sector, null=False, related_name='branches')
-    code = models.CharField(max_length=3, null=False)
+    code = models.CharField(max_length=10, null=False)
     description = models.CharField(max_length=250, null=False)
