@@ -50,6 +50,15 @@ FIXTURE_DIRS = [
     os.path.join(PROJECT_ROOT, 'fixture'),
 ]
 
+FIXTURES = [
+    '{}/auth/user.json'.format(FIXTURE_DIRS[0]),
+    '{}/user/profile.json'.format(FIXTURE_DIRS[0]),
+    '{}/account/emailaddress.json'.format(FIXTURE_DIRS[0]),
+    '{}/sites/site.json'.format(FIXTURE_DIRS[0]),
+    '{}/membership/state.json'.format(FIXTURE_DIRS[0]),
+    '{}/membership/municipality.json'.format(FIXTURE_DIRS[0]),
+]
+
 # Application definition
 
 INSTALLED_APPS = [
