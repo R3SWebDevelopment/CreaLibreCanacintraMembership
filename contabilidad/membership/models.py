@@ -222,3 +222,14 @@ class Municipality(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.state, self.name)
+
+
+class Sector(models.Model):
+    code = models.CharField(max_length=3, null=False)
+    description = models.CharField(max_length=250, null=False)
+
+
+class Branch(models.Model):
+    sector = models.ForeignKey(Sector, null=False, related_name='branches')
+    code = models.CharField(max_length=3, null=False)
+    description = models.CharField(max_length=250, null=False)
