@@ -46,6 +46,9 @@ ENABLE_DEBUG_TOOLBAR = os.environ.get('ENABLE_DEBUG_TOOLBAR', False) or False
 DJANGO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(DJANGO_ROOT)
 
+FIXTURE_DIRS = [
+    os.path.join(PROJECT_ROOT, 'fixture'),
+]
 
 # Application definition
 
