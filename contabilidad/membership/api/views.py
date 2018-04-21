@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import MembershipRequestSerializer, StateSerializer
-from ..models import MembershipRequest, State
+from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer
+from ..models import MembershipRequest, State, Sector
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
@@ -50,4 +50,13 @@ class StateView(APIView):
     def get(self, request, *args, **kwargs):
         queryset = State.objects.all()
         serializer = StateSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class SectorView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        queryset = Sector.objects.all()
+        serializer = SectorSerializer(queryset, many=True)
         return Response(serializer.data)
