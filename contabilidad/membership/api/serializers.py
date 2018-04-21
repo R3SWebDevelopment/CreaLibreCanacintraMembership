@@ -1,4 +1,4 @@
-from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality
+from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Sector, Branch
 from rest_framework import serializers
 
 
@@ -44,4 +44,19 @@ class StateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = State
+        fields = '__all__'
+
+
+class SectorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Sector
+        fields = '__all__'
+
+
+class BranchSerializer(serializers.ModelSerializer):
+    branches = SectorSerializer(many=True, source='branches.all')
+
+    class Meta:
+        model = Branch
         fields = '__all__'
