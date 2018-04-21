@@ -47,16 +47,16 @@ class StateSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SectorSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Sector
-        fields = '__all__'
-
-
 class BranchSerializer(serializers.ModelSerializer):
-    branches = SectorSerializer(many=True, source='branches.all')
 
     class Meta:
         model = Branch
+        fields = '__all__'
+
+
+class SectorSerializer(serializers.ModelSerializer):
+    branches = BranchSerializer(many=True, source='branches.all')
+
+    class Meta:
+        model = Sector
         fields = '__all__'
