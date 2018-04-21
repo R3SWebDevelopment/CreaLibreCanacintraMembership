@@ -1,0 +1,956 @@
+[
+  {
+    "model": "membership.branch",
+    "pk": 1,
+    "fields": {
+      "sector": 1,
+      "code": "01000",
+      "description": "SECTOR INDUSTRIAL METAL - MEC\u00c1NICO"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 2,
+    "fields": {
+      "sector": 1,
+      "code": "01001",
+      "description": "Rama 1 - Fabricantes de Art\u00edculos de Alambre, Tornillos y Tuercas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 3,
+    "fields": {
+      "sector": 1,
+      "code": "01002",
+      "description": "Rama 2 - Fundiciones"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 4,
+    "fields": {
+      "sector": 1,
+      "code": "01004",
+      "description": "Rama 4 - Talleres Metal-Mec\u00e1nicos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 5,
+    "fields": {
+      "sector": 1,
+      "code": "01005",
+      "description": "Rama 5 - Fabricantes de Artefactos de L\u00e1mina"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 6,
+    "fields": {
+      "sector": 1,
+      "code": "01008",
+      "description": "Rama 8 - Fabricantes de Art\u00edculos de Metales no Ferrosos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 7,
+    "fields": {
+      "sector": 1,
+      "code": "01009",
+      "description": "Rama 9 - Fabricantes de Art\u00edculos de Aluminio"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 8,
+    "fields": {
+      "sector": 1,
+      "code": "01011",
+      "description": "Rama 11 - Fabricantes de Herramientas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 9,
+    "fields": {
+      "sector": 1,
+      "code": "01019",
+      "description": "Rama 19 - Centros de Servicio y Transformaci\u00f3n del Acero"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 10,
+    "fields": {
+      "sector": 1,
+      "code": "01039",
+      "description": "Rama 39 - Industrias del Ne\u00f3n y Anuncio Exterior"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 11,
+    "fields": {
+      "sector": 1,
+      "code": "01040",
+      "description": "Rama 40 - Industriales de las Energ\u00edas Renovables"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 12,
+    "fields": {
+      "sector": 1,
+      "code": "01041",
+      "description": "Rama 41 - Fabricantes de Art\u00edculos Mec\u00e1nico-El\u00e9ctricos para uso Dom\u00e9stico y Similares"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 13,
+    "fields": {
+      "sector": 1,
+      "code": "01042",
+      "description": "Rama 42 - Fabricantes de Equipo Mec\u00e1nico-El\u00e9ctrico para uso Industrial"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 14,
+    "fields": {
+      "sector": 2,
+      "code": "02000",
+      "description": "SECTOR DE LA INDUSTRIA QU\u00cdMICA Y PARAQU\u00cdMICA"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 15,
+    "fields": {
+      "sector": 2,
+      "code": "02028",
+      "description": "Rama 28 - Industrias Qu\u00edmicas de Proceso"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 16,
+    "fields": {
+      "sector": 2,
+      "code": "02029",
+      "description": "Rama 29 - Fabricantes de Sabores y Colorantes para Alimentos y Fragancias"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 17,
+    "fields": {
+      "sector": 2,
+      "code": "02030",
+      "description": "Rama 30 - Laboratorios Veterinarios ANALAV"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 18,
+    "fields": {
+      "sector": 2,
+      "code": "02031",
+      "description": "Rama 31 - Fabricantes de Pinturas y Tintas para las Artes Gr\u00e1ficas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 19,
+    "fields": {
+      "sector": 2,
+      "code": "02038",
+      "description": "Rama 38 - Industriales de la Parafina"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 20,
+    "fields": {
+      "sector": 2,
+      "code": "02034",
+      "description": "Rama 34 - Fabricantes de Loza, Cer\u00e1mica y Refractarios"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 21,
+    "fields": {
+      "sector": 2,
+      "code": "02046",
+      "description": "Rama 46 - Fabricantes de Art\u00edculos de Pl\u00e1stico"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 22,
+    "fields": {
+      "sector": 2,
+      "code": "02053",
+      "description": "Rama 53 - Material Primas, Minerales Industrializadas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 23,
+    "fields": {
+      "sector": 2,
+      "code": "02064",
+      "description": "Rama 64 - Industria Petroqu\u00edmica"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 24,
+    "fields": {
+      "sector": 2,
+      "code": "02066",
+      "description": "Rama 66 - Fabricantes de Aerosoles"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 25,
+    "fields": {
+      "sector": 2,
+      "code": "02083",
+      "description": "Rama 83 - Fabricantes de Productos para el Aseo del Hogar"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 26,
+    "fields": {
+      "sector": 2,
+      "code": "02084",
+      "description": "Rama 84 - Fabricantes de Diluyentes y Adelgazadores"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 27,
+    "fields": {
+      "sector": 2,
+      "code": "02085",
+      "description": "Rama 85 - Fabricantes de Formuladores de Agroqu\u00edmicos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 28,
+    "fields": {
+      "sector": 2,
+      "code": "02086",
+      "description": "Rama 86 - Fabricantes de Productos Qu\u00edmicos Automotrices"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 29,
+    "fields": {
+      "sector": 2,
+      "code": "02090",
+      "description": "Rama 90 - Fabricantes de Especialidades Qu\u00edmicas para Mantenimiento y Limpieza Industrial"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 30,
+    "fields": {
+      "sector": 2,
+      "code": "02089",
+      "description": "Rama 89 - Fabricantes de Farmoqu\u00edmicos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 31,
+    "fields": {
+      "sector": 3,
+      "code": "03000",
+      "description": "SECTOR INDUSTRIAL DE BIENES DE CAPITAL"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 32,
+    "fields": {
+      "sector": 3,
+      "code": "03003",
+      "description": "Rama 3 - Fabricantes de Maquinaria, Componentes y Partes para Maquinaria"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 33,
+    "fields": {
+      "sector": 3,
+      "code": "03092",
+      "description": "Rama 92 - Fabricantes de Moldes, Troqueles, Dispositivos y Modelos para Fundici\u00f3n"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 34,
+    "fields": {
+      "sector": 3,
+      "code": "03007",
+      "description": "Rama 7 - Fabricantes de Bombas para el Manejo de Fluidos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 35,
+    "fields": {
+      "sector": 3,
+      "code": "03093",
+      "description": "Rama 93 - Fabricantes de Maquinaria y Equipo para Construcci\u00f3n y Miner\u00eda"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 36,
+    "fields": {
+      "sector": 3,
+      "code": "03078",
+      "description": "Rama 78 - Fabricantes de Recipientes a Presi\u00f3n para Procesos F\u00edsico-Qu\u00edmicos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 37,
+    "fields": {
+      "sector": 3,
+      "code": "03102",
+      "description": "Rama 102 - Fabricantes de Instrumentaci\u00f3n Industrial"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 38,
+    "fields": {
+      "sector": 3,
+      "code": "03087",
+      "description": "Rama 87 - Fabricantes de Equipo para el Tratamiento y Servicios del Agua"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 39,
+    "fields": {
+      "sector": 3,
+      "code": "03113",
+      "description": "Rama 113 - Fabricantes de Maquinaria e Implementos Agr\u00edcolas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 40,
+    "fields": {
+      "sector": 4,
+      "code": "04000",
+      "description": "SECTOR DE LAS INDUSTRIAS DIVERSAS"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 41,
+    "fields": {
+      "sector": 4,
+      "code": "04035",
+      "description": "Rama 35 - Fabricantes de Vidrio, Art\u00edculos de Vidrio y Cristal"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 42,
+    "fields": {
+      "sector": 4,
+      "code": "04044",
+      "description": "Rama 44 - Fabricantes de Colchones, Borras, Estopas y Guatas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 43,
+    "fields": {
+      "sector": 4,
+      "code": "04045",
+      "description": "Rama 45 - Fabricantes de Art\u00edculos de Piel, Viaje y Sint\u00e9ticos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 44,
+    "fields": {
+      "sector": 4,
+      "code": "04047",
+      "description": "Rama 47 - Industrias Varias"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 45,
+    "fields": {
+      "sector": 4,
+      "code": "04055",
+      "description": "Rama 55 - Desarrollo, Innovaci\u00f3n Tecnol\u00f3gica y Capacitaci\u00f3n"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 46,
+    "fields": {
+      "sector": 4,
+      "code": "04063",
+      "description": "Rama 63 - Plantas Recicladoras de Llantas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 47,
+    "fields": {
+      "sector": 4,
+      "code": "04065",
+      "description": "Rama 65 - Laboratorios de Pr\u00f3tesis Dental"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 48,
+    "fields": {
+      "sector": 4,
+      "code": "04067",
+      "description": "Rama 67 - Industrias \u00d3pticas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 49,
+    "fields": {
+      "sector": 4,
+      "code": "04114",
+      "description": "Rama 114 - Industria Artesanal"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 50,
+    "fields": {
+      "sector": 4,
+      "code": "04117",
+      "description": "Rama 117 - Verificentros"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 51,
+    "fields": {
+      "sector": 4,
+      "code": "04118",
+      "description": "Rama 118 - Servicios de Limpieza"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 52,
+    "fields": {
+      "sector": 5,
+      "code": "05000",
+      "description": "SECTOR INDUSTRIAL DE ALIMENTOS, BEBIDAS Y TABACOS"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 53,
+    "fields": {
+      "sector": 5,
+      "code": "05014",
+      "description": "Rama 14 - Agroindustria Tipo Inspecci\u00f3n Federal"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 54,
+    "fields": {
+      "sector": 5,
+      "code": "05017",
+      "description": "Rama 17 - Alimentos Diversos y Tabacos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 55,
+    "fields": {
+      "sector": 5,
+      "code": "05018",
+      "description": "Rama 18 - Empacadoras de Carnes Fr\u00edas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 56,
+    "fields": {
+      "sector": 5,
+      "code": "05020",
+      "description": "Rama 20 - Tostadores y Molinos de Caf\u00e9"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 57,
+    "fields": {
+      "sector": 5,
+      "code": "05021",
+      "description": "Rama 21 - Obradores de Tociner\u00eda"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 58,
+    "fields": {
+      "sector": 5,
+      "code": "05022",
+      "description": "Rama 22 - Fabricantes de Dulces, Chicles y Chocolates"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 59,
+    "fields": {
+      "sector": 5,
+      "code": "05027",
+      "description": "Rama 27 - Fabricantes de Vinos y Licores"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 60,
+    "fields": {
+      "sector": 5,
+      "code": "05049",
+      "description": "Rama 49 - Fabricantes de Alimentos Balanceados para Animales"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 61,
+    "fields": {
+      "sector": 5,
+      "code": "05050",
+      "description": "Rama 50 - Industria de Derivados Alimenticios y Qu\u00edmicos del Ma\u00edz"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 62,
+    "fields": {
+      "sector": 5,
+      "code": "05061",
+      "description": "Rama 61 - Industrias L\u00e1cteas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 63,
+    "fields": {
+      "sector": 5,
+      "code": "05106",
+      "description": "Rama 106 - Fabricantes de Botanas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 64,
+    "fields": {
+      "sector": 6,
+      "code": "06000",
+      "description": "SECTOR DE INDUSTRIALES T\u00c9CNICOS DE SERVICIOS"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 65,
+    "fields": {
+      "sector": 6,
+      "code": "06056",
+      "description": "Rama 56 - Servicios Automotrices"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 66,
+    "fields": {
+      "sector": 6,
+      "code": "06060",
+      "description": "Rama 60 - Cerrajeros Profesionales de M\u00e9xico"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 67,
+    "fields": {
+      "sector": 6,
+      "code": "06099",
+      "description": "Rama 99 - Rectificadores y Reconstructores de Motores"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 68,
+    "fields": {
+      "sector": 7,
+      "code": "07000",
+      "description": "SECTOR INDUSTRIAL DE FABRICANTES DE PRODUCTOS Y MATERIALES PARA LA CONSTRUCCI\u00d3N"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 69,
+    "fields": {
+      "sector": 7,
+      "code": "07006",
+      "description": "Rama 6 - Fabricantes de Estructuras Met\u00e1licas y Herrer\u00edas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 70,
+    "fields": {
+      "sector": 7,
+      "code": "07036",
+      "description": "Rama 36 - Fabricantes de Materiales para la Construcci\u00f3n"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 71,
+    "fields": {
+      "sector": 7,
+      "code": "07104",
+      "description": "Rama 104 - Fabricantes de Tuber\u00eda de Concreto Reforzado"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 72,
+    "fields": {
+      "sector": 7,
+      "code": "07108",
+      "description": "Rama 108 - Fabricantes de Concreto Premezclado"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 73,
+    "fields": {
+      "sector": 7,
+      "code": "07112",
+      "description": "Rama 112 - Fabricantes de Productos de Concreto Prefabricados y Presforzados"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 74,
+    "fields": {
+      "sector": 7,
+      "code": "07116",
+      "description": "Rama 116 - Fabricantes de Muebles para Ba\u00f1o y Grifer\u00eda"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 75,
+    "fields": {
+      "sector": 8,
+      "code": "08000",
+      "description": "SECTOR DE LA INDUSTRIA ELABORADORA DE ART\u00cdCULOS DE PAPEL, CART\u00d3N Y ESCRITORIO"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 76,
+    "fields": {
+      "sector": 8,
+      "code": "08013",
+      "description": "Rama 13 - Fabricantes de Cart\u00f3n Gris y L\u00e1minas de Cart\u00f3n"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 77,
+    "fields": {
+      "sector": 8,
+      "code": "08016",
+      "description": "Rama 16 - Fabricantes de Art\u00edculos de Papel, Escolares y de Escritorio"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 78,
+    "fields": {
+      "sector": 8,
+      "code": "08062",
+      "description": "Rama 62 - Fot\u00f3grafos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 79,
+    "fields": {
+      "sector": 8,
+      "code": "08109",
+      "description": "Rama 109 - Procesos de Impresi\u00f3n Digital"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 80,
+    "fields": {
+      "sector": 9,
+      "code": "09000",
+      "description": "SECTOR INDUSTRIAL MUEBLERO"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 81,
+    "fields": {
+      "sector": 9,
+      "code": "09025",
+      "description": "Rama 25 - Fabricantes de Muebles Tapizados"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 82,
+    "fields": {
+      "sector": 9,
+      "code": "09033",
+      "description": "Rama 33 - Fabricantes de Muebles para el Hogar"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 83,
+    "fields": {
+      "sector": 9,
+      "code": "09080",
+      "description": "Rama 80 - Fabricantes de Muebles y Equipo para Cocinas Integrales"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 84,
+    "fields": {
+      "sector": 9,
+      "code": "09098",
+      "description": "Rama 98 - Fabricantes de Muebles para Oficina"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 85,
+    "fields": {
+      "sector": 10,
+      "code": "10000",
+      "description": "SECTOR INDUSTRIAL M\u00c9DICO"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 86,
+    "fields": {
+      "sector": 10,
+      "code": "10012",
+      "description": "Rama 12 - Fabricantes de Material de Curaci\u00f3n"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 87,
+    "fields": {
+      "sector": 10,
+      "code": "10015",
+      "description": "Rama 15 - Fabricantes de Productos Higi\u00e9nicos Hospitalarios"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 88,
+    "fields": {
+      "sector": 10,
+      "code": "10024",
+      "description": "Rama 24 - Fabricantes de Insumos para Imagenolog\u00eda"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 89,
+    "fields": {
+      "sector": 10,
+      "code": "10026",
+      "description": "Rama 26 - Servicios Integrales, Subrogados y Hospitalarios"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 90,
+    "fields": {
+      "sector": 10,
+      "code": "10037",
+      "description": "Rama 37 - Fabricantes de Material de Laboratorios y Reactivos de Diagn\u00f3stico"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 91,
+    "fields": {
+      "sector": 10,
+      "code": "10077",
+      "description": "Rama 77 - Fabricantes de Equipo para Profesionales de la Medicina"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 92,
+    "fields": {
+      "sector": 11,
+      "code": "11000",
+      "description": "SECTOR INDUSTRIAL DE ECONOM\u00cdA VERDE"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 93,
+    "fields": {
+      "sector": 11,
+      "code": "11048",
+      "description": "Rama 48 - Reciclaje y Reuso de Residuos"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 94,
+    "fields": {
+      "sector": 11,
+      "code": "11051",
+      "description": "Rama 51 - Servicios de Consultor\u00eda Ambiental"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 95,
+    "fields": {
+      "sector": 11,
+      "code": "11070",
+      "description": "Rama 70 - Nuevas Tecnolog\u00edas para el Cuidado y Mejora del Medio Ambiente"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 96,
+    "fields": {
+      "sector": 12,
+      "code": "12000",
+      "description": "SECTOR DE LA INDUSTRIA AUTOMOTRIZ"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 97,
+    "fields": {
+      "sector": 12,
+      "code": "12010",
+      "description": "Rama 10 - Fabricantes de Balatas, Pastas para Clutch y Materiales de Fricci\u00f3n"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 98,
+    "fields": {
+      "sector": 12,
+      "code": "12052",
+      "description": "Rama 52 - Industria de Autopartes"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 99,
+    "fields": {
+      "sector": 12,
+      "code": "12059",
+      "description": "Rama 59 - Fabricantes de Carrocer\u00edas"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 100,
+    "fields": {
+      "sector": 12,
+      "code": "12105",
+      "description": "Rama 105 - Fabricantes de Remolques y Semiremolques"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 101,
+    "fields": {
+      "sector": 12,
+      "code": "12115",
+      "description": "Rama 115 - Fabricantes de Autobuses, Camiones y Tractocamiones"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 102,
+    "fields": {
+      "sector": 13,
+      "code": "13000",
+      "description": "SECTOR INDUSTRIAL DE TECNOLOG\u00cdA PARA LA INFORMACI\u00d3N Y ECONOM\u00cdA DEL CONOCIMIENTO"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 103,
+    "fields": {
+      "sector": 13,
+      "code": "13023",
+      "description": "Rama 23 - Marketing Digital"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 104,
+    "fields": {
+      "sector": 13,
+      "code": "13032",
+      "description": "Rama 32 - Infraestructura Tecnol\u00f3gica y Telecomunicaciones"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 105,
+    "fields": {
+      "sector": 13,
+      "code": "13057",
+      "description": "Rama 57 - Especialistas en Tecnolog\u00edas para la Informaci\u00f3n"
+    }
+  },
+  {
+    "model": "membership.branch",
+    "pk": 106,
+    "fields": {
+      "sector": 13,
+      "code": "13058",
+      "description": "Rama 58 - Software"
+    }
+  }
+]

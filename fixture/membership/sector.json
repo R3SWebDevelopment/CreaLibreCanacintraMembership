@@ -1,0 +1,106 @@
+[
+  {
+    "model": "membership.sector",
+    "pk": 1,
+    "fields": {
+      "code": "01",
+      "description": "SECTOR INDUSTRIAL METAL - MEC\u00c1NICO"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 2,
+    "fields": {
+      "code": "02",
+      "description": "SECTOR DE LA INDUSTRIA QU\u00cdMICA Y PARAQU\u00cdMICA"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 3,
+    "fields": {
+      "code": "03",
+      "description": "SECTOR INDUSTRIAL DE BIENES DE CAPITAL"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 4,
+    "fields": {
+      "code": "04",
+      "description": "SECTOR DE LAS INDUSTRIAS DIVERSAS"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 5,
+    "fields": {
+      "code": "05",
+      "description": "SECTOR INDUSTRIAL DE ALIMENTOS, BEBIDAS Y TABACOS"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 6,
+    "fields": {
+      "code": "06",
+      "description": "SECTOR DE INDUSTRIALES T\u00c9CNICOS DE SERVICIOS"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 7,
+    "fields": {
+      "code": "07",
+      "description": "SECTOR INDUSTRIAL DE FABRICANTES DE PRODUCTOS Y MATERIALES PARA LA CONSTRUCCI\u00d3N"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 8,
+    "fields": {
+      "code": "08",
+      "description": "SECTOR DE LA INDUSTRIA ELABORADORA DE ART\u00cdCULOS DE PAPEL, CART\u00d3N Y ESCRITORIO"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 9,
+    "fields": {
+      "code": "09",
+      "description": "SECTOR INDUSTRIAL MUEBLERO"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 10,
+    "fields": {
+      "code": "10",
+      "description": "SECTOR INDUSTRIAL M\u00c9DICO"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 11,
+    "fields": {
+      "code": "11",
+      "description": "SECTOR INDUSTRIAL DE ECONOM\u00cdA VERDE"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 12,
+    "fields": {
+      "code": "12",
+      "description": "SECTOR DE LA INDUSTRIA AUTOMOTRIZ"
+    }
+  },
+  {
+    "model": "membership.sector",
+    "pk": 13,
+    "fields": {
+      "code": "13",
+      "description": "SECTOR INDUSTRIAL DE TECNOLOG\u00cdA PARA LA INFORMACI\u00d3N Y ECONOM\u00cdA DEL CONOCIMIENTO"
+    }
+  }
+]
