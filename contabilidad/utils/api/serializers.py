@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from membership.models import Sector, State
+from membership.api.serializers import StateSerializer, SectorSerializer
 from datetime import datetime
 from django.conf import settings
 import pytz
@@ -24,3 +26,14 @@ class HealthCheckSerializer(serializers.Serializer):
 
     def get_timestamp(self, obj):
         return datetime.now(pytz.timezone(settings.TIME_ZONE)).strftime("%Y-%m-%dT%H:%M:%S%Z")
+
+
+class CatalogSerializer(serializers.Serializer):
+    states = serializers.SerializerMethodField()
+    sectors = serializers.SerializerMethodField()
+
+    def get_states(self, obj):
+        return StateSerializer(State.objects.all(), many=True).data
+
+    def get_sectors(self, obj):
+        return SectorSerializer(Sector.objects.all(), many=True).data
