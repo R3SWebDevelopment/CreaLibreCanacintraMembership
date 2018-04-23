@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MembershipRequest, Member, State, Municipality, Sector, Branch
+from .models import MembershipRequest, Member, State, Municipality, Sector, Branch, SCIAN
 
 
 @admin.register(Member)
@@ -29,4 +29,9 @@ class SectorAdmin(admin.ModelAdmin):
 
 @admin.register(Branch)
 class BranchAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(SCIAN)
+class SCIANAdmin(admin.ModelAdmin):
     pass
