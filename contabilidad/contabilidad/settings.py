@@ -59,6 +59,7 @@ FIXTURES = [
     '{}/membership/municipality.json'.format(FIXTURE_DIRS[0]),
     '{}/membership/sector.json'.format(FIXTURE_DIRS[0]),
     '{}/membership/branch.json'.format(FIXTURE_DIRS[0]),
+    '{}/membership/scian.json'.format(FIXTURE_DIRS[0]),
 ]
 
 # Application definition
