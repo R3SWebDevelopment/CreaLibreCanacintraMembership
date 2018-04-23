@@ -256,3 +256,14 @@ class SCIAN(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.code, self.description)
+
+
+class TariffFraction(models.Model):
+    code = models.CharField(max_length=10, null=False)
+    description = models.TextField(null=False)
+
+    class Meta:
+        ordering = ('code', 'description')
+
+    def __str__(self):
+        return "{} - {}".format(self.code, self.description)
