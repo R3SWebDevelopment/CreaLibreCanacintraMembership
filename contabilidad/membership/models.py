@@ -224,6 +224,18 @@ class Municipality(models.Model):
         return "{} - {}".format(self.state, self.name)
 
 
+class Suburb(models.Model):
+    municipality = models.ForeignKey(Municipality, related_name="suburbs")
+    name = models.CharField(max_length=250)
+    zip_code = models.CharField(max_length=5)
+
+    class Meta:
+        ordering = ('municipality', 'name')
+
+    def __str__(self):
+        return "{} - {} ({})".format(self.municipality, self.name, self.zip_code)
+
+
 class Sector(models.Model):
     code = models.CharField(max_length=3, null=False)
     description = models.CharField(max_length=250, null=False)
