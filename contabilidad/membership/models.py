@@ -212,7 +212,7 @@ class State(models.Model):
         null=True,
         default=None
     )
-    municipalities_list = JSONBField(default=list, null=True, blank=True)
+    municipalities = JSONBField(default=list, null=True, blank=True)
 
     class Meta:
         ordering = ('name', )
