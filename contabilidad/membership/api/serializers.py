@@ -1,5 +1,5 @@
-from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Sector, Branch, \
-    SCIAN, TariffFraction
+from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Suburb, Sector, \
+    Branch, SCIAN, TariffFraction
 from rest_framework import serializers
 
 
@@ -33,7 +33,15 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
         return super(MembershipRequestSerializer, self).update(instance, validated_data)
 
 
+class SuburbSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Suburb
+        fields = '__all__'
+
+
 class MunicipalitySerializer(serializers.ModelSerializer):
+    suburbs = SuburbSerializer(many=True)
 
     class Meta:
         model = Municipality
@@ -41,7 +49,7 @@ class MunicipalitySerializer(serializers.ModelSerializer):
 
 
 class StateSerializer(serializers.ModelSerializer):
-    municipality = MunicipalitySerializer(many=True, source='municipality.all')
+    municipalities = MunicipalitySerializer(many=True)
 
     class Meta:
         model = State

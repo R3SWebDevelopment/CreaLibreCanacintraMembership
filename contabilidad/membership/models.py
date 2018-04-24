@@ -215,7 +215,7 @@ class State(models.Model):
 
     @cached_property
     def municipalities(self):
-        return self.municipality.all()
+        return self.municipality.all().prefetch_related('suburb')
 
 
 class Municipality(models.Model):

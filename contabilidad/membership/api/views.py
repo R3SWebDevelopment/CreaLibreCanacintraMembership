@@ -49,7 +49,7 @@ class StateView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
-        queryset = State.objects.all()
+        queryset = State.objects.all().prefetch_related('municipality', 'municipality__suburb')
         serializer = StateSerializer(queryset, many=True)
         return Response(serializer.data)
 
