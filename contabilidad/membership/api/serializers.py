@@ -42,6 +42,7 @@ class SuburbSerializer(serializers.ModelSerializer):
 
 class MunicipalitySerializer(serializers.ModelSerializer):
     suburbs = SuburbSerializer(many=True)
+    zip_codes = serializers.ListField()
 
     class Meta:
         model = Municipality
@@ -50,6 +51,7 @@ class MunicipalitySerializer(serializers.ModelSerializer):
 
 class StateSerializer(serializers.ModelSerializer):
     municipalities = MunicipalitySerializer(many=True)
+    zip_codes = serializers.ListField()
 
     class Meta:
         model = State

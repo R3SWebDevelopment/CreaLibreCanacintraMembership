@@ -217,6 +217,10 @@ class State(models.Model):
     def municipalities(self):
         return self.municipality.all().prefetch_related('suburb')
 
+    @cached_property
+    def zip_codes(self):
+        return self.municipalities.values_list('suburb__zip_code', flat=True).order_by('suburb__zip_code').distinct()
+
 
 class Municipality(models.Model):
     state = models.ForeignKey(State, related_name="municipality")
@@ -231,6 +235,10 @@ class Municipality(models.Model):
     @cached_property
     def suburbs(self):
         return self.suburb.all()
+
+    @cached_property
+    def zip_codes(self):
+        return self.suburbs.values_list('zip_code', flat=True).order_by('zip_code').distinct()
 
 
 class Suburb(models.Model):
