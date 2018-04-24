@@ -206,6 +206,11 @@ class Member(MemberInfo):
 
 class State(models.Model):
     name = models.CharField(max_length=250)
+    zip_codes = ArrayField(
+        models.CharField(max_length=5, blank=True),
+        null=True,
+        default=None
+    )
 
     class Meta:
         ordering = ('name', )
@@ -218,7 +223,7 @@ class State(models.Model):
         return self.municipality.all().prefetch_related('suburb')
 
     @cached_property
-    def zip_codes(self):
+    def get_zip_codes(self):
         return self.municipalities.values_list('suburb__zip_code', flat=True).order_by('suburb__zip_code').distinct()
 
 
