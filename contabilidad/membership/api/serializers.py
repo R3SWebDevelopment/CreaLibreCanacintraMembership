@@ -1,4 +1,5 @@
-from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Sector, Branch
+from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Sector, Branch, \
+    SCIAN, TariffFraction
 from rest_framework import serializers
 
 
@@ -59,4 +60,18 @@ class SectorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sector
+        fields = '__all__'
+
+
+class SCIANSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SCIAN
+        fields = '__all__'
+
+
+class TariffFractionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TariffFraction
         fields = '__all__'

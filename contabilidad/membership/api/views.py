@@ -1,7 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer
-from ..models import MembershipRequest, State, Sector
+from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
+    TariffFractionSerializer
+from ..models import MembershipRequest, State, Sector, SCIAN, TariffFraction
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
@@ -59,4 +60,22 @@ class SectorView(APIView):
     def get(self, request, *args, **kwargs):
         queryset = Sector.objects.all()
         serializer = SectorSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class SCIANView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        queryset = SCIAN.objects.all()
+        serializer = SCIANSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class TariffFractionView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        queryset = TariffFraction.objects.all()
+        serializer = TariffFractionSerializer(queryset, many=True)
         return Response(serializer.data)
