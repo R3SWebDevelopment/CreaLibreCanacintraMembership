@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.contrib.auth.models import User
+from django.utils.functional import cached_property
 import re
 
 SAT_PERSON_TYPE = 1
@@ -212,6 +213,10 @@ class State(models.Model):
     def __str__(self):
         return "{}".format(self.name)
 
+    @cached_property
+    def municipalities(self):
+        return self.municipality.all()
+
 
 class Municipality(models.Model):
     state = models.ForeignKey(State, related_name="municipality")
@@ -223,9 +228,13 @@ class Municipality(models.Model):
     def __str__(self):
         return "{} - {}".format(self.state, self.name)
 
+    @cached_property
+    def suburbs(self):
+        return self.suburb.all()
+
 
 class Suburb(models.Model):
-    municipality = models.ForeignKey(Municipality, related_name="suburbs")
+    municipality = models.ForeignKey(Municipality, related_name="suburb")
     name = models.CharField(max_length=250)
     zip_code = models.CharField(max_length=5)
 
