@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.contrib.postgres.fields.jsonb import JSONField as JSONBField
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.contrib.auth.models import User
 from django.utils.functional import cached_property
@@ -211,11 +212,7 @@ class State(models.Model):
         null=True,
         default=None
     )
-    municipalities = ArrayField(
-        JSONField(),
-        null=True,
-        default=None
-    )
+    municipalities_list = JSONBField(default=list, null=True, blank=True)
 
     class Meta:
         ordering = ('name', )
@@ -242,7 +239,8 @@ class State(models.Model):
                     for s in m.suburbs
                 ],
             })
-        return data
+        self.municipalities_list = data
+        self.save()
 
 
 class Municipality(models.Model):
