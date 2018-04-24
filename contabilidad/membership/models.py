@@ -211,6 +211,11 @@ class State(models.Model):
         null=True,
         default=None
     )
+    municipalities = ArrayField(
+        JSONField(),
+        null=True,
+        default=None
+    )
 
     class Meta:
         ordering = ('name', )
@@ -219,8 +224,25 @@ class State(models.Model):
         return "{}".format(self.name)
 
     @cached_property
-    def municipalities(self):
+    def get_municipalities(self):
         return self.municipality.all().prefetch_related('suburb')
+
+    @cached_property
+    def get_municipalities_dict(self):
+        data = []
+        for m in self.get_municipalities:
+            data.append({
+                "name": m.name,
+                "zip_codes": list(m.zip_codes),
+                "suburbs": [
+                    {
+                        "name": s.name,
+                        "zip_code": s.zip_code,
+                    }
+                    for s in m.suburbs
+                ],
+            })
+        return data
 
 
 class Municipality(models.Model):
