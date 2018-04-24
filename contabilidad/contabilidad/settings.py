@@ -57,6 +57,7 @@ FIXTURES = [
     '{}/sites/site.json'.format(FIXTURE_DIRS[0]),
     '{}/membership/state.json'.format(FIXTURE_DIRS[0]),
     '{}/membership/municipality.json'.format(FIXTURE_DIRS[0]),
+    '{}/membership/suburb.json'.format(FIXTURE_DIRS[0]),
     '{}/membership/sector.json'.format(FIXTURE_DIRS[0]),
     '{}/membership/branch.json'.format(FIXTURE_DIRS[0]),
     '{}/membership/scian.json'.format(FIXTURE_DIRS[0]),
