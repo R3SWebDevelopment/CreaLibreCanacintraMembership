@@ -14,7 +14,7 @@ class HealthCheckView(APIView):
 
 
 class CatalogView(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (AllowAny, )
 
     def get(self, request, format=None):
         return Response(CatalogSerializer({}).data, status=status.HTTP_202_ACCEPTED)

@@ -35,7 +35,8 @@ class CatalogSerializer(serializers.Serializer):
     tariff_traffic = serializers.SerializerMethodField()
 
     def get_states(self, obj):
-        return StateSerializer(State.objects.all(), many=True).data
+        return StateSerializer(State.objects.all().prefetch_related('municipality', 'municipality__suburb'),
+                               many=True).data
 
     def get_sectors(self, obj):
         return SectorSerializer(Sector.objects.all(), many=True).data
