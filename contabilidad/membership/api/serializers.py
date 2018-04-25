@@ -73,7 +73,7 @@ class MembershipRequestPdfSerializer(MembershipRequestSerializer):
     class Meta:
         model = MembershipRequest
         exclude = ('attachment', 'id', 'created_at', 'requested_at', 'validated', 'requested_by', 'attended_by',
-                   'member')
+                   'member', 'pdf_data')
 
 
 class SuburbSerializer(serializers.ModelSerializer):
