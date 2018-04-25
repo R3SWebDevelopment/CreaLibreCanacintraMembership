@@ -111,9 +111,9 @@ MIDDLEWARE = [
 ]
 
 if ENABLE_DEBUG_TOOLBAR:
-    INSTALLED_APPS += ('debug_toolbar',)
-    MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-    INTERNAL_IPS = ['127.0.0.1']
+    INSTALLED_APPS = ['debug_toolbar', 'debug_panel', ] + INSTALLED_APPS
+    MIDDLEWARE = ['debug_panel.middleware.DebugPanelMiddleware', ] + MIDDLEWARE
+    INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 
 MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)  # CRUM middleware
 
