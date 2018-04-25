@@ -81,8 +81,7 @@ class MemberInfo(models.Model):
     zip_code = models.CharField(max_length=5, null=True, default=None)
     municipality = models.CharField(max_length=250, null=True, default=None)
     state = models.CharField(max_length=250, null=True, default=None)
-    # phone Format [{"area_code":"999|99", "number": "9999-9999|999-9999", "extension":["99","999"]}]
-    phone = ArrayField(JSONField(), null=True)
+    phone = models.CharField(max_length=250, null=True, default=None)
     mobile = models.CharField(max_length=14, null=True, default=None)
     main_activity_description = models.CharField(max_length=250, null=True, default=None)
     scian_code = models.CharField(max_length=250, null=True, default=None)
