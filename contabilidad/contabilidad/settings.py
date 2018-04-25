@@ -20,6 +20,7 @@ def get_bool_env(key, default):
         return default
     return value.lower() == 'true'
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
