@@ -163,8 +163,8 @@ class AttachedFile(models.Model):
 class MembershipRequest(MemberInfo):
     registration_number = models.IntegerField(null=True, default=None)
     registration_year = models.IntegerField(null=True, default=None)
-    sector = models.IntegerField(null=True, default=None)
-    branch = models.IntegerField(null=True, default=None)
+    sector = models.CharField(max_length=250, null=True, default=None)
+    branch = models.CharField(max_length=250, null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     requested_by = models.ForeignKey(User, related_name="membership_requests", null=True)
     requested_at = models.DateTimeField(null=True, default=None)
