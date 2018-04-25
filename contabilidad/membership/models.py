@@ -113,6 +113,42 @@ class MemberInfo(models.Model):
     class Meta:
         abstract = True
 
+    @property
+    def ceo_name(self):
+        return self.ceo.get('name', '') if self.ceo is not None else ''
+
+    @property
+    def ceo_email(self):
+        return self.ceo.get('email', '') if self.ceo is not None else ''
+
+    @property
+    def ceo_phone(self):
+        return self.ceo.get('phone', '') if self.ceo is not None else ''
+
+    @property
+    def legal_name(self):
+        return self.legal_representative.get('name', '') if self.legal_representative is not None else ''
+
+    @property
+    def legal_email(self):
+        return self.legal_representative.get('email', '') if self.legal_representative is not None else ''
+
+    @property
+    def legal_phone(self):
+        return self.legal_representative.get('phone', '') if self.legal_representative is not None else ''
+
+    @property
+    def main_name(self):
+        return self.main_representative.get('name', '') if self.main_representative is not None else ''
+
+    @property
+    def main_email(self):
+        return self.main_representative.get('email', '') if self.main_representative is not None else ''
+
+    @property
+    def main_phone(self):
+        return self.main_representative.get('phone', '') if self.main_representative is not None else ''
+
     def __figure_sat_taxpayer_type(self):
         if self.rfc:
             is_person_pattern = re.compile(r"[A-Z]{4}[0-9]{6}[A-Z0-9]{3}", re.I)
