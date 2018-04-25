@@ -208,6 +208,7 @@ class MembershipRequest(MemberInfo):
     validated = models.NullBooleanField(null=True, default=None)
     member = models.OneToOneField("Member", related_name="request", null=True)
     attachment = models.ManyToManyField(AttachedFile)
+    pdf_data = JSONField(null=True)
 
     def __str__(self):
         return "{} - {}".format(self.requested_by, self.created_at)
