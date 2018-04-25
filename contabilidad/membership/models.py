@@ -210,6 +210,16 @@ class MembershipRequest(MemberInfo):
     attachment = models.ManyToManyField(AttachedFile)
     pdf_data = JSONField(null=True)
 
+    @@property
+    def pdf_context(self):
+        from .api.serializers import MembershipRequestPdfSerializer
+        try:
+            self.pdf_data = MembershipRequestPdfSerializer(self).data()
+            self.save()
+        except:
+            return None
+        return self.pdf_data
+
     def __str__(self):
         return "{} - {}".format(self.requested_by, self.created_at)
 
