@@ -192,8 +192,8 @@ class UpdateRequest(MemberInfo):
 class Member(MemberInfo):
     registration_number = models.IntegerField(null=True, default=None)
     registration_year = models.IntegerField(null=True, default=None)
-    sector = models.IntegerField(null=True, default=None)
-    branch = models.IntegerField(null=True, default=None)
+    sector = models.CharField(max_length=250, null=True, default=None)
+    branch = models.CharField(max_length=250, null=True, default=None)
     promoter_office = models.CharField(max_length=250, null=True, default=None)
     promoter_name = models.CharField(max_length=250, null=True, default=None)
     payment_date = models.DateField(null=True, default=None)
