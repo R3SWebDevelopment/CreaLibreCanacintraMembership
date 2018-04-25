@@ -108,7 +108,7 @@ class MemberInfo(models.Model):
     #   "area_name": "AAAAAA AAAAA AAAAA"
     # }
     other_representative = JSONField(null=True)
-    website = models.URLField(null=True, default=None)
+    website = models.CharField(max_length=250, null=True, default=None)
 
     class Meta:
         abstract = True
