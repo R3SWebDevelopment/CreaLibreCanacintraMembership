@@ -36,6 +36,33 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
         if is_person is not None or is_company is not None:
             data['sat_taxpayer_type'] = SAT_PERSON_TYPE if is_person else SAT_ORGANIZATION_TYPE if is_company else None
 
+        data['ceo'] = {
+            'name': data.get('ceo_name', ''),
+            'email': data.get('ceo_email', ''),
+            'phone': data.get('ceo_phone', ''),
+        }
+        del data['ceo_name']
+        del data['ceo_email']
+        del data['ceo_phone']
+
+        data['legal_representative'] = {
+            'name': data.get('legal_name', ''),
+            'email': data.get('legal_email', ''),
+            'phone': data.get('legal_phone', ''),
+        }
+        del data['legal_name']
+        del data['legal_email']
+        del data['legal_phone']
+
+        data['main_representative'] = {
+            'name': data.get('main_name', ''),
+            'email': data.get('main_email', ''),
+            'phone': data.get('main_phone', ''),
+        }
+        del data['main_name']
+        del data['main_email']
+        del data['main_phone']
+
         return data
 
     def update(self, instance, validated_data):
