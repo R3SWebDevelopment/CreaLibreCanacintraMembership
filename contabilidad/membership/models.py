@@ -239,6 +239,10 @@ class Municipality(models.Model):
     def zip_codes(self):
         return self.suburbs.values_list('zip_code', flat=True).order_by('zip_code').distinct()
 
+    @property
+    def suburbs_name(self):
+        return list(self.suburbs.values_list('name', flat=True).order_by('name').distinct())
+
 
 class Suburb(models.Model):
     municipality = models.ForeignKey(Municipality, related_name="suburb")
@@ -250,6 +254,31 @@ class Suburb(models.Model):
 
     def __str__(self):
         return "{} - {} ({})".format(self.municipality, self.name, self.zip_code)
+
+    @cached_property
+    def siblings(self):
+        return self.__class__.objects.filter(zip_code=self.zip_code)
+
+    @property
+    def suburbs_name(self):
+        return self.siblings.values_list('name', flat=True).\
+            order_by('name').distinct()
+
+    @property
+    def suburb_name(self):
+        suburbs = self.siblings
+        if len(suburbs) == 0:
+            return self.name
+        return ""
+
+    @property
+    def municipalities_name(self):
+        return list(self.municipality.state.municipality.all().values_list('name', flat=True).order_by('name')
+                    .distinct())
+
+    @property
+    def municipality_name(self):
+        self.municipality
 
 
 class Sector(models.Model):

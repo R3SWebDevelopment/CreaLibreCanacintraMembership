@@ -33,6 +33,50 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
         return super(MembershipRequestSerializer, self).update(instance, validated_data)
 
 
+class SuburbSerializer(serializers.ModelSerializer):
+    state = serializers.CharField(source='municipality.state.name')
+    municipality = serializers.CharField(source='municipality.name')
+    municipalities = serializers.ListField(source='municipalities_name')
+    suburbs = serializers.ListField(source='suburbs_name')
+    suburb = serializers.CharField(source='suburb_name')
+
+    class Meta:
+        model = Suburb
+        fields = '__all__'
+
+
+class SuburbSimpleSerializer(serializers.ModelSerializer):
+    state = serializers.CharField(source='municipality.state.name')
+    municipalities = serializers.ListField(source='municipalities_name')
+
+    class Meta:
+        model = Suburb
+        fields = ('state', 'municipalities', )
+
+
+class SuburbMunicipalitySerializer(serializers.ModelSerializer):
+    state = serializers.CharField(source='municipality.state.name')
+    municipality = serializers.CharField(source='municipality.name')
+    municipalities = serializers.ListField(source='municipalities_name')
+    suburbs = serializers.ListField(source='municipality.suburbs_name')
+
+    class Meta:
+        model = Suburb
+        fields = ('state', 'municipalities', 'municipality', 'suburbs', )
+
+
+class SuburbWithoutZipCodeSerializer(serializers.ModelSerializer):
+    state = serializers.CharField(source='municipality.state.name')
+    municipality = serializers.CharField(source='municipality.name')
+    municipalities = serializers.ListField(source='municipalities_name')
+    suburbs = serializers.ListField(source='municipality.suburbs_name')
+    suburb = serializers.CharField(source='name')
+
+    class Meta:
+        model = Suburb
+        fields = ('state', 'municipalities', 'municipality', 'suburbs', 'suburb', 'zip_code')
+
+
 class StateSerializer(serializers.ModelSerializer):
 
     class Meta:

@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
-    TariffFractionSerializer
-from ..models import MembershipRequest, State, Sector, SCIAN, TariffFraction
+    TariffFractionSerializer, SuburbSerializer, SuburbWithoutZipCodeSerializer, SuburbMunicipalitySerializer, \
+    SuburbSimpleSerializer
+from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 
@@ -34,9 +35,6 @@ class MyMembershipRequestView(APIView):
         return Response(serializer.data)
 
     def patch(self, request, *args, **kwargs):
-        print("AQUI")
-        print("request: {}".format(dir(request)))
-        print("DATA: {}".format(request.data))
         object = self.get_object(*args, **kwargs)
         serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
         if serializer.is_valid():
@@ -49,7 +47,33 @@ class StateView(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request, *args, **kwargs):
-        queryset = State.objects.all()#.prefetch_related('municipality', 'municipality__suburb')
+        zip_code = request.GET.get('zip_code', None)
+        if zip_code is not None:
+            suburb = Suburb.objects.filter(zip_code=zip_code).first()
+            serializer = SuburbSerializer(suburb)
+            return Response(serializer.data)
+        state = request.GET.get('state', None)
+        state = None if state.upper() in ['NULL', 'UNDEFINED'] or state.strip() == '' else state
+        municipality = request.GET.get('municipality', None)
+        municipality = None if municipality.upper() in ['NULL', 'UNDEFINED'] or municipality.strip() == '' \
+            else municipality
+        suburb = request.GET.get('suburb', None)
+        suburb = None if suburb.upper() in ['NULL', 'UNDEFINED'] or suburb.strip() == '' else suburb
+        if state is not None or municipality is not None or suburb is not None:
+            serializer = None
+            suburbs = Suburb.objects.all()
+            if state is not None:
+                serializer = SuburbSimpleSerializer
+                suburbs = suburbs.filter(municipality__state__name=state)
+            if municipality is not None:
+                serializer = SuburbMunicipalitySerializer
+                suburbs = suburbs.filter(municipality__name=municipality)
+            if suburb is not None:
+                serializer = SuburbWithoutZipCodeSerializer
+                suburbs = suburbs.filter(name=suburb)
+            serializer = serializer(suburbs.first())
+            return Response(serializer.data)
+        queryset = State.objects.all()
         serializer = StateSerializer(queryset, many=True)
         return Response(serializer.data)
 
