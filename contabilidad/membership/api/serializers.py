@@ -6,6 +6,15 @@ from rest_framework import serializers
 class MembershipRequestSerializer(serializers.ModelSerializer):
     is_person = serializers.NullBooleanField(required=False)
     is_company = serializers.NullBooleanField(required=False)
+    ceo_name = serializers.CharField()
+    ceo_email = serializers.CharField()
+    ceo_phone = serializers.CharField()
+    legal_name = serializers.CharField()
+    legal_email = serializers.CharField()
+    legal_phone = serializers.CharField()
+    main_name = serializers.CharField()
+    main_email = serializers.CharField()
+    main_phone = serializers.CharField()
 
     class Meta:
         model = MembershipRequest
