@@ -210,13 +210,14 @@ class MembershipRequest(MemberInfo):
     attachment = models.ManyToManyField(AttachedFile)
     pdf_data = JSONField(null=True)
 
-    @@property
+    @property
     def pdf_context(self):
         from .api.serializers import MembershipRequestPdfSerializer
         try:
-            self.pdf_data = MembershipRequestPdfSerializer(self).data()
+            self.pdf_data = MembershipRequestPdfSerializer(self).data
             self.save()
-        except:
+        except Exception as e:
+            print(e)
             return None
         return self.pdf_data
 

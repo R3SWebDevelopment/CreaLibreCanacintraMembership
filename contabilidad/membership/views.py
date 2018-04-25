@@ -2,12 +2,12 @@
 from django.http import HttpResponse
 from django.views.generic import View
 from .models import MembershipRequest
-from ..utils import render_to_pdf
+from utils.render_to_pdf import render_to_pdf
 
 
 class GeneratePDF(View):
     def get(self, request, *args, **kwargs):
-        request_id = self.GET.get('id', None)
+        request_id = request.GET.get('id', None)
         if request_id:
             membership_request = MembershipRequest.objects.filter(pk=request_id).first()
             if membership_request:

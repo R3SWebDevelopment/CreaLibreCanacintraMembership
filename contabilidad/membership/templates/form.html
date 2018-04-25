@@ -1,10 +1,673 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
+  <head>
+    <style>
 
-</body>
-</html>
+    </style>
+  </head>
+  <body>
+    <div id="canacintra-form">
+      <div id="container">
+        <div class="row header">
+          <div id="logo">
+            <img src="img/logo_canacintra_vertical.png" />
+          </div>
+          <div id="detail">
+            <div id="first-row">
+              <div id="left-section">
+                <p>
+                  Ficha de Registro
+                </p>
+                <p>
+                  <div class="form-input-field">
+                    <div class="label">
+                      <label>
+                        Año
+                      </label>
+                    </div>
+                    <div class="input underlined">
+                      {{registration_year}}
+                    </div>
+                  </div>
+                </p>
+              </div>
+              <div id="right-section">
+                <p>
+                  <div class="form-input-field push-right w50p" style="width: 98%;">
+                    <div class="label">
+                      <label>
+                        No. de Registro
+                      </label>
+                    </div>
+                    <div class="input">
+                      {{registration_number}}
+                    </div>
+                  </div>
+                </p>
+                <p>
+                  <div class="form-input-field push-right w20p" style="width: 98%;">
+                    <div class="label">
+                      <label>
+                        Sector
+                      </label>
+                    </div>
+                    <div class="input">
+                      {{sector}}
+                    </div>
+                  </div>
+                </p>
+                <p>
+                  <div class="form-input-field push-right w20p" style="width: 98%;">
+                    <div class="label">
+                      <label>
+                        Rama
+                      </label>
+                    </div>
+                    <div class="input">
+                      {{branch}}
+                    </div>
+                  </div>
+                </p>
+              </div>
+              <div class="clearfloat"></div>
+            </div>
+            <div id="second-row">
+              Datos Generales
+            </div>
+          </div>
+          <div class="clearfloat"></div>
+        </div>
+        <div class="row">
+          <div class="cell w15p">
+            <div class="form-input-field push-right w15p no-input" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Contribuyente
+                </label>
+              </div>
+              <div class="input">
+                <input type="text" id="year" name="year" value="" />
+              </div>
+            </div>
+          </div>
+          <div class="cell w25p">
+            <div class="form-input-field push-right w70p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Física
+                </label>
+              </div>
+              <div class="input">
+                <input type="checkbox" name="vehicle" value="Bike" checked="checked">
+              </div>
+            </div>
+          </div>
+          <div class="cell w25p">
+            <div class="form-input-field push-right w60p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Moral
+                </label>
+              </div>
+              <div class="input">
+                <input type="checkbox" name="vehicle" value="Bike" checked="checked">
+              </div>
+            </div>
+          </div>
+          <div class="cell w35p">
+            <div class="form-input-field push-right w15p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  RFC:
+                </label>
+              </div>
+              <div class="input">
+                {{rfc}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w20p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Nombre / Razón Social:
+                </label>
+              </div>
+              <div class="input">
+                {{business_name}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w20p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Nombre Comercial:
+                </label>
+              </div>
+              <div class="input">
+                {{trade_name}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w60p">
+            <div class="form-input-field push-right w15p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Domicilio:
+                </label>
+              </div>
+              <div class="input">
+                {{street_name_1}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w20p">
+            <div class="form-input-field push-right w60p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  No. Exterior:
+                </label>
+              </div>
+              <div class="input">
+                {{street_number}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w20p">
+            <div class="form-input-field push-right w60p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  No. Interior:
+                </label>
+              </div>
+              <div class="input">
+                {{apartment_number}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w70p">
+            <div class="form-input-field push-right w10p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Colonia:
+                </label>
+              </div>
+              <div class="input">
+                {{suburb}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w30p">
+            <div class="form-input-field push-right w20p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  C.P.:
+                </label>
+              </div>
+              <div class="input">
+                {{zip_code}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w50p">
+            <div class="form-input-field push-right w20p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Municipio:
+                </label>
+              </div>
+              <div class="input">
+                {{municipality}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w50p">
+            <div class="form-input-field push-right w20p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Estado:
+                </label>
+              </div>
+              <div class="input">
+                {{state}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w65p">
+            <div class="form-input-field push-right w40p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Teléfono(s) (10 digitos):
+                </label>
+              </div>
+              <div class="input">
+                {{phone}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w35p">
+            <div class="form-input-field push-right w20p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Celular:
+                </label>
+              </div>
+              <div class="input">
+                {{mobile}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w40p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Giro o Actividad principal del establecimiento:
+                </label>
+              </div>
+              <div class="input">
+                {{main_activity_description}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w50p">
+            <div class="form-input-field push-right w50p no-label" style="width: 98%;">
+              <div class="label">
+                <label>
+                </label>
+              </div>
+              <div class="input">
+                <input type="text" id="year" name="year" value="" />
+              </div>
+            </div>
+          </div>
+          <div class="cell w50p">
+            <div class="form-input-field push-right w30p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Código SCIAN
+                </label>
+              </div>
+              <div class="input">
+                {{scian_code}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w40p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Principales Productos o Servicios que ofrece:
+                </label>
+              </div>
+              <div class="input">
+                {{main_product_service}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w50p">
+            <div class="form-input-field push-right w50p no-label" style="width: 98%;">
+              <div class="label">
+                <label>
+                </label>
+              </div>
+              <div class="input">
+                <input type="text" id="year" name="year" value="" />
+              </div>
+            </div>
+          </div>
+          <div class="cell w50p">
+            <div class="form-input-field push-right w40p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Fracción Arancelaria:
+                </label>
+              </div>
+              <div class="input">
+                {{tariff_fraction}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w60p">
+            <div class="form-input-field push-right w70p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Fecha Inicio de Operaciones (dd/mm/yyyy):
+                </label>
+              </div>
+              <div class="input">
+                {{begins_operations}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w40p">
+            <div class="form-input-field push-right w60p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Total Empleados:
+                </label>
+              </div>
+              <div class="input">
+                {{total_employees}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w50p">
+            <div class="form-input-field push-right w45p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Rango de Ventas Brutas:
+                </label>
+              </div>
+              <div class="input">
+                {{gross_sell_range}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w25p">
+            <!-- ADD CHECKBOX IMPORT AND EXPORT -->
+            <div class="form-input-field push-right w50p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Exporta
+                </label>
+              </div>
+              <div class="input">
+                <input type="checkbox" name="vehicle" value="Bike" checked="checked">
+              </div>
+            </div>
+          </div>
+          <div class="cell w25p">
+            <div class="form-input-field push-right w50p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Importa
+                </label>
+              </div>
+              <div class="input">
+                <input type="checkbox" name="vehicle" value="Bike" checked="checked">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w25p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Nombre del Director General:
+                </label>
+              </div>
+              <div class="input">
+                {{ceo_name}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w70p">
+            <div class="form-input-field push-right w50p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Correo Electrónico del Director Genearal:
+                </label>
+              </div>
+              <div class="input">
+                {{ceo_email}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w30p">
+            <div class="form-input-field push-right w30p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Teléfono:
+                </label>
+              </div>
+              <div class="input">
+                {{ceo_phone}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w30p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Nombre del Representante Legal:
+                </label>
+              </div>
+              <div class="input">
+                {{legal_name}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w70p">
+            <div class="form-input-field push-right w55p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Correo Electrónico del Representate Legal:
+                </label>
+              </div>
+              <div class="input">
+                {{legal_email}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w30p">
+            <div class="form-input-field push-right w30p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Teléfono:
+                </label>
+              </div>
+              <div class="input">
+                {{legal_phone}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w40p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Nombre del Representante ante CANACINTRA:
+                </label>
+              </div>
+              <div class="input">
+                {{main_name}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w70p">
+            <div class="form-input-field push-right w70p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Correo Electrónico del Representate ante CANACINTRA:
+                </label>
+              </div>
+              <div class="input">
+                {{main_email}}
+              </div>
+            </div>
+          </div>
+          <div class="cell w30p">
+            <div class="form-input-field push-right w30p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Teléfono:
+                </label>
+              </div>
+              <div class="input">
+                {{main_phone}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add block of rows to handle other reprsentatives -->
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w30p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Página de Internet http://
+                </label>
+              </div>
+              <div class="input">
+                {{website}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row  blank-row" id="spacer">
+          <div>
+            Para uso exclusivo de CANACINTRA
+          </div>
+          <div>
+            Oficina promotora:
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w30p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Nombre del Gerente y/o Promotor:
+                </label>
+              </div>
+              <div class="input">
+                <input type="text" id="year" name="year" value="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell">
+            <div class="form-input-field push-right w20p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Contacto de Empresa:
+                </label>
+              </div>
+              <div class="input">
+                <input type="text" id="year" name="year" value="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell w50p">
+            <div class="form-input-field push-right w40p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Importe de Afiliación:
+                </label>
+              </div>
+              <div class="input">
+                <input type="text" id="year" name="year" value="" />
+              </div>
+            </div>
+          </div>
+          <div class="cell w50p">
+            <div class="form-input-field push-right w30p" style="width: 98%;">
+              <div class="label">
+                <label>
+                  Fecha de Pago:
+                </label>
+              </div>
+              <div class="input">
+                <input type="text" id="year" name="year" value="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row footer">
+          <div>
+            Documentación que debe anexar a esta solicitud para nuevo ingreso
+          </div>
+          <div>
+            <span>
+              Persona Moral:
+            </span>
+            <ul>
+              <li>
+                Acta Constitutiva
+              </li>
+              <li>
+                Poder Legal
+              </li>
+              <li>
+                Cuota Patronal
+              </li>
+              <li>
+                Identificación Oficial del Representante Legal
+              </li>
+              <li>
+                Última Declaración
+              </li>
+              <li>
+                R.F.C.
+              </li>
+            </ul>
+            <span>
+              Persona Física:
+            </span>
+            <ul>
+              <li>
+                Identificación Oficial
+              </li>
+              <li>
+                Inscripción del Padrón
+              </li>
+              <li>
+                Última cuota Patronal
+              </li>
+              <li>
+                Última Declaración
+              </li>
+              <li>
+                R.F.C.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <span>
+              Firma del Representante Legal:
+            </span>
+            <span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</htm>
