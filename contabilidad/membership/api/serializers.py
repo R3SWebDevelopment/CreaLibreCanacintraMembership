@@ -69,6 +69,13 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
         return super(MembershipRequestSerializer, self).update(instance, validated_data)
 
 
+class MembershipRequestPdfSerializer(MembershipRequestSerializer):
+    class Meta:
+        model = MembershipRequest
+        exclude = ('attachment', 'id', 'created_at', 'requested_at', 'validated', 'requested_by', 'attended_by',
+                   'member')
+
+
 class SuburbSerializer(serializers.ModelSerializer):
     state = serializers.CharField(source='municipality.state.name')
     municipality = serializers.CharField(source='municipality.name')
