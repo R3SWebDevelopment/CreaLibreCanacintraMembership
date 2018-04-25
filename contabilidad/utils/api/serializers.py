@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from membership.models import Sector, State, SCIAN, TariffFraction
-from membership.api.serializers import StateSerializer, SectorSerializer, SCIANSerializer, TariffFractionSerializer
+from membership.models import Sector, Branch, State, SCIAN, TariffFraction
+from membership.api.serializers import StateSerializer, SectorSerializer, BranchSerializer, SCIANSerializer, \
+    TariffFractionSerializer
 from datetime import datetime
 from django.conf import settings
 import pytz
@@ -31,6 +32,7 @@ class HealthCheckSerializer(serializers.Serializer):
 class CatalogSerializer(serializers.Serializer):
     states = serializers.SerializerMethodField()
     sectors = serializers.SerializerMethodField()
+    branches = serializers.SerializerMethodField()
     scian = serializers.SerializerMethodField()
     tariff_traffic = serializers.SerializerMethodField()
 
@@ -40,6 +42,9 @@ class CatalogSerializer(serializers.Serializer):
 
     def get_sectors(self, obj):
         return SectorSerializer(Sector.objects.all(), many=True).data
+
+    def get_branches(self, obj):
+        return BranchSerializer(Branch.objects.all(), many=True).data
 
     def get_scian(self, obj):
         return SCIANSerializer(SCIAN.objects.all(), many=True).data

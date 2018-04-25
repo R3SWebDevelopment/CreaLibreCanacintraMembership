@@ -33,29 +33,11 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
         return super(MembershipRequestSerializer, self).update(instance, validated_data)
 
 
-class SuburbSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Suburb
-        fields = '__all__'
-
-
-class MunicipalitySerializer(serializers.ModelSerializer):
-    suburbs = SuburbSerializer(many=True)
-    zip_codes = serializers.ListField()
-
-    class Meta:
-        model = Municipality
-        fields = '__all__'
-
-
 class StateSerializer(serializers.ModelSerializer):
-    municipalities = MunicipalitySerializer(many=True)
-    zip_codes = serializers.ListField()
 
     class Meta:
         model = State
-        fields = '__all__'
+        fields = ('name', )
 
 
 class BranchSerializer(serializers.ModelSerializer):

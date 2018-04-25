@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
     TariffFractionSerializer
 from ..models import MembershipRequest, State, Sector, SCIAN, TariffFraction
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 
 
@@ -46,10 +46,10 @@ class MyMembershipRequestView(APIView):
 
 
 class StateView(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def get(self, request, *args, **kwargs):
-        queryset = State.objects.all().prefetch_related('municipality', 'municipality__suburb')
+        queryset = State.objects.all()#.prefetch_related('municipality', 'municipality__suburb')
         serializer = StateSerializer(queryset, many=True)
         return Response(serializer.data)
 
