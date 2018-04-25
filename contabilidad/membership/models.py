@@ -49,6 +49,7 @@ def get_file_type_label(type):
             return t[1]
     return None
 
+
 REQUIRED_FILES = {
     SAT_PERSON_TYPE: [
         OFFICIAL_ID,
