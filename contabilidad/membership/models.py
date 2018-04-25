@@ -86,7 +86,7 @@ class MemberInfo(models.Model):
     main_activity_description = models.CharField(max_length=250, null=True, default=None)
     scian_code = models.CharField(max_length=250, null=True, default=None)
     main_product_service = models.CharField(max_length=250, null=True, default=None)
-    tariff_fraction = models.CharField(max_length=100, null=True, default=None)
+    tariff_fraction = models.CharField(max_length=250, null=True, default=None)
     begins_operations = models.DateField(null=True, default=None)
     total_employees = models.IntegerField(null=True, default=None)
     gross_sell_range = models.DecimalField(null=True, default=None, max_digits=12, decimal_places=2)
