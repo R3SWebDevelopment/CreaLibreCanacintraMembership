@@ -1,0 +1,26 @@
+[
+  {
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+      "domain": "contableapp-backend.r3s.com.mx",
+      "name": "ConTable App"
+    }
+  },
+  {
+    "model": "sites.site",
+    "pk": 2,
+    "fields": {
+      "domain": "127.0.0.1",
+      "name": "local"
+    }
+  },
+  {
+    "model": "sites.site",
+    "pk": 3,
+    "fields": {
+      "domain": "localhost",
+      "name": "local"
+    }
+  }
+]

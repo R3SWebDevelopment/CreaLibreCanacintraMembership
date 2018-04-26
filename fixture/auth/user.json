@@ -1,0 +1,74 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$ly4XEL1TP05J$CjB5mqT4+F9Ps99DtXRchUR4hUbbpt8KROqgYTTfWAo=",
+      "last_login": "2017-11-23T01:51:04.478Z",
+      "is_superuser": true,
+      "username": "admin@r3s.com.mx",
+      "first_name": "System",
+      "last_name": "Admin",
+      "email": "admin@r3s.com.mx",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2017-11-23T01:23:57.575Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$HKAcSUZsk6Cq$QO2Pr3MJyqPUOTnEYkODUdKN9Bicy2wPxspjAbrjj7M=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "bot@r3s.com.mx",
+      "first_name": "System",
+      "last_name": "Bot",
+      "email": "bot@r3s.com.mx",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2017-11-23T01:25:44.777Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$Ka9ffJcP66jZ$YG3ESq6F13YQgadjVriQ/0gUYNcVMrUTbYL4gj1oJXA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ricardo.tercero@r3s.com.mx",
+      "first_name": "Ricardo",
+      "last_name": "Tercero",
+      "email": "ricardo.tercero@r3s.com.mx",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2017-11-23T01:27:28.705Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$jDoA5EJHkq6u$MUHgMqivqc3bTKFEv0xZH+agKEc8+0Oqbam5tZWfAoM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kristal.diaz@cherrynchocolat.com.mx",
+      "first_name": "Kristal",
+      "last_name": "Diaz",
+      "email": "kristal.diaz@cherrynchocalat.com.mx",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2017-11-23T01:28:42Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

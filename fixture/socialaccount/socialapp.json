@@ -1,0 +1,18 @@
+[
+  {
+    "model": "socialaccount.socialapp",
+    "pk": 1,
+    "fields": {
+      "provider": "facebook",
+      "name": "R3S Contabilidad App",
+      "client_id": "409449702843935",
+      "secret": "b0d3e7eaa10709f1c63f56a0bdb08967",
+      "key": "",
+      "sites": [
+        2,
+        1,
+        3
+      ]
+    }
+  }
+]

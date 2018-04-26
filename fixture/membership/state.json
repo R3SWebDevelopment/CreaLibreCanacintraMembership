@@ -1,0 +1,226 @@
+[
+  {
+    "model": "membership.state",
+    "pk": 1,
+    "fields": {
+      "name": "Aguascalientes"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 2,
+    "fields": {
+      "name": "Baja California"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 3,
+    "fields": {
+      "name": "Baja California Sur"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 4,
+    "fields": {
+      "name": "Campeche"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 5,
+    "fields": {
+      "name": "Coahuila de Zaragoza"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 6,
+    "fields": {
+      "name": "Colima"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 7,
+    "fields": {
+      "name": "Chiapas"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 8,
+    "fields": {
+      "name": "Chihuahua"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 10,
+    "fields": {
+      "name": "Durango"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 11,
+    "fields": {
+      "name": "Guanajuato"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 12,
+    "fields": {
+      "name": "Guerrero"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 13,
+    "fields": {
+      "name": "Hidalgo"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 14,
+    "fields": {
+      "name": "Jalisco"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 15,
+    "fields": {
+      "name": "M\u00e9xico"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 16,
+    "fields": {
+      "name": "Michoac\u00e1n de Ocampo"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 17,
+    "fields": {
+      "name": "Morelos"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 18,
+    "fields": {
+      "name": "Nayarit"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 19,
+    "fields": {
+      "name": "Nuevo Le\u00f3n"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 20,
+    "fields": {
+      "name": "Oaxaca"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 21,
+    "fields": {
+      "name": "Puebla"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 22,
+    "fields": {
+      "name": "Quer\u00e9taro"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 23,
+    "fields": {
+      "name": "Quintana Roo"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 24,
+    "fields": {
+      "name": "San Luis Potos\u00ed"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 25,
+    "fields": {
+      "name": "Sinaloa"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 26,
+    "fields": {
+      "name": "Sonora"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 27,
+    "fields": {
+      "name": "Tabasco"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 28,
+    "fields": {
+      "name": "Tamaulipas"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 29,
+    "fields": {
+      "name": "Tlaxcala"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 30,
+    "fields": {
+      "name": "Veracruz de Ignacio de la Llave"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 31,
+    "fields": {
+      "name": "Yucat\u00e1n"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 32,
+    "fields": {
+      "name": "Zacatecas"
+    }
+  },
+  {
+    "model": "membership.state",
+    "pk": 33,
+    "fields": {
+      "name": "Ciudad de M\u00e9xico"
+    }
+  }
+]

@@ -1,0 +1,11 @@
+{% load account %}
+{% load membership_account %}
+{% user_display user as user_display %}
+
+{% autoescape on %}
+
+Gracias por realizar tu régistro para tu afiliación en línea. haz click en el link para completar tu regístro.
+
+{% get_signup_verification_link user key %}
+
+{% endautoescape %}

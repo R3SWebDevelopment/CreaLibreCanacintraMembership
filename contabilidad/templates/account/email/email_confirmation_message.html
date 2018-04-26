@@ -1,0 +1,31 @@
+{% extends 'email/base.html' %}
+{% load account %}
+
+{% block STYLE %}
+textarea.confirm_key{
+    width: 250px;
+    text-align: center;
+    border: 1px solid black;
+    height: 20px;
+    resize: none;
+    padding: 45px 0px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: darkgray;
+    border-radius: 25px;
+    margin: auto;
+}
+{% endblock %}
+
+{% block BODY %}
+    {% include 'email/snippet/body/one_column_text.html' with template_path='account/email/snippet/confirmation_message.html' %}
+{% endblock %}
+
+{% block SCRIPT %}
+    $(document).ready(function(){
+        $("button.copy_key").click(function(){
+            $("textarea.confirm_key").select();
+            document.execCommand('copy');
+        });
+    });
+{% endblock %}

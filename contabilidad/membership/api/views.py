@@ -1,0 +1,105 @@
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
+    TariffFractionSerializer, SuburbSerializer, SuburbWithoutZipCodeSerializer, SuburbMunicipalitySerializer, \
+    SuburbSimpleSerializer
+from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework import status
+
+
+class MyMembershipRequestView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        profile = user.profile
+        if profile is None:
+            raise ValueError('Este usuario no tiene perfil')
+        company = profile.my_company
+        if company is None:
+            raise ValueError('Este usuario no tiene compañia')
+        object = company.membership_request
+        if object is None:
+            object, created = MembershipRequest.objects.get_or_create(rfc=company.rfc)
+            if created:
+                object.business_name = company.full_name
+                object.trade_name = company.full_name
+                object.setAddress(**company.address)
+                object.save()
+        return object
+
+    def get(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        serializer = MembershipRequestSerializer(object)
+        return Response(serializer.data)
+
+    def patch(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StateView(APIView):
+    permission_classes = (AllowAny,)
+
+    def get(self, request, *args, **kwargs):
+        zip_code = request.GET.get('zip_code', None)
+        if zip_code is not None:
+            suburb = Suburb.objects.filter(zip_code=zip_code).first()
+            serializer = SuburbSerializer(suburb)
+            return Response(serializer.data)
+        state = request.GET.get('state', None)
+        state = None if state.upper() in ['NULL', 'UNDEFINED'] or state.strip() == '' else state
+        municipality = request.GET.get('municipality', None)
+        municipality = None if municipality.upper() in ['NULL', 'UNDEFINED'] or municipality.strip() == '' \
+            else municipality
+        suburb = request.GET.get('suburb', None)
+        suburb = None if suburb.upper() in ['NULL', 'UNDEFINED'] or suburb.strip() == '' else suburb
+        if state is not None or municipality is not None or suburb is not None:
+            serializer = None
+            suburbs = Suburb.objects.all()
+            if state is not None:
+                serializer = SuburbSimpleSerializer
+                suburbs = suburbs.filter(municipality__state__name=state)
+            if municipality is not None:
+                serializer = SuburbMunicipalitySerializer
+                suburbs = suburbs.filter(municipality__name=municipality)
+            if suburb is not None:
+                serializer = SuburbWithoutZipCodeSerializer
+                suburbs = suburbs.filter(name=suburb)
+            serializer = serializer(suburbs.first())
+            return Response(serializer.data)
+        queryset = State.objects.all()
+        serializer = StateSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class SectorView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        queryset = Sector.objects.all()
+        serializer = SectorSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class SCIANView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        queryset = SCIAN.objects.all()
+        serializer = SCIANSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class TariffFractionView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        queryset = TariffFraction.objects.all()
+        serializer = TariffFractionSerializer(queryset, many=True)
+        return Response(serializer.data)

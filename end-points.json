@@ -1,0 +1,83 @@
+{
+  "user_info": {
+    "url": "/rest-auth/user/",
+    "method": ["GET", "PATCH", "PUT"],
+    "token_required": true,
+    "param": {
+      "email": "string",
+      "first_name": "string",
+      "last_name": "string",
+      "profile": {
+              "notify_by_email": true,
+              "notify_by_sms": true,
+               "mobile_number": {
+                      "number": "8110713920",
+                      "country_code": "+52"
+               }
+      },
+      "avatar": "FILE"
+    }
+  },
+  "user_registration": {
+    "url": "/rest-auth/registration/",
+    "method": ["POST"],
+    "param": {
+      "email": "string",
+      "password1": "string",
+      "password2": "string",
+      "first_name": "string",
+      "last_name": "string",
+      "country_phone_code": "string",
+      "mobile_number": "string"
+    }
+  },
+  "user_registration_confirm": {
+    "url": "/rest-auth/registration/verify-email/",
+    "method": ["POST"],
+    "param": {
+      "key": "string"
+    }
+  },
+  "user_login": {
+    "url": "/rest-auth/login/",
+    "method": ["POST"],
+    "param": {
+      "email": "string",
+      "password": "string"
+    }
+  },
+  "user_logout": {
+    "url": "/rest-auth/logout/",
+    "method": ["POST"]
+  },
+  "password_reset_request": {
+    "url": "/rest-auth/password/reset/",
+    "method": ["POST"],
+    "param": {
+      "email": "string"
+    }
+  },
+  "password_reset_confirm": {
+    "url": "/rest-auth/password/reset/confirm/",
+    "method": ["POST"],
+    "param": {
+      "new_password1": "string",
+      "new_password2": "string",
+      "uid": "string",
+      "token": "string"
+    }
+  },
+  "user_password_change": {
+    "url": "/rest-auth/password/change/",
+    "method": ["POST"],
+    "param": {
+      "old_password": "string",
+      "new_password1": "string",
+      "new_password2": "string"
+    }
+  },
+  "health_check": {
+    "url": "/system/health_check/",
+    "method": ["GET"]
+  }
+}
