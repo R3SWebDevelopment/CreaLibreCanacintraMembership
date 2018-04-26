@@ -2,10 +2,52 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
     TariffFractionSerializer, SuburbSerializer, SuburbWithoutZipCodeSerializer, SuburbMunicipalitySerializer, \
-    SuburbSimpleSerializer
+    SuburbSimpleSerializer, MembershipRequestAttachment
 from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
+
+
+class MyMembershipRequestAttachmentView(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = MembershipRequestAttachment
+    # permission_classes = (IsAuthenticated,)
+
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        profile = user.profile
+        if profile is None:
+            raise ValueError('Este usuario no tiene perfil')
+        company = profile.my_company
+        if company is None:
+            raise ValueError('Este usuario no tiene compañia')
+        object = company.membership_request
+        if object is None:
+            object = MembershipRequest.objects.filter(rfc=company.rfc).first()
+        return object
+
+    def get(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        file_serializer = MembershipRequestAttachment(data=request.data)
+        if file_serializer.is_valid():
+            try:
+                attachment = file_serializer.save()
+                object.add_attachment(attachment)
+            except Exception as e:
+                error = {
+                    e.args[1]: e.args[0]
+                }
+                attachment.delete()
+                return Response(error, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
+        return Response(serializer.data)
 
 
 class MyMembershipRequestView(APIView):
