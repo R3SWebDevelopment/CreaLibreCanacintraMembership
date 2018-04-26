@@ -221,6 +221,21 @@ class MembershipRequest(MemberInfo):
             return None
         return self.pdf_data
 
+    def add_attachment(self, attachment):
+        if self.sat_taxpayer_type is None or self.sat_taxpayer_type not in SAT_TAXPAYER_TYPES:
+            raise Exception('El tipo de contribuyente no se ha definido correctamente', 'general')
+        if self.sat_taxpayer_type == SAT_PERSON_TYPE:  # The tax payer is a person
+            if attachment.type not in SAT_PERSON_TYPE_ATTACHMENT:
+                raise Exception('Este archivo no es permitido para una persona física', attachment.type)
+        elif self.sat_taxpayer_type == SAT_ORGANIZATION_TYPE:  # The tax payer is an organization
+            if attachment.type not in SAT_ORGANIZATION_TYPE_ATTACHMENT:
+                raise Exception('Este archivo no es permitido para una persona moral', attachment.type)
+
+        existing = self.attachment.filter(type=attachment.type).first()
+        if existing:
+            self.attachment.remove(existing)
+        self.attachment.add(attachment)
+
     def __str__(self):
         return "{} - {}".format(self.requested_by, self.created_at)
 
