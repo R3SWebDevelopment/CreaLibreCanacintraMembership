@@ -3,6 +3,18 @@ from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, 
 from rest_framework import serializers
 
 
+class MembershipRequestAttachment(serializers.ModelSerializer):
+    type = serializers.CharField(required=True)
+    file = serializers.FileField(required=True)
+
+    class Meta:
+        model = AttachedFile
+        fields = '__all__'
+
+    def create(self, validated_data):
+        return super(MembershipRequestAttachment, self).create(validated_data)
+
+
 class MembershipRequestSerializer(serializers.ModelSerializer):
     is_person = serializers.NullBooleanField(required=False)
     is_company = serializers.NullBooleanField(required=False)
