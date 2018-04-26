@@ -9,7 +9,7 @@ import re
 SAT_PERSON_TYPE = 1
 SAT_ORGANIZATION_TYPE = 2
 SAT_TAXPAYER_TYPE = (
-    (SAT_PERSON_TYPE, "Fisca"),
+    (SAT_PERSON_TYPE, "Física"),
     (SAT_ORGANIZATION_TYPE, "Moral")
 )
 
