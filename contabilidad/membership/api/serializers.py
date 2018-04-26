@@ -18,7 +18,13 @@ class MembershipRequestAttachment(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        return super(MembershipRequestAttachment, self).create(validated_data)
+        attachment = []
+        for item in zip(validated_data.get('types', []), validated_data.get('files', [])):
+            attachment.append(super(MembershipRequestAttachment, self).create({
+                "type": item[0],
+                "file": item[1]
+            }))
+        return attachment
 
 
 class MembershipRequestSerializer(serializers.ModelSerializer):
