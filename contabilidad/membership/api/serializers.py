@@ -1,5 +1,5 @@
 from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Suburb, Sector, \
-    Branch, SCIAN, TariffFraction
+    Branch, SCIAN, TariffFraction, AttachedFile
 from rest_framework import serializers
 
 
