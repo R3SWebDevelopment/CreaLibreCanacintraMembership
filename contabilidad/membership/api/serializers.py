@@ -4,8 +4,14 @@ from rest_framework import serializers
 
 
 class MembershipRequestAttachment(serializers.ModelSerializer):
-    type = serializers.CharField(required=True)
-    file = serializers.FileField(required=True)
+    type = serializers.CharField(read_only=True)
+    file = serializers.FileField(read_only=True)
+    types = serializers.ListField(
+        child=serializers.CharField(write_only=True)
+    )
+    files = serializers.ListField(
+        child=serializers.FileField(write_only=True)
+    )
 
     class Meta:
         model = AttachedFile
