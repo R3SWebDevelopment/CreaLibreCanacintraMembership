@@ -46,9 +46,11 @@ class MyMembershipRequestAttachmentView(APIView):
                     attachment.delete()
                     errors.append(error)
             serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
+            request_serializer = MembershipRequestSerializer(object)
             return Response({
                 "errors": errors,
-                "attachments": serializer.data
+                "attachments": serializer.data,
+                "request": request_serializer.data,
             })
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
