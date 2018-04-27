@@ -28,7 +28,11 @@ class MyMembershipRequestAttachmentView(APIView):
     def get(self, request, *args, **kwargs):
         object = self.get_object(*args, **kwargs)
         serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
-        return Response(serializer.data)
+        request_serializer = MembershipRequestSerializer(object)
+        return Response({
+            "attachments": serializer.data,
+            "request": request_serializer.data,
+        })
 
     def post(self, request, *args, **kwargs):
         object = self.get_object(*args, **kwargs)
