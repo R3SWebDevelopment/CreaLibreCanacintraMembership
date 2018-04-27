@@ -9,9 +9,8 @@ from rest_framework import status
 
 
 class MyMembershipRequestAttachmentView(APIView):
-    permission_classes = (AllowAny,)
     serializer_class = MembershipRequestAttachment
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def get_object(self, *args, **kwargs):
         user = self.request.user
