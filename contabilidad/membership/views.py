@@ -6,8 +6,8 @@ from utils.render_to_pdf import render_to_pdf
 
 
 class ViewAttachmentPDF(View):
-    def get(self, request, *args, **kwargs):
-        attachment_id = request.GET.get('id', None)
+    def get(self, request, id, *args, **kwargs):
+        attachment_id = id
         if attachment_id:
             attachment = AttachedFile.objects.filter(pk=attachment_id).first()
             if attachment:

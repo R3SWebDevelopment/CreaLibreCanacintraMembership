@@ -7,5 +7,5 @@ from .views import (
 
 urlpatterns = [
     url(r'^form_pdf/$', GeneratePDF.as_view(), name='generate_membership_request'),
-    url(r'^attachment/view/$', ViewAttachmentPDF.as_view(), name='generate_membership_request')
+    url(r'^attachment/view/(?P<id>[0-9]+)/$', ViewAttachmentPDF.as_view(), name='membership_request_attachment_view')
 ]
