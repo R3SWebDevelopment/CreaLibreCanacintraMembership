@@ -34,15 +34,15 @@ class MembershipRequestAttachment(serializers.ModelSerializer):
 class MembershipRequestSerializer(serializers.ModelSerializer):
     is_person = serializers.NullBooleanField(required=False)
     is_company = serializers.NullBooleanField(required=False)
-    ceo_name = serializers.CharField(required=False)
-    ceo_email = serializers.CharField(required=False)
-    ceo_phone = serializers.CharField(required=False)
-    legal_name = serializers.CharField(required=False)
-    legal_email = serializers.CharField(required=False)
-    legal_phone = serializers.CharField(required=False)
-    main_name = serializers.CharField(required=False)
-    main_email = serializers.CharField(required=False)
-    main_phone = serializers.CharField(required=False)
+    ceo_name = serializers.CharField(required=False, allow_blank=True)
+    ceo_email = serializers.CharField(required=False, allow_blank=True)
+    ceo_phone = serializers.CharField(required=False, allow_blank=True)
+    legal_name = serializers.CharField(required=False, allow_blank=True)
+    legal_email = serializers.CharField(required=False, allow_blank=True)
+    legal_phone = serializers.CharField(required=False, allow_blank=True)
+    main_name = serializers.CharField(required=False, allow_blank=True)
+    main_email = serializers.CharField(required=False, allow_blank=True)
+    main_phone = serializers.CharField(required=False, allow_blank=True)
 
     class Meta:
         model = MembershipRequest
