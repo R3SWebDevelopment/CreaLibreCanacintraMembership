@@ -36,6 +36,7 @@ class MyMembershipRequestAttachmentView(APIView):
 
     def post(self, request, *args, **kwargs):
         object = self.get_object(*args, **kwargs)
+        print(request.data)
         file_serializer = MembershipRequestAttachment(data=request.data)
         if file_serializer.is_valid():
             attachments = file_serializer.save()

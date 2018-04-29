@@ -4,6 +4,7 @@ from django.contrib.postgres.fields.jsonb import JSONField as JSONBField
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.contrib.auth.models import User
 from django.utils.functional import cached_property
+from django.urls import reverse
 import re
 
 SAT_PERSON_TYPE = 1
@@ -220,6 +221,12 @@ class AttachedFile(models.Model):
     def __str__(self):
         label = get_file_type_label(self.type)
         return "{} - {}".format(label if label is not None else self.type, self.file.name)
+
+    @property
+    def url(self):
+        return reverse('membership_request:membership_request_attachment_view', kwargs={
+            "id": self.id
+        })
 
 
 class MembershipRequest(MemberInfo):

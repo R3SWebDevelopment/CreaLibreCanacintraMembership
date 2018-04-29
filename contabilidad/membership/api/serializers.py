@@ -6,7 +6,7 @@ from rest_framework import serializers
 class MembershipRequestAttachment(serializers.ModelSerializer):
     type = serializers.CharField(read_only=True)
     file = serializers.FileField(read_only=True)
-    url = serializers.URLField(read_only=True, source="file.url")
+    url = serializers.URLField(read_only=True)
     name = serializers.CharField(read_only=True, source="file.name")
     types = serializers.ListField(
         child=serializers.CharField(),

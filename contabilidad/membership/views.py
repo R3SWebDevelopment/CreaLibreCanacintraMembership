@@ -3,9 +3,13 @@ from django.http import HttpResponse
 from django.views.generic import View
 from .models import MembershipRequest, AttachedFile
 from utils.render_to_pdf import render_to_pdf
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class ViewAttachmentPDF(View):
+
+    @method_decorator(login_required)
     def get(self, request, id, *args, **kwargs):
         attachment_id = id
         if attachment_id:
