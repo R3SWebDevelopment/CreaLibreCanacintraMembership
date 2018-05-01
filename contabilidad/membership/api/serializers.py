@@ -32,6 +32,15 @@ class MembershipRequestAttachment(serializers.ModelSerializer):
 
 
 class MembershipRequestSerializer(serializers.ModelSerializer):
+    is_submitted = serializers.NullBooleanField(required=False)
+    can_edit = serializers.NullBooleanField(required=False)
+    has_change_form = serializers.NullBooleanField(required=False)
+    can_load_attachment = serializers.NullBooleanField(required=False)
+    has_create_pdf = serializers.NullBooleanField(required=False)
+    can_download_form = serializers.NullBooleanField(required=False)
+    can_submit = serializers.NullBooleanField(required=False)
+    is_required_field_fulfilled = serializers.NullBooleanField(required=False)
+
     is_person = serializers.NullBooleanField(required=False)
     is_company = serializers.NullBooleanField(required=False)
     ceo_name = serializers.CharField(required=False, allow_blank=True)
@@ -101,7 +110,8 @@ class MembershipRequestPdfSerializer(MembershipRequestSerializer):
     class Meta:
         model = MembershipRequest
         exclude = ('attachment', 'id', 'created_at', 'requested_at', 'validated', 'requested_by', 'attended_by',
-                   'member', 'pdf_data')
+                   'member', 'pdf_data', 'is_submitted', 'can_edit', 'has_change_form', 'can_load_attachment',
+                   'has_create_pdf', 'can_download_form', 'can_submit', 'is_required_field_fulfilled')
 
 
 class SuburbSerializer(serializers.ModelSerializer):
