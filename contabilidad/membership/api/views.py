@@ -36,7 +36,6 @@ class MyMembershipRequestAttachmentView(APIView):
 
     def post(self, request, *args, **kwargs):
         object = self.get_object(*args, **kwargs)
-        print(request.data)
         file_serializer = MembershipRequestAttachment(data=request.data)
         if file_serializer.is_valid():
             attachments = file_serializer.save()
@@ -94,6 +93,15 @@ class MyMembershipRequestView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        if object.can_submit:
+            object.do_submit(user=request.user)
+            serializer = MembershipRequestSerializer(object)
+            return Response(serializer.data)
+        errors = object.submit_errors
+        return Response(errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class StateView(APIView):

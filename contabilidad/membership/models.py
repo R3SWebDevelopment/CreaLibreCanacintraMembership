@@ -5,6 +5,7 @@ from django.contrib.postgres.fields import ArrayField, JSONField
 from django.contrib.auth.models import User
 from django.utils.functional import cached_property
 from django.urls import reverse
+import datetime
 import re
 
 SAT_PERSON_TYPE = 1
@@ -342,6 +343,19 @@ class MembershipRequest(MemberInfo):
     @property
     def form_pdf_url(self):
         return "{}?id={}".format(reverse('membership_request:generate_membership_request'), self.id)
+
+    @property
+    def submit_errors(self):
+        data = {
+            'error': 'No puede enviar su formulario'
+        }
+        return data
+
+    def do_submit(self, user=None):
+        if self.can_submit:
+            self.requested_by = user
+            self.requested_at = datetime.datetime.now()
+            self.save()
 
     def add_attachment(self, attachment):
         if self.sat_taxpayer_type is None or self.sat_taxpayer_type not in SAT_TAXPAYER_TYPES:
