@@ -289,7 +289,8 @@ class MembershipRequest(MemberInfo):
 
     @property
     def can_load_attachment(self):
-        if self.is_required_field_fulfilled and self.has_create_pdf and not self.has_change_form:
+        if self.is_required_field_fulfilled and self.has_create_pdf and not self.has_change_form \
+                and not self.is_submitted:
             return True
         return False
 
@@ -299,7 +300,7 @@ class MembershipRequest(MemberInfo):
 
     @property
     def can_download_form(self):
-        return self.is_required_field_fulfilled
+        return self.is_required_field_fulfilled and not self.is_submitted
 
     @property
     def can_submit(self):
