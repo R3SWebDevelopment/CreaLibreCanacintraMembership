@@ -244,6 +244,43 @@ class MembershipRequest(MemberInfo):
     pdf_data = JSONField(null=True)
 
     @property
+    def is_submitted(self):
+        if self.requested_by is not None and self.requested_at is not None:
+            return True
+        return False
+
+    @property
+    def can_edit(self):
+        return False if self.is_submitted else True
+
+    @property
+    def has_change_form(self):
+        if self.has_create_pdf:
+            return not self.pdf_data == self.pdf_context
+        return False
+
+    @property
+    def can_load_attachment(self):
+        if self.is_required_field_fulfilled and self.has_create_pdf and not self.has_change_form:
+            return True
+        return False
+
+    @property
+    def has_create_pdf(self):
+        return True if self.pdf_data is not None else False
+
+    @property
+    def can_download_form(self):
+        return False if self.is_required_field_fulfilled else False
+
+    @property
+    def can_submit(self):
+        if not self.is_submitted:
+            if self.is_required_field_fulfilled:
+                return True
+        return False
+
+    @property
     def pdf_context(self):
         from .api.serializers import MembershipRequestPdfSerializer
         try:
@@ -253,6 +290,10 @@ class MembershipRequest(MemberInfo):
             print(e)
             return None
         return self.pdf_data
+
+    @property
+    def is_required_field_fulfilled(self):
+        return False
 
     def add_attachment(self, attachment):
         if self.sat_taxpayer_type is None or self.sat_taxpayer_type not in SAT_TAXPAYER_TYPES:
