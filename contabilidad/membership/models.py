@@ -244,7 +244,7 @@ class MembershipRequest(MemberInfo):
     pdf_data = JSONField(null=True)
 
     required_fields = [
-        'registration_years',
+        'registration_year',
         'registration_number',
         'sector',
         'branch',
@@ -267,8 +267,6 @@ class MembershipRequest(MemberInfo):
         'begins_operations',
         'total_employees',
         'gross_sell_range',
-        'customs_activity',
-        'other_representative',
         'website'
     ]
 
@@ -300,12 +298,12 @@ class MembershipRequest(MemberInfo):
 
     @property
     def can_download_form(self):
-        return False if self.is_required_field_fulfilled else False
+        return self.is_required_field_fulfilled
 
     @property
     def can_submit(self):
         if not self.is_submitted:
-            if self.is_required_field_fulfilled:
+            if self.is_required_field_fulfilled and self.attachment_fulfill:
                 return True
         return False
 
@@ -325,8 +323,15 @@ class MembershipRequest(MemberInfo):
 
     @property
     def is_required_field_fulfilled(self):
+        data = self.generate_pdf_data
         for field in self.__class__.required_fields:
-            data = self.p
+            value = data.get(field, None)
+            if value is None:
+                return False
+        return True
+
+    @property
+    def attachment_fulfill(self):
         return False
 
     def add_attachment(self, attachment):
