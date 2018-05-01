@@ -332,7 +332,12 @@ class MembershipRequest(MemberInfo):
 
     @property
     def attachment_fulfill(self):
-        return False
+        attachments = SAT_ORGANIZATION_TYPE_ATTACHMENT if self.sat_taxpayer_type == SAT_ORGANIZATION_TYPE \
+            else SAT_PERSON_TYPE_ATTACHMENT if self.sat_taxpayer_type == SAT_PERSON_TYPE else []
+        for attachment in attachments:
+            if self.attachment.filter(type__iexact=attachment) is None:
+                return False
+        return True
 
     @property
     def form_pdf_url(self):
