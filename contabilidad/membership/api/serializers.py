@@ -32,14 +32,14 @@ class MembershipRequestAttachment(serializers.ModelSerializer):
 
 
 class MembershipRequestSerializer(serializers.ModelSerializer):
-    is_submitted = serializers.NullBooleanField(required=False)
-    can_edit = serializers.NullBooleanField(required=False)
-    has_change_form = serializers.NullBooleanField(required=False)
-    can_load_attachment = serializers.NullBooleanField(required=False)
-    has_create_pdf = serializers.NullBooleanField(required=False)
-    can_download_form = serializers.NullBooleanField(required=False)
-    can_submit = serializers.NullBooleanField(required=False)
-    is_required_field_fulfilled = serializers.NullBooleanField(required=False)
+    is_submitted = serializers.NullBooleanField(required=False, read_only=True)
+    can_edit = serializers.NullBooleanField(required=False, read_only=True)
+    has_change_form = serializers.NullBooleanField(required=False, read_only=True)
+    can_load_attachment = serializers.NullBooleanField(required=False, read_only=True)
+    has_create_pdf = serializers.NullBooleanField(required=False, read_only=True)
+    can_download_form = serializers.NullBooleanField(required=False, read_only=True)
+    can_submit = serializers.NullBooleanField(required=False, read_only=True)
+    is_required_field_fulfilled = serializers.NullBooleanField(required=False, read_only=True)
 
     is_person = serializers.NullBooleanField(required=False)
     is_company = serializers.NullBooleanField(required=False)
@@ -58,7 +58,6 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
         exclude = ('attachment',)
 
     def validate(self, data):
-        print(data)
 
         is_person = data.get('is_person', None)
         if is_person is not None:
