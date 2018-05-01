@@ -334,6 +334,10 @@ class MembershipRequest(MemberInfo):
     def attachment_fulfill(self):
         return False
 
+    @property
+    def form_pdf_url(self):
+        return "{}?id={}".format(reverse('membership_request:generate_membership_request'), self.id)
+
     def add_attachment(self, attachment):
         if self.sat_taxpayer_type is None or self.sat_taxpayer_type not in SAT_TAXPAYER_TYPES:
             raise Exception('El tipo de contribuyente no se ha definido correctamente', 'general')
