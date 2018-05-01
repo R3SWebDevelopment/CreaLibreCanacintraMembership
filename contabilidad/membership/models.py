@@ -243,6 +243,35 @@ class MembershipRequest(MemberInfo):
     attachment = models.ManyToManyField(AttachedFile)
     pdf_data = JSONField(null=True)
 
+    required_fields = [
+        'registration_years',
+        'registration_number',
+        'sector',
+        'branch',
+        'sat_taxpayer_type',
+        'rfc',
+        'business_name',
+        'trade_name',
+        'street_name_1',
+        'street_number',
+        'suburb',
+        'zip_code',
+        'municipality',
+        'state',
+        'phone',
+        'mobile',
+        'main_activity_description',
+        'scian_code',
+        'main_product_service',
+        'tariff_fraction',
+        'begins_operations',
+        'total_employees',
+        'gross_sell_range',
+        'customs_activity',
+        'other_representative',
+        'website'
+    ]
+
     @property
     def is_submitted(self):
         if self.requested_by is not None and self.requested_at is not None:
@@ -281,18 +310,23 @@ class MembershipRequest(MemberInfo):
         return False
 
     @property
-    def pdf_context(self):
+    def generate_pdf_data(self):
         from .api.serializers import MembershipRequestPdfSerializer
         try:
-            self.pdf_data = MembershipRequestPdfSerializer(self).data
-            self.save()
+            return MembershipRequestPdfSerializer(self).data
         except Exception as e:
-            print(e)
             return None
+
+    @property
+    def pdf_context(self):
+        self.pdf_data = self.generate_pdf_data
+        self.save()
         return self.pdf_data
 
     @property
     def is_required_field_fulfilled(self):
+        for field in self.__class__.required_fields:
+            data = self.p
         return False
 
     def add_attachment(self, attachment):
