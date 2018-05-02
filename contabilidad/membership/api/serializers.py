@@ -32,17 +32,42 @@ class MembershipRequestAttachment(serializers.ModelSerializer):
 
 
 class MembershipRequestAcceptance(serializers.ModelSerializer):
-    membership_request = serializers.IntegerField(read_only=True, required=True)
-    promoter_office = serializers.CharField(read_only=True, required=True)
-    promoter_name = serializers.CharField(read_only=True, required=True)
-    payment_date = serializers.DateField(read_only=True, required=True)
-    business_contact = serializers.CharField(read_only=True, required=True)
-    membership_feed = serializers.DecimalField(read_only=True, required=True, max_digits=10, decimal_places=2)
+    membership_request = serializers.IntegerField(write_only=True, required=True)
+    promoter_office = serializers.CharField(write_only=True, required=True)
+    promoter_name = serializers.CharField(write_only=True, required=True)
+    payment_date = serializers.DateField(write_only=True, required=True)
+    business_contact = serializers.CharField(write_only=True, required=True)
+    membership_feed = serializers.DecimalField(write_only=True, required=True, max_digits=10, decimal_places=2)
 
     class Meta:
         model = Member
         fields = ('membership_request', 'promoter_office', 'promoter_name', 'payment_date', 'business_contact',
                   'membership_feed')
+
+    def validate(self, data):
+        validated_data = super(MembershipRequestAcceptance, self).validate(data)
+        if 'membership_request' in validated_data.keys():
+            self.request = MembershipRequest.objects.filter(id=data['membership_request']).first()
+            if self.request is None:
+                raise serializers.ValidationError("La solicitud de registro no existe")
+            elif not self.request.is_submitted:
+                raise serializers.ValidationError("La solicitud de registro todavia no se puede revisar")
+        return validated_data
+
+    def create(self, validated_data):
+        data = self.request.pdf_data
+        other_representative = data.get('other_representative', [])
+        for key in ['other_representative', 'is_company', 'is_person']:
+            del data[key]
+        del validated_data['membership_request']
+        for key in ['ceo', 'legal', 'main']:
+            del data['{}_name'.format(key)]
+            del data['{}_email'.format(key)]
+            del data['{}_phone'.format(key)]
+        data.update(validated_data)
+        instance = Member.objects.create(**data)
+        print("instance: {}".format(instance))
+        s
 
 
 class MembershipRequestSerializer(serializers.ModelSerializer):
