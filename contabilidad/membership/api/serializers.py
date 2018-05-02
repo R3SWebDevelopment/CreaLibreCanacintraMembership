@@ -66,8 +66,9 @@ class MembershipRequestAcceptance(serializers.ModelSerializer):
             del data['{}_phone'.format(key)]
         data.update(validated_data)
         instance = Member.objects.create(**data)
-        print("instance: {}".format(instance))
-        s
+        for attachment in self.request.attachment.all():
+            instance.attachment.add(attachment)
+        return instance
 
 
 class MembershipRequestSerializer(serializers.ModelSerializer):
