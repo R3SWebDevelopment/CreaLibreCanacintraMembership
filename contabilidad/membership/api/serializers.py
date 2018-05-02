@@ -68,6 +68,8 @@ class MembershipRequestAcceptance(serializers.ModelSerializer):
         instance = Member.objects.create(**data)
         for attachment in self.request.attachment.all():
             instance.attachment.add(attachment)
+        self.request.hidden = True
+        self.request.save()
         return instance
 
 
