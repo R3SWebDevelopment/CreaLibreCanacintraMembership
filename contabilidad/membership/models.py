@@ -400,6 +400,7 @@ class Member(MemberInfo):
     business_contact = models.CharField(max_length=250, null=True, default=None)
     membership_feed = models.DecimalField(null=True, default=None, max_digits=12, decimal_places=2)
     allowed_person = models.ManyToManyField(User, related_name="members")
+    attachment = models.ManyToManyField(AttachedFile)
 
     def __str__(self):
         return "{}".format(self.rfc)
