@@ -125,12 +125,13 @@ class StateView(APIView):
             serializer = SuburbSerializer(suburb)
             return Response(serializer.data)
         state = request.GET.get('state', None)
-        state = None if state.upper() in ['NULL', 'UNDEFINED'] or state.strip() == '' else state
+        state = None if state is not None and (state.upper() in ['NULL', 'UNDEFINED'] or state.strip()) == '' else state
         municipality = request.GET.get('municipality', None)
-        municipality = None if municipality.upper() in ['NULL', 'UNDEFINED'] or municipality.strip() == '' \
-            else municipality
+        municipality = None if municipality is not None and (municipality.upper() in ['NULL', 'UNDEFINED'] or
+                                                             municipality.strip() == '') else municipality
         suburb = request.GET.get('suburb', None)
-        suburb = None if suburb.upper() in ['NULL', 'UNDEFINED'] or suburb.strip() == '' else suburb
+        suburb = None if suburb is not None and (suburb.upper() in ['NULL', 'UNDEFINED'] or suburb.strip() == '')\
+            else suburb
         if state is not None or municipality is not None or suburb is not None:
             serializer = None
             suburbs = Suburb.objects.all()
