@@ -1,5 +1,5 @@
 from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Suburb, Sector, \
-    Branch, SCIAN, TariffFraction, AttachedFile
+    Branch, SCIAN, TariffFraction, AttachedFile, Member
 from rest_framework import serializers
 
 
@@ -29,6 +29,20 @@ class MembershipRequestAttachment(serializers.ModelSerializer):
                 "file": item[1]
             }))
         return attachment
+
+
+class MembershipRequestAcceptance(serializers.ModelSerializer):
+    membership_request = serializers.IntegerField(read_only=True, required=True)
+    promoter_office = serializers.CharField(read_only=True, required=True)
+    promoter_name = serializers.CharField(read_only=True, required=True)
+    payment_date = serializers.DateField(read_only=True, required=True)
+    business_contact = serializers.CharField(read_only=True, required=True)
+    membership_feed = serializers.DecimalField(read_only=True, required=True, max_digits=10, decimal_places=2)
+
+    class Meta:
+        model = Member
+        fields = ('membership_request', 'promoter_office', 'promoter_name', 'payment_date', 'business_contact',
+                  'membership_feed')
 
 
 class MembershipRequestSerializer(serializers.ModelSerializer):
