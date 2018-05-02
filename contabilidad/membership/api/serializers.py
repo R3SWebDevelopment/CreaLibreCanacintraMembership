@@ -68,9 +68,16 @@ class MembershipRequestAcceptance(serializers.ModelSerializer):
         instance = Member.objects.create(**data)
         for attachment in self.request.attachment.all():
             instance.attachment.add(attachment)
-        self.request.hidden = True
-        self.request.save()
+        MembershipRequest.objects.filter(pk=self.request.pk).update(hidden=True)
         return instance
+
+
+class MemberSerializer(serializers.ModelSerializer):
+    attachment = MembershipRequestAttachment(many=True, read_only=True)
+
+    class Meta:
+        model = Member
+        fields = '__all__'
 
 
 class MembershipRequestSerializer(serializers.ModelSerializer):

@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
     TariffFractionSerializer, SuburbSerializer, SuburbWithoutZipCodeSerializer, SuburbMunicipalitySerializer, \
-    SuburbSimpleSerializer, MembershipRequestAttachment, MembershipRequestAcceptance
+    SuburbSimpleSerializer, MembershipRequestAttachment, MembershipRequestAcceptance, MemberSerializer
 from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework import status
@@ -14,8 +14,8 @@ class MembershipRequestAcceptanceView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = MembershipRequestAcceptance(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+            member = serializer.save()
+            return Response(MemberSerializer(member).data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
