@@ -243,6 +243,7 @@ class MembershipRequest(MemberInfo):
     member = models.OneToOneField("Member", related_name="request", null=True)
     attachment = models.ManyToManyField(AttachedFile)
     pdf_data = JSONField(null=True)
+    hidden = models.NullBooleanField(default=False)
 
     required_fields = [
         'registration_year',
