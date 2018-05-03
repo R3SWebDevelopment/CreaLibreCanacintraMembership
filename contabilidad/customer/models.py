@@ -66,6 +66,14 @@ class Company(models.Model):
     def has_payment(self):
         return False
 
+    @cached_property
+    def membership_status(self):
+        return "En Proceso de Afiliación"
+
+    @cached_property
+    def branch_office(self):
+        return "Ensenada"
+
     class Meta:
         ordering = ['rfc']
 

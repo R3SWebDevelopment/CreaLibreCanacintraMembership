@@ -44,7 +44,7 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ('full_name', 'rfc', 'address', 'collaborators', 'is_member', 'has_membership_request', 'membership',
                   'membership_request', 'can_request_membership', 'can_request_update', 'has_update_membership_request',
                   'can_renew', 'has_payment', 'product_services', 'certifications', 'product_services_id',
-                  'certifications_id')
+                  'certifications_id', 'membership_status', 'branch_office')
 
 
 class AddCollaboratorsSerializer(serializers.Serializer):
