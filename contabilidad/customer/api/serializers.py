@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework import fields
-from ..models import Company
+from ..models import Company, ProductService, Certification
 from utils.api.serializers import UserSerializer
 from membership.api.serializers import MemberSerializer, MembershipRequestSerializer
 from django.contrib.auth.models import User
@@ -30,3 +30,16 @@ class AddCollaboratorsSerializer(serializers.Serializer):
 
     def get_users(self):
         return User.objects.filter(pk__in=self.data.get('users', []))
+
+
+class ProductServiceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductService
+        fields = '__all__'
+
+
+class CertificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Certification
+        fields = '__all__'
