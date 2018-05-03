@@ -56,7 +56,7 @@ class HiddenModelQuerySet(models.QuerySet):
 
 class HiddenModelManager(models.Manager):
     def get_queryset(self):
-        return HiddenModelQuerySet(self.model, using=self._db)
+        return HiddenModelQuerySet(self.model, using=self._db).exclude(hidden=True)
 
 
 class OwnerModelQuerySet(models.QuerySet):

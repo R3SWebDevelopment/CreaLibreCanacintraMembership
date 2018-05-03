@@ -8,6 +8,15 @@ from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework import status
 
 
+class MembershipRequestsView(APIView):
+    permission_classes = (IsAdminUser,)
+
+    def get(self, request, *args, **kwargs):
+        qs = MembershipRequest.objects.all()
+        serializer = MembershipRequestSerializer(qs, many=True)
+        return Response(serializer.data)
+
+
 class MembershipRequestAcceptanceView(APIView):
     permission_classes = (IsAdminUser,)
 
