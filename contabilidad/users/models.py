@@ -30,8 +30,8 @@ class Profile(models.Model):
     @cached_property
     def comments(self):
         comments = []
-        for comment in self.comments_sent.all():
+        for comment in self.user.comments_sent.all():
             comments.append(comment)
-        for comment in self.comments_received.all():
+        for comment in self.user.comments_received.all():
             comments.append(comment)
         return comments

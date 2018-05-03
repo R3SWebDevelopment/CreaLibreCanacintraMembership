@@ -5,8 +5,11 @@ from membership.api.serializers import StateSerializer, SectorSerializer, Branch
     TariffFractionSerializer
 from datetime import datetime
 from django.conf import settings
+from users.api.serializers import *
 from ..models import Comment
 import pytz
+
+from crum import get_current_user
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -55,7 +58,27 @@ class CatalogSerializer(serializers.Serializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.IntegerField(write_only=True, max_value=10000, min_value=1, required=True)
+    message = serializers.CharField(max_length=250, write_only=True, required=True, allow_blank=False)
+    source = UserSerializer(read_only=True)
+    destination = UserSerializer(read_only=True)
 
     class Meta:
         model = Comment
-        fields = '__all__'
+        exclude = ('id',)
+
+    def validate(self, data):
+        validated_data = super(CommentSerializer, self).validate(data)
+        user_id = validated_data.get('user')
+
+        self.destination_user = User.objects.filter(pk=user_id).first()
+
+        if self.destination_user is None:
+            raise serializers.ValidationError("El Usuario no existe")
+        return validated_data
+
+    def create(self, validated_data):
+        source = get_current_user()
+        msg = validated_data.get('message')
+        instance = Comment.objects.create(msg=msg, source=source, destination=self.destination_user)
+        return instance
