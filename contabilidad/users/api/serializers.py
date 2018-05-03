@@ -7,6 +7,7 @@ from users.models import Profile
 from avatar.models import Avatar
 from customer.utils import validate_rfc
 from customer.api.serializers import CompanySerializer
+from utils.api.serializers import CommentSerializer
 
 
 class RegistrationSerializer(RegisterSerializer):
@@ -76,10 +77,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     is_admin = serializers.BooleanField(read_only=True)
     has_company = serializers.BooleanField(read_only=True)
     company = CompanySerializer(read_only=True, source='my_company')
+    comments = CommentSerializer(read_only=True, many=True)
 
     class Meta:
         model = Profile
-        fields = ('mobile_number', 'notify_by_email', 'notify_by_sms', 'is_admin', 'has_company', 'company')
+        fields = ('mobile_number', 'notify_by_email', 'notify_by_sms', 'is_admin', 'has_company', 'company', 'comments')
 
 
 class AvatarSerializer(serializers.ModelSerializer):
