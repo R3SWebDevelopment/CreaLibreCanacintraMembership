@@ -100,6 +100,8 @@ class MyMembershipRequestView(APIView):
         company = profile.my_company
         if company is None:
             raise ValueError('Este usuario no tiene compañia')
+        if not company.can_request_membership:
+            raise ValueError('Este usuario no puede solicitar la afiliación')
         object = company.membership_request
         if object is None:
             object, created = MembershipRequest.objects.get_or_create(rfc=company.rfc)
