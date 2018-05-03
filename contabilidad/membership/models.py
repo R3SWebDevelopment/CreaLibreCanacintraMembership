@@ -388,6 +388,9 @@ class UpdateRequest(MemberInfo):
     requested_at = models.DateTimeField(null=True, default=None)
     attended_by = models.ForeignKey(User, related_name="update_requests_approved", null=True)
     validated = models.NullBooleanField(null=True, default=None)
+    hidden = models.NullBooleanField(default=False)
+
+    objects = HiddenModelManager()
 
     def __str__(self):
         return "{} - {} - {}".format(self.member, self.requested_by, self.created_at)
@@ -405,6 +408,9 @@ class Member(MemberInfo):
     membership_feed = models.DecimalField(null=True, default=None, max_digits=12, decimal_places=2)
     allowed_person = models.ManyToManyField(User, related_name="members")
     attachment = models.ManyToManyField(AttachedFile)
+    hidden = models.NullBooleanField(default=False)
+
+    objects = HiddenModelManager()
 
     def __str__(self):
         return "{}".format(self.rfc)
