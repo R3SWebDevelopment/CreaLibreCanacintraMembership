@@ -5,6 +5,7 @@ from django.contrib.postgres.fields import ArrayField, JSONField
 from django.contrib.auth.models import User
 from django.utils.functional import cached_property
 from django.urls import reverse
+from utils.models import HiddenModelManager
 import datetime
 import re
 
@@ -244,6 +245,8 @@ class MembershipRequest(MemberInfo):
     attachment = models.ManyToManyField(AttachedFile)
     pdf_data = JSONField(null=True)
     hidden = models.NullBooleanField(default=False)
+
+    objects = HiddenModelManager()
 
     required_fields = [
         'registration_year',

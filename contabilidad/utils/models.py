@@ -47,6 +47,18 @@ def get_current_user_or_none():
     return None if current_user is None else current_user
 
 
+class HiddenModelQuerySet(models.QuerySet):
+
+    def all(self):
+        qs = super(HiddenModelQuerySet, self).all()
+        return qs.exclude(hidden=True)
+
+
+class HiddenModelManager(models.Manager):
+    def get_queryset(self):
+        return HiddenModelQuerySet(self.model, using=self._db)
+
+
 class OwnerModelQuerySet(models.QuerySet):
 
     def all(self):
