@@ -273,3 +273,16 @@ class CompressFileUpload(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Comment(models.Model):
+    source = models.ForeignKey(User, null=True, related_name="comments_sent")
+    destination = models.ForeignKey(User, null=True, related_name="comments_received")
+    msg = models.TextField(null=True, blank=False)
+    timestamp = models.DateTimeField(null=False, auto_now_add=True)
+
+    class Meta:
+        ordering = ('timestamp', )
+
+    def __str__(self):
+        return "From: {} - To: {} - When: {}".format(self.source, self.destination, self.timestamp)
