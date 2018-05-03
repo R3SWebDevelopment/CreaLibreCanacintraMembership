@@ -48,6 +48,14 @@ class Company(models.Model):
     def has_update_membership_request(self):
         return self.update_membership_request is not None
 
+    @cached_property
+    def can_renew(self):
+        return self.is_member
+
+    @cached_property
+    def has_payment(self):
+        return False
+
     class Meta:
         ordering = ['rfc']
 
