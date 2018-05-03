@@ -5,6 +5,7 @@ from membership.api.serializers import StateSerializer, SectorSerializer, Branch
     TariffFractionSerializer
 from datetime import datetime
 from django.conf import settings
+from ..models import Comment
 import pytz
 
 
@@ -52,3 +53,9 @@ class CatalogSerializer(serializers.Serializer):
     def get_tariff_traffic(self, obj):
         return TariffFractionSerializer(TariffFraction.objects.all(), many=True).data
 
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Comment
+        fields = '__all__'
