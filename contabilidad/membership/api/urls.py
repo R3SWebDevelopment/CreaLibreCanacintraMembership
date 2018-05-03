@@ -4,7 +4,7 @@ from .views import MyMembershipRequestView, StateView, SectorView, SCIANView, Ta
     MyMembershipRequestAttachmentView, MembershipRequestAcceptanceView, MembershipRequestsView, MemberView
 
 urlpatterns = [
-    url(r'^$', MyMembershipRequestView.as_view()),
+    url(r'^request/$', MyMembershipRequestView.as_view()),
     url(r'^members/$', MemberView.as_view()),
     url(r'^requests/$', MembershipRequestsView.as_view()),
     url(r'^requests/acceptance/$', MembershipRequestAcceptanceView.as_view()),
