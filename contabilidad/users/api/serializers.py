@@ -74,11 +74,12 @@ class LogInSerializer(LoginSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     mobile_number = serializers.JSONField(default={'number': '', 'country_code': ''})
     is_admin = serializers.BooleanField(read_only=True)
+    has_company = serializers.BooleanField(read_only=True)
     company = CompanySerializer(read_only=True, source='my_company')
 
     class Meta:
         model = Profile
-        fields = ('mobile_number', 'notify_by_email', 'notify_by_sms', 'is_admin', 'company')
+        fields = ('mobile_number', 'notify_by_email', 'notify_by_sms', 'is_admin', 'has_company', 'company')
 
 
 class AvatarSerializer(serializers.ModelSerializer):

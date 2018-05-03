@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.postgres.fields import JSONField
+from django.utils.functional import cached_property
 from django.conf import settings
 
 
@@ -14,10 +15,14 @@ class Profile(models.Model):
     notify_by_email = models.BooleanField(default=True)
     notify_by_sms = models.BooleanField(default=False)
 
-    @property
+    @cached_property
     def is_admin(self):
-        return False
+        return True if self.user.is_staff else False
 
-    @property
+    @cached_property
     def my_company(self):
         return self.user.companies.first()
+
+    @cached_property
+    def has_company(self):
+        return self.my_company is not None
