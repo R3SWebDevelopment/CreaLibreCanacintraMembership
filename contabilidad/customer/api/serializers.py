@@ -6,6 +6,19 @@ from membership.api.serializers import MemberSerializer, MembershipRequestSerial
 from django.contrib.auth.models import User
 
 
+class ProductServiceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductService
+        fields = '__all__'
+
+
+class CertificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Certification
+        fields = '__all__'
+
+
 class CompanySerializer(serializers.ModelSerializer):
     collaborators = UserSerializer(many=True, read_only=True)
     is_member = serializers.BooleanField(read_only=True)
@@ -17,6 +30,8 @@ class CompanySerializer(serializers.ModelSerializer):
     has_update_membership_request = serializers.BooleanField(read_only=True)
     can_renew = serializers.BooleanField(read_only=True)
     has_payment = serializers.BooleanField(read_only=True)
+    product_services = ProductServiceSerializer(read_only=True)
+    certification = CertificationSerializer(read_only=True)
 
     class Meta:
         model = Company
@@ -30,16 +45,3 @@ class AddCollaboratorsSerializer(serializers.Serializer):
 
     def get_users(self):
         return User.objects.filter(pk__in=self.data.get('users', []))
-
-
-class ProductServiceSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ProductService
-        fields = '__all__'
-
-
-class CertificationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Certification
-        fields = '__all__'
