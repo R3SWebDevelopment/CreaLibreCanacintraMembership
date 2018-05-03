@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^customer/', include('customer.api.urls', namespace='customer_api')),
     url(r'^membership/', include('membership.api.urls', namespace='membership_api')),
+    url(r'^users/', include('users.api.urls', namespace='users_api')),
     url(r'^membership/request/', include('membership.request_urls', namespace='membership_request')),
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
