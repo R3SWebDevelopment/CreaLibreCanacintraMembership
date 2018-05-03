@@ -3,9 +3,18 @@ from rest_framework.response import Response
 from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
     TariffFractionSerializer, SuburbSerializer, SuburbWithoutZipCodeSerializer, SuburbMunicipalitySerializer, \
     SuburbSimpleSerializer, MembershipRequestAttachment, MembershipRequestAcceptance, MemberSerializer
-from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction
+from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction, Member
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework import status
+
+
+class MemberView(APIView):
+    permission_classes = (IsAdminUser,)
+
+    def get(self, request, *args, **kwargs):
+        qs = Member.objects.all()
+        serializer = MemberSerializer(qs, many=True)
+        return Response(serializer.data)
 
 
 class MembershipRequestsView(APIView):
