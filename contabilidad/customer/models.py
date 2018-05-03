@@ -3,7 +3,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.postgres.fields import JSONField
 from django.utils.functional import cached_property
 from django.contrib.auth.models import User
-from membership.models import MembershipRequest, Member
+from membership.models import MembershipRequest, Member, UpdateRequest
 
 
 class Company(models.Model):
@@ -31,6 +31,22 @@ class Company(models.Model):
     @cached_property
     def membership_request(self):
         return MembershipRequest.objects.filter(rfc=self.rfc).first()
+
+    @cached_property
+    def can_request_membership(self):
+        return not self.is_member
+
+    @cached_property
+    def can_request_update(self):
+        return self.is_member
+
+    @cached_property
+    def update_membership_request(self):
+        return UpdateRequest.objects.filter(rfc=self.rfc).first()
+
+    @cached_property
+    def has_update_membership_request(self):
+        return self.update_membership_request is not None
 
     class Meta:
         ordering = ['rfc']

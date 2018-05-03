@@ -12,11 +12,15 @@ class CompanySerializer(serializers.ModelSerializer):
     has_membership_request = serializers.BooleanField(read_only=True)
     membership = MemberSerializer(read_only=True)
     membership_request = MembershipRequestSerializer(read_only=True)
+    can_request_membership = serializers.BooleanField(read_only=True)
+    can_request_update = serializers.BooleanField(read_only=True)
+    has_update_membership_request = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Company
         fields = ('full_name', 'rfc', 'address', 'collaborators', 'is_member', 'has_membership_request', 'membership',
-                  'membership_request')
+                  'membership_request', 'can_request_membership', 'can_request_update', 'has_update_membership_request',
+                  )
 
 
 class AddCollaboratorsSerializer(serializers.Serializer):
