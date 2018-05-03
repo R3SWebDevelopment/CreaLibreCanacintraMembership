@@ -64,3 +64,23 @@ class Company(models.Model):
 
     def __unicode__(self):
         return u"{} - {}".format(self.rfc, self.full_name)
+
+
+class CompanyList(models.Model):
+    code = models.CharField(max_length=10, null=False, blank=False)
+    name = models.CharField(max_length=250, null=False, blank=False)
+
+    class Meta:
+        abstract = True
+        ordering = ('code', 'name')
+
+    def __str__(self):
+        return "{} - {}".format(self.code, self.name)
+
+
+class ProductService(CompanyList):
+    pass
+
+
+class Certification(CompanyList):
+    pass
