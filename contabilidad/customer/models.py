@@ -15,8 +15,16 @@ class Company(models.Model):
     has_membership = models.BooleanField(default=False)
     membership_has_expired = models.BooleanField(default=False)
     expiration_date = models.DateField(null=True, default=None)
-    product_services = models.ManyToManyField("ProductService", related_name='companies')
+    product_service = models.ManyToManyField("ProductService", related_name='companies')
     certification = models.ManyToManyField("Certification", related_name='companies')
+
+    @cached_property
+    def product_services(self):
+        return self.product_service.all()
+
+    @cached_property
+    def certifications(self):
+        return self.certification.all()
 
     @cached_property
     def has_membership_request(self):
