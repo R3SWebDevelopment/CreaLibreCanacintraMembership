@@ -73,6 +73,17 @@ class MembershipRequestAcceptance(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
+    is_person = serializers.NullBooleanField(read_only=True)
+    is_company = serializers.NullBooleanField(read_only=True)
+    ceo_name = serializers.CharField(read_only=True)
+    ceo_email = serializers.CharField(read_only=True)
+    ceo_phone = serializers.CharField(read_only=True)
+    legal_name = serializers.CharField(read_only=True)
+    legal_email = serializers.CharField(read_only=True)
+    legal_phone = serializers.CharField(read_only=True)
+    main_name = serializers.CharField(read_only=True)
+    main_email = serializers.CharField(read_only=True)
+    main_phone = serializers.CharField(read_only=True)
     attachment = MembershipRequestAttachment(many=True, read_only=True)
 
     class Meta:
