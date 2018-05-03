@@ -26,3 +26,12 @@ class Profile(models.Model):
     @cached_property
     def has_company(self):
         return self.my_company is not None
+
+    @cached_property
+    def comments(self):
+        comments = []
+        for comment in self.comments_sent.all():
+            comments.append(comment)
+        for comment in self.comments_received.all():
+            comments.append(comment)
+        return comments
