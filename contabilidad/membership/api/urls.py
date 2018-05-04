@@ -2,10 +2,11 @@ from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import MyMembershipRequestView, StateView, SectorView, SCIANView, TariffFractionView, \
     MyMembershipRequestAttachmentView, MembershipRequestAcceptanceView, MembershipRequestsView, MemberView, \
-    MyMembershipView
+    MyMembershipView, MyMembershipAttachmentView
 
 urlpatterns = [
     url(r'^$', MyMembershipView.as_view()),
+    url(r'^attachment/$', MyMembershipAttachmentView.as_view()),
     url(r'^request/$', MyMembershipRequestView.as_view()),
     url(r'^members/$', MemberView.as_view()),
     url(r'^requests/$', MembershipRequestsView.as_view()),

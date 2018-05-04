@@ -2,7 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
     TariffFractionSerializer, SuburbSerializer, SuburbWithoutZipCodeSerializer, SuburbMunicipalitySerializer, \
-    SuburbSimpleSerializer, MembershipRequestAttachment, MembershipRequestAcceptance, MemberSerializer
+    SuburbSimpleSerializer, MembershipRequestAttachment, MembershipRequestAcceptance, MemberSerializer, \
+    MembershipAttachment
 from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction, Member
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework import status
@@ -59,6 +60,33 @@ class MembershipRequestAcceptanceView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class MyMembershipAttachmentView(APIView):
+    serializer_class = MembershipRequestAttachment
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        profile = user.profile
+        if profile is None:
+            raise ValueError('Este usuario no tiene perfil')
+        company = profile.my_company
+        if company is None:
+            raise ValueError('Este usuario no tiene compañia')
+        object = company.membership
+        if object is None:
+            raise ValueError('Esta compañia no tiene afiliación')
+        return object
+
+    def get(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
+        member_serializer = MemberSerializer(object)
+        return Response({
+            "attachments": serializer.data,
+            "request": member_serializer .data,
+        })
+
+
 class MyMembershipRequestAttachmentView(APIView):
     serializer_class = MembershipRequestAttachment
     permission_classes = (IsAuthenticated,)
@@ -78,7 +106,7 @@ class MyMembershipRequestAttachmentView(APIView):
 
     def get(self, request, *args, **kwargs):
         object = self.get_object(*args, **kwargs)
-        serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
+        serializer = MembershipAttachment(object.attachment.all(), many=True)
         request_serializer = MembershipRequestSerializer(object)
         return Response({
             "attachments": serializer.data,

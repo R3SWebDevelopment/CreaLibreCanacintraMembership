@@ -31,6 +31,17 @@ class MembershipRequestAttachment(serializers.ModelSerializer):
         return attachment
 
 
+class MembershipAttachment(serializers.ModelSerializer):
+    type = serializers.CharField(read_only=True)
+    file = serializers.FileField(read_only=True)
+    url = serializers.URLField(read_only=True)
+    name = serializers.CharField(read_only=True, source="file.name")
+
+    class Meta:
+        model = AttachedFile
+        fields = '__all__'
+
+
 class MembershipRequestAcceptance(serializers.ModelSerializer):
     membership_request = serializers.IntegerField(write_only=True, required=True)
     promoter_office = serializers.CharField(write_only=True, required=True)
