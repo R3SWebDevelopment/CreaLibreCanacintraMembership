@@ -17,6 +17,28 @@ class MemberView(APIView):
         return Response(serializer.data)
 
 
+class MyMembershipView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        profile = user.profile
+        if profile is None:
+            raise ValueError('Este usuario no tiene perfil')
+        company = profile.my_company
+        if company is None:
+            raise ValueError('Este usuario no tiene compañia')
+        object = company.membership
+        if object is None:
+            raise ValueError('Esta compañia no tiene afiliación')
+        return object
+
+    def get(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        serializer = MemberSerializer(object)
+        return Response(serializer.data)
+
+
 class MembershipRequestsView(APIView):
     permission_classes = (IsAdminUser,)
 
