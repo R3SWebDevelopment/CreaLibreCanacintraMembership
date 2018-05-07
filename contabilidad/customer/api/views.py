@@ -1,12 +1,16 @@
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route
-from .serializers import CompanySerializer, Company, AddCollaboratorsSerializer
+from .serializers import CompanySerializer, Company, AddCollaboratorsSerializer, ProductServiceSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from .permissions import AdminAndCollaboratorPermission
 from .filterings import CompanyFiltering, CompanyFiltering_filter_fields
 from rest_framework.permissions import IsAuthenticated
 from django.utils.translation import ugettext as _
+from rest_framework.generics import ListAPIView
+from ..models import ProductService
+from rest_framework.permissions import AllowAny
+from .filters import ProductServicesFilter
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -37,4 +41,12 @@ class CompanyViewSet(viewsets.ModelViewSet):
         return Response({
             "message": _("No user selected nor is already a collaborator nor valid user")
         }, status=status.HTTP_403_FORBIDDEN)
+
+
+class ProductServicesView(ListAPIView):
+    queryset = ProductService.objects.all()
+    serializer_class = ProductServiceSerializer
+    permission_classes = (AllowAny,)
+    search_fields = ('search', 'name',)
+    filter_backends = (ProductServicesFilter,)
 
