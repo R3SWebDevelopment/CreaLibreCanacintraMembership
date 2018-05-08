@@ -82,3 +82,10 @@ class CommentSerializer(serializers.ModelSerializer):
         msg = validated_data.get('message')
         instance = Comment.objects.create(msg=msg, source=source, destination=self.destination_user)
         return instance
+
+
+class APISerializer(serializers.Serializer):
+    creation_timestamp = serializers.SerializerMethodField()
+
+    def get_creation_timestamp(self, obj):
+        return settings.API_TIMESTAMP

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import datetime
+import datetime
 
 
 def get_bool_env(key, default):
@@ -111,6 +112,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    API_TIMESTAMP = datetime.datetime(1970, 1, 1)
+else:
+    API_TIMESTAMP = datetime.datetime.now()
+
 
 if ENABLE_DEBUG_TOOLBAR:
     INSTALLED_APPS = ['debug_toolbar', 'debug_panel', ] + INSTALLED_APPS
