@@ -11,6 +11,21 @@ import pytz
 
 from crum import get_current_user
 
+MONTH_NAMES = {
+    1: "enero",
+    2: "febrero",
+    3: "marzo",
+    4: "abril",
+    5: "mayo",
+    6: "junio",
+    7: "julio",
+    8: "agosto",
+    9: "septiembre",
+    10: "octubre",
+    11: "noviembre",
+    12: "diciembre"
+}
+
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -62,10 +77,23 @@ class CommentSerializer(serializers.ModelSerializer):
     message = serializers.CharField(max_length=250, write_only=True, required=True, allow_blank=False)
     source = UserSerializer(read_only=True)
     destination = UserSerializer(read_only=True)
+    date = serializers.SerializerMethodField(read_only=True)
+    source_full_name = serializers.SerializerMethodField(read_only=True)
+    destination_full_name = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Comment
         exclude = ('id',)
+
+    def get_date(self, obj):
+        return "{day}/{month}/{year}".format(day=obj.timestamp.day, month=MONTH_NAMES.get(obj.timestamp.month, 'MES'),
+                                             year=obj.timestamp.year)
+
+    def get_source_full_name(self, obj):
+        return obj.source.get_full_name()
+
+    def get_destination_full_name(self, obj):
+        return obj.destination.get_full_name()
 
     def validate(self, data):
         validated_data = super(CommentSerializer, self).validate(data)
