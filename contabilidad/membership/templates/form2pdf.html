@@ -1,0 +1,303 @@
+<html>
+  <head>
+    <style>
+      @page {
+      margin-right:20pt;
+      size: A4 portrait;
+        @frame header_frame {           /* Static frame */
+            -pdf-frame-content: header_content;
+            left: 44pt; width: 460pt; top: 40pt; height: 30pt;
+        }
+
+      @frame col1_frame {             /* Content frame 1 */
+      -pdf-frame-content: header_content_uno;
+      left: 44pt; width: 200pt; top: 120pt; height: 100pt;
+      /*-pdf-frame-border: 1;    /* for debugging the layout */
+      }
+      @frame col2_frame {             /* Content frame 2 */
+      -pdf-frame-content: header_content_dos;
+      left: 300pt; width: 200pt; top: 120pt; height: 100pt;
+      /*-pdf-frame-border: 1;    /* for debugging the layout */
+      }
+      @frame col3_frame {             /* Content frame 3 */
+      left: 44pt; width: 480pt; top: 320pt; height: 100pt;
+      /*-pdf-frame-border: 1;     for debugging the layout */
+      }
+      @frame col4_frame {             /* Content frame 4 */
+      left: 300pt; width: 200pt; top: 320pt; height: 100pt;
+    /*  -pdf-frame-border: 1;     for debugging the layout */
+      }
+      @frame col5_frame {             /* Content frame 5 */
+      -pdf-frame-content: header_content_footer;
+      left: 44pt; width: 460pt; top: 700pt; height: 50pt;
+     /* -pdf-frame-border: 1;     for debugging the layout */
+      }
+      }
+      .header_title { border-bottom: 1 solid gray;}
+      .label { font-weight: bold; }
+      #header_content_dos  { width: 50%; }
+      p { -pdf-keep-with-next: true; }
+      p.separator { -pdf-keep-with-next: false; font-size: 6pt; }
+      p.header_title { font-size: 12pt; font-weight:bold; }
+      p.header_2 { font-size: 10pt; font-weight:bold;}
+      .small-text { font-size: 7pt;}
+      .centered { margin-left: 200pt;}
+    </style>
+  </head>
+  <body>
+  <div id="header_content">
+<p class="header_title">Ficha de Registro | N. {{registration_number}} [ {{registration_year}} ]</p>
+<p class="">
+      Sector
+      </label>
+      {{sector}}
+      <label>
+      - Rama
+      </label>
+      {{branch}}
+</p>
+</div>
+<div id="header_content_uno">
+<p class="header_2">Datos Generales</p>
+<div>
+    <label>
+        {% if sat_taxpayer_type == 1 %}
+          Persona Física
+        {% elif sat_taxpayer_type == 2 %}
+          Persona Moral
+        {% endif %}
+    </label>
+|
+    <label>
+    RFC:
+    </label>
+    {{rfc}}
+</div>
+<div>
+    <label>
+    Nombre / Razón Social:
+    </label>
+    {{business_name}}
+</div>
+<div>
+    <label>
+    Nombre Comercial:
+    </label>
+    {{trade_name}}
+</div>
+<div>
+    <label>
+    Domicilio:
+    </label>
+    {{street_name_1}}
+    <label>
+    No. Exterior:
+    </label>
+    {{street_number}}
+    <label>
+    No. Interior:
+    </label>
+    {{apartment_number}}
+</div>
+<div>
+    <label>
+    Colonia:
+    </label>
+    {{suburb}}
+    <label>
+    C.P.:
+    </label>
+    {{zip_code}}, {{municipality}}, {{state}}.
+</div>
+<div>
+  <label>
+    Teléfono:
+    </label>
+    {{phone}} |
+  <label>
+    Celular:
+    </label>
+    {{mobile}}
+</div>
+</div>
+<p class="separator"></p>
+
+  <div id="header_content_dos">
+<p class="header_2">
+  Actividad principal
+</p>
+
+<p>
+<div>
+    <label>
+    Giro o Actividad principal del establecimiento:
+    </label>
+</div>
+    {{main_activity_description}}
+
+<div>
+   <label>
+    Código SCIAN
+    </label>
+    {{scian_code}}
+</div>
+
+<div>
+    <label>
+    Principales Productos o Servicios que ofrece:
+    </label>
+</div>
+<div class="small-text">
+    {{main_product_service}}
+</div>
+
+<div>
+    <label>
+    Fracción Arancelaria:
+    </label>
+    {{tariff_fraction}}
+</div>
+
+<div>
+    <label>
+    Fecha Inicio de Operaciones:
+    </label>
+    {{begins_operations}}
+</div>
+
+<div>
+    <label>
+    Total Empleados:
+    </label>
+    {{total_employees}}
+</div>
+<div>
+    <label>
+    Rango de Ventas Brutas:
+    </label>
+    {{gross_sell_range}}
+</div>
+
+<div>
+    {% if customs_activity == 1 %}
+      Importa
+    {% elif customs_activity == 2 %}
+      Exporta
+    {% endif %}
+
+</div>
+
+</p>
+
+
+<p class="separator"></p>
+</div>
+
+<p class="header_2">
+    Representantes
+</p>
+<div>
+    <label>
+    Nombre del Director General:
+    </label>
+    {{ceo_name}}
+</div>
+<div>
+    <label>
+    Correo Electrónico del Director General:
+    </label>
+    {{ceo_email}}
+    <label>
+    Teléfono:
+    </label>
+    {{ceo_phone}}
+</div>
+<div>
+    <label>
+    Nombre del Representante Legal:
+    </label>
+    {{legal_name}}
+</div>
+<div>
+
+    <label>
+    Correo Electrónico del Representate Legal:
+    </label>
+    {{legal_email}}
+    <label>
+    Teléfono:
+    </label>
+    {{legal_phone}}
+</div>
+<div>
+    <label>
+    Nombre del Representante ante CANACINTRA:
+    </label>
+    {{main_name}}
+</div>
+<div>
+    <label>
+    Correo Electrónico del Representate ante CANACINTRA:
+    </label>
+    {{main_email}}
+    <label>
+    Teléfono:
+    </label>
+    {{main_phone}}
+</div>
+{% if other_representative %}
+Contacto de Empresa: <!-- Add block of rows to handle other reprsentatives -->
+  {% for contact in other_representative %}
+<div>
+    <label>
+    Nombre:
+    </label>
+    {{contact.other_name}} <!-- XXX This could be wrong -->
+</div>
+<div>
+    <label>
+    Correo Electrónico:
+    </label>
+    {{contact.other_email}}
+    <label>
+    Teléfono:
+    </label>
+    {{contact.other_phone}}
+</div>
+  {% endfor %}
+{% endif %}
+<div>
+    <label>
+    Página de Internet http://
+    </label>
+    {{website}}
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<div class="small-text">
+  <p class="header_4">
+      Documentación que debe anexar a esta solicitud para nuevo ingreso
+  </p>
+  {% if sat_taxpayer_type == 1 %}
+    <div><strong>Persona Física:</strong>
+    <p>Identificación Oficial, Inscripción del Padrón, Última cuota Patronal, Última Declaración, R.F.C.</p>
+    </div>
+  {% elif sat_taxpayer_type == 2 %}
+    <div><strong>Persona Moral:</strong>
+    <p>Acta Constitutiva, Poder Legal, Cuota Patronal, Identificación Oficial del Representante Legal, Última Declaración, R.F.C.</p>
+    </div>
+  {% endif %}
+</div>
+
+<div id="header_content_footer">
+Por medio de la presente yo C. __________________________________________________ declaro Bajo protesta de decir verdad que todos los datos incluidos en el presente formulario son verídicos por lo cual autorizo al presente Comité realizar los trámites correspondientes al proceso de Afiliación a la CANACINTRA.
+<br/>
+<br/>
+<br/>
+<p class="centered">Firma del Representante Legal</p>
+</div>
+</body>
+</html>
