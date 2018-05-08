@@ -49,7 +49,7 @@ class GeneratePDF(View):
             if membership_request:
                 context = membership_request.pdf_context
                 if context is not None:
-                    pdf = render_to_pdf('form.html', context)
+                    pdf = render_to_pdf('form2pdf.html', context)
                     if pdf:
                         response = HttpResponse(pdf, content_type='application/pdf')
                         filename = "formulario_de_registro.pdf"
