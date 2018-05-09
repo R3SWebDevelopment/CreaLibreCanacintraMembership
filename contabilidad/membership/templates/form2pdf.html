@@ -20,16 +20,17 @@
       /*-pdf-frame-border: 1;    /* for debugging the layout */
       }
       @frame col3_frame {             /* Content frame 3 */
-      left: 44pt; width: 480pt; top: 320pt; height: 100pt;
+      -pdf-frame-content: header_content_tres;
+      left: 44pt; width: 480pt; top: 280pt; height: 100pt;
       /*-pdf-frame-border: 1;     for debugging the layout */
       }
       @frame col4_frame {             /* Content frame 4 */
-      left: 300pt; width: 200pt; top: 320pt; height: 100pt;
+      left: 300pt; width: 480pt; top: 400pt; height: 100pt;
     /*  -pdf-frame-border: 1;     for debugging the layout */
       }
       @frame col5_frame {             /* Content frame 5 */
       -pdf-frame-content: header_content_footer;
-      left: 44pt; width: 460pt; top: 700pt; height: 50pt;
+      left: 44pt; width: 460pt; top: 560pt; height: 50pt;
      /* -pdf-frame-border: 1;     for debugging the layout */
       }
       }
@@ -120,9 +121,10 @@
     {{mobile}}
 </div>
 </div>
+
 <p class="separator"></p>
 
-  <div id="header_content_dos">
+<div id="header_content_dos">
 <p class="header_2">
   Actividad principal
 </p>
@@ -184,15 +186,11 @@
     {% elif customs_activity == 2 %}
       Exporta
     {% endif %}
-
 </div>
-
 </p>
-
-
-<p class="separator"></p>
 </div>
 
+<div id="header_content_tres">
 <p class="header_2">
     Representantes
 </p>
@@ -272,11 +270,13 @@ Contacto de Empresa: <!-- Add block of rows to handle other reprsentatives -->
     </label>
     {{website}}
 </div>
+</div>
 
 <br/>
 <br/>
 <br/>
 
+<div id="header_content_tres">
 <div class="small-text">
   <p class="header_4">
       Documentación que debe anexar a esta solicitud para nuevo ingreso
@@ -291,6 +291,8 @@ Contacto de Empresa: <!-- Add block of rows to handle other reprsentatives -->
     </div>
   {% endif %}
 </div>
+</div>
+
 
 <div id="header_content_footer">
 Por medio de la presente yo C. __________________________________________________ declaro Bajo protesta de decir verdad que todos los datos incluidos en el presente formulario son verídicos por lo cual autorizo al presente Comité realizar los trámites correspondientes al proceso de Afiliación a la CANACINTRA.
