@@ -1,6 +1,20 @@
 from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Suburb, Sector, \
-    Branch, SCIAN, TariffFraction, AttachedFile, Member
+    Branch, SCIAN, TariffFraction, AttachedFile, Member, Region, RegionDelegation
 from rest_framework import serializers
+
+
+class RegionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Region
+        fields = '__all__'
+
+
+class RegionDelegationSerializer(serializers.ModelSerializer):
+    region = RegionSerializer()
+
+    class Meta:
+        model = RegionDelegation
+        fields = '__all__'
 
 
 class MembershipRequestAttachment(serializers.ModelSerializer):
