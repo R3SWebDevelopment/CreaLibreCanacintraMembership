@@ -535,3 +535,26 @@ class TariffFraction(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.code, self.description)
+
+
+class Region(models.Model):
+    code = models.CharField(max_length=10, null=False)
+    description = models.CharField(max_length=250, null=False)
+
+    class Meta:
+        ordering = ('code', 'description')
+
+    def __str__(self):
+        return "{} - {}".format(self.code, self.description)
+
+
+class RegionDelegation(models.Model):
+    region = models.ForeignKey(Region, related_name="delegations")
+    code = models.CharField(max_length=10, null=False)
+    description = models.CharField(max_length=250, null=False)
+
+    class Meta:
+        ordering = ('code', 'description')
+
+    def __str__(self):
+        return "{} - {} - {}".format(self.region, self.code, self.description)
