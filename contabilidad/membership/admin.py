@@ -1,9 +1,19 @@
 from django.contrib import admin
 from .models import MembershipRequest, Member, State, Municipality, Suburb, Sector, Branch, SCIAN, TariffFraction, \
-    AttachedFile
+    AttachedFile, Region, RegionDelegation
 from django.core.urlresolvers import reverse
 from django.utils.text import force_text
 from django.utils.translation import ugettext_lazy as _
+
+
+@admin.register(RegionDelegation)
+class RegionDelegationAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Region)
+class ReginAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(AttachedFile)
