@@ -3,17 +3,18 @@ from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, 
 from rest_framework import serializers
 
 
-class RegionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Region
-        fields = '__all__'
-
-
 class RegionDelegationSerializer(serializers.ModelSerializer):
-    region = RegionSerializer()
 
     class Meta:
         model = RegionDelegation
+        fields = '__all__'
+
+
+class RegionSerializer(serializers.ModelSerializer):
+    delegations = RegionDelegationSerializer(source='delegations.all', many=True)
+
+    class Meta:
+        model = Region
         fields = '__all__'
 
 

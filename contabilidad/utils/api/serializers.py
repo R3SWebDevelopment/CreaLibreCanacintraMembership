@@ -1,12 +1,13 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from membership.models import Sector, Branch, State, SCIAN, TariffFraction
+from membership.models import Sector, Branch, State, SCIAN, TariffFraction, Region
 from membership.api.serializers import StateSerializer, SectorSerializer, BranchSerializer, SCIANSerializer, \
-    TariffFractionSerializer
+    TariffFractionSerializer, RegionSerializer
 from datetime import datetime
 from django.conf import settings
 from users.api.serializers import *
 from ..models import Comment
+
 import pytz
 
 from crum import get_current_user
@@ -54,6 +55,7 @@ class CatalogSerializer(serializers.Serializer):
     branches = serializers.SerializerMethodField()
     scian = serializers.SerializerMethodField()
     tariff_traffic = serializers.SerializerMethodField()
+    regions = serializers.SerializerMethodField()
 
     def get_states(self, obj):
         return StateSerializer(State.objects.all().prefetch_related('municipality', 'municipality__suburb'),
@@ -70,6 +72,9 @@ class CatalogSerializer(serializers.Serializer):
 
     def get_tariff_traffic(self, obj):
         return TariffFractionSerializer(TariffFraction.objects.all(), many=True).data
+
+    def get_regions(self, obj):
+        return RegionSerializer(Region.objects.all(), many=True).data
 
 
 class CommentSerializer(serializers.ModelSerializer):
