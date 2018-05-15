@@ -3,7 +3,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.postgres.fields import JSONField
 from django.utils.functional import cached_property
 from django.contrib.auth.models import User
-from membership.models import MembershipRequest, Member, UpdateRequest
+from membership.models import MembershipRequest, Member, UpdateRequest, RegionDelegation
 from membership.models import SAT_TAXPAYER_TYPE
 
 
@@ -21,6 +21,11 @@ class Company(models.Model):
     sat_tax_payer_type = models.IntegerField(null=True, default=None, choices=SAT_TAXPAYER_TYPE)
     state = models.CharField(max_length=250, null=False, blank=True, verbose_name=_('State Name'))
     delegation = models.CharField(max_length=250, null=False, blank=True, verbose_name=_('Delegation Name'))
+
+    @cached_property
+    def get_delegation(self):
+        delegation = RegionDelegation.objects.filter(code=self.delegation).first()
+        return "" if delegation is None else delegation.description
 
     @cached_property
     def product_services(self):
@@ -76,7 +81,7 @@ class Company(models.Model):
 
     @cached_property
     def branch_office(self):
-        return "Ensenada"
+        return self.get_delegationk
 
     class Meta:
         ordering = ['rfc']

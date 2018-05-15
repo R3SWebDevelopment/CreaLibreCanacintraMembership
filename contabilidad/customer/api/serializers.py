@@ -38,13 +38,17 @@ class CompanySerializer(serializers.ModelSerializer):
     certifications_id = serializers.ListField(write_only=True, required=False,
                                               child=serializers.IntegerField(min_value=0, max_value=100)
                                               )
+    delegation = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Company
         fields = ('full_name', 'rfc', 'address', 'collaborators', 'is_member', 'has_membership_request', 'membership',
                   'membership_request', 'can_request_membership', 'can_request_update', 'has_update_membership_request',
                   'can_renew', 'has_payment', 'product_services', 'certifications', 'product_services_id',
-                  'certifications_id', 'membership_status', 'branch_office')
+                  'certifications_id', 'membership_status', 'branch_office', 'state', 'delegation')
+
+    def get_delegation(self, obj):
+        return obj.get_delegation
 
 
 class AddCollaboratorsSerializer(serializers.Serializer):
