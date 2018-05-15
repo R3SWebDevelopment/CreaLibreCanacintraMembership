@@ -4,6 +4,7 @@ from django.contrib.postgres.fields import JSONField
 from django.utils.functional import cached_property
 from django.contrib.auth.models import User
 from membership.models import MembershipRequest, Member, UpdateRequest
+from membership.models import SAT_TAXPAYER_TYPE
 
 
 class Company(models.Model):
@@ -17,6 +18,9 @@ class Company(models.Model):
     expiration_date = models.DateField(null=True, default=None)
     product_service = models.ManyToManyField("ProductService", related_name='companies')
     certification = models.ManyToManyField("Certification", related_name='companies')
+    sat_tax_payer_type = models.IntegerField(null=True, default=None, choices=SAT_TAXPAYER_TYPE)
+    state = models.CharField(max_length=250, null=False, blank=True, verbose_name=_('State Name'))
+    delegation = models.CharField(max_length=250, null=False, blank=True, verbose_name=_('Delegation Name'))
 
     @cached_property
     def product_services(self):
