@@ -18,6 +18,9 @@ class RegistrationSerializer(RegisterSerializer):
     username = serializers.HiddenField(default="SAME")
     rfc = serializers.CharField(required=True, write_only=True, max_length=13)
     business_name = serializers.CharField(required=True, write_only=True, max_length=250)
+    state = serializers.CharField(required=True, write_only=True, max_length=250)
+    delegation = serializers.CharField(required=True, write_only=True, max_length=250)
+    sat_tax_payer_type = serializers.IntegerField(required=True, write_only=True)
 
     class Meta:
         model = User
@@ -42,8 +45,14 @@ class RegistrationSerializer(RegisterSerializer):
         user.save()
         rfc = cleaned_data.get('rfc', '')
         business_name = cleaned_data.get('business_name', '')
+        sat_tax_payer_type = cleaned_data.get('sat_tax_payer_type', 0)
+        state = cleaned_data.get('state', '')
+        delegation = cleaned_data.get('delegation', '')
         company, created = Company.objects.get_or_create(rfc=rfc)
         company.full_name = business_name
+        company.sat_tax_payer_type = sat_tax_payer_type
+        company.state = state
+        company.delegation = delegation
         company.save()
         company.collaborators.add(user)
         return user
@@ -58,6 +67,9 @@ class RegistrationSerializer(RegisterSerializer):
             "mobile_number": self.validated_data.get('mobile_number', ''),
             "business_name": self.validated_data.get('business_name', ''),
             "rfc": self.validated_data.get('rfc', ''),
+            "state": self.validated_data.get('state', ''),
+            "delegation": self.validated_data.get('delegation', ''),
+            "sat_tax_payer_type": self.validated_data.get('sat_tax_payer_type', 0),
         })
         return cleaned_data
 
