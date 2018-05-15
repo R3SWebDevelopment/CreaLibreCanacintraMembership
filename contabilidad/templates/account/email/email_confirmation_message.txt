@@ -4,7 +4,7 @@
 
 {% autoescape on %}
 
-Gracias por realizar tu registro para tu afiliación en línea. Haz click en el link para completar tu registro.
+Gracias por realizar tu registro para tu afiliaciÃ³n en lÃ­nea. Haz click en el link para completar tu registro.
 
 {% get_signup_verification_link user key %}
 
