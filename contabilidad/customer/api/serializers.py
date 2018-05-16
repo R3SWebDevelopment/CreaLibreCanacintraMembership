@@ -7,10 +7,18 @@ from django.contrib.auth.models import User
 
 
 class ProductServiceSerializer(serializers.ModelSerializer):
+    selected = serializers.ListField(child=serializers.IntegerField(), write_only=True, required=True)
+
+    def validate_selected(self, value):
+        qs = ProductService.objects.filter(pk__in=value)
+        if qs.count() != len(set(value)):
+            raise serializers.ValidationError("Uno de los productos o servicios no estan registrados")
+        return qs
 
     class Meta:
         model = ProductService
         fields = '__all__'
+        read_only_fields = ('code', 'name')
 
 
 class CertificationSerializer(serializers.ModelSerializer):
