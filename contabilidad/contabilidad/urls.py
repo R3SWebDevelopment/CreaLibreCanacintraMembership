@@ -6,7 +6,7 @@ from rest_framework.authtoken import views
 from django.conf import settings
 
 from users.api.views import FacebookLogin
-from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 schema_view = get_swagger_view(title=_('Accounting API'))
 
@@ -14,6 +14,7 @@ urlpatterns = [
     url("^admin/", admin.site.urls),
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-token-refresh/', refresh_jwt_token),
     # url(r'^ocr/', include('ocr.api.urls', namespace='ocr_api')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^customer/', include('customer.api.urls', namespace='customer_api')),
