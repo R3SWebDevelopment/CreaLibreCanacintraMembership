@@ -26,7 +26,7 @@
       }
       @frame col5_frame {             /* Content frame 5 */
       -pdf-frame-content: header_content_footer;
-      left: 44pt; width: 460pt; top: 420pt; height: 250pt;
+      left: 44pt; width: 460pt; top: 540pt; height: 200pt;
      /* -pdf-frame-border: 1;     for debugging the layout */
       }
       }
@@ -45,13 +45,9 @@
   <div id="header_content">
 <p class="header_title">Ficha de Registro | N. {{registration_number}} [ {{registration_year}} ]</p>
 <p class="">
-      Sector
-      </label>
-      {{sector}}
-      <label>
-      - Rama
-      </label>
-      {{branch}}
+  {% if sector %}{{ sector }}{% endif %}
+      <span> - </span>
+  {% if branch %}{{ branch }}{% endif %}
 </p>
 </div>
 <div id="header_content_uno">
@@ -68,33 +64,37 @@
     <label>
     RFC:
     </label>
-    {{rfc}}
+    {{ rfc }}
 </div>
 <div>
     <label>
     Nombre / Razón Social:
     </label>
-    {{business_name}}
+    {{ business_name }}
 </div>
 <div>
     <label>
     Nombre Comercial:
     </label>
-    {{trade_name}}
+    {{ trade_name }}
 </div>
 <div>
     <label>
     Domicilio:
     </label>
-    {{street_name_1}}
+    {{ street_name_1 }}
     <label>
     No. Exterior:
     </label>
-    {{street_number}}
+    {{ street_number }}
+
+    {% if apartment_number %}
     <label>
     No. Interior:
     </label>
-    {{apartment_number}}
+    {{ apartment_number }}
+    {% endif %}
+
 </div>
 <div>
     <label>
@@ -134,10 +134,9 @@
     {{main_activity_description}}
 
 <div>
-   <label>
-    Código SCIAN
-    </label>
-    {{scian_code}}
+{% if scian_code %}
+  <label>Código SCIAN</label>{{scian_code}}
+{% endif %}
 </div>
 
 <div>
@@ -150,10 +149,9 @@
 </div>
 
 <div>
-    <label>
-    Fracción Arancelaria:
-    </label>
-    {{tariff_fraction}}
+  {% if tariff_fraction %}
+    <label>Fracción Arancelaria:</label>{{tariff_fraction}}
+  {% endif %}
 </div>
 
 <div>
@@ -170,10 +168,9 @@
     {{total_employees}}
 </div>
 <div>
-    <label>
-    Rango de Ventas Brutas:
-    </label>
-    {{gross_sell_range}}
+  {% if gross_sell_range %}
+    <label>Rango de Ventas Brutas:</label>{{gross_sell_range}}
+  {% endif %}
 </div>
 
 <div>
@@ -295,7 +292,9 @@ Por medio de la presente yo C. _________________________________________________
 <br/>
 <br/>
 <br/>
-<p class="centered">Firma del Representante Legal</p>
+<br/>
+<br/>
+<p class="centered"> Firma del Representante Legal</p>
 </div>
 </body>
 </html>
