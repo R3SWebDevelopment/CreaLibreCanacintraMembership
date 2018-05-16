@@ -143,6 +143,7 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MembershipRequest
+        fields = '__all__'
 
     def validate(self, data):
 
