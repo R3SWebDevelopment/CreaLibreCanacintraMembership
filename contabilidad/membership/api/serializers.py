@@ -139,10 +139,10 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
     main_name = serializers.CharField(required=False, allow_blank=True)
     main_email = serializers.CharField(required=False, allow_blank=True)
     main_phone = serializers.CharField(required=False, allow_blank=True)
+    attachment = MembershipRequestAttachment(read_only=True, many=True)
 
     class Meta:
         model = MembershipRequest
-        exclude = ('attachment',)
 
     def validate(self, data):
 
