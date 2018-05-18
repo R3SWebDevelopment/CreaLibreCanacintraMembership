@@ -109,5 +109,8 @@ class ProductService(CompanyList):
     pass
 
 
-class Certification(CompanyList):
-    pass
+class Certification(models.Model):
+    company = models.ForeignKey(Company, null=False, default=1, related_name="certifications")
+    name = models.CharField(max_length=250, null=False, blank=False)
+    public = models.BooleanField(null=False, default=True)
+    file = models.FileField(upload_to="certifications/attachment", null=False, default=1)
