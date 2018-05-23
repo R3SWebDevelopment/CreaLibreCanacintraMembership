@@ -5,6 +5,7 @@ from django.utils.functional import cached_property
 from django.contrib.auth.models import User
 from membership.models import MembershipRequest, Member, UpdateRequest, RegionDelegation
 from membership.models import SAT_TAXPAYER_TYPE
+from django.urls import reverse
 
 
 class Company(models.Model):
@@ -114,3 +115,9 @@ class Certification(models.Model):
     company = models.ForeignKey(Company, null=False, default=1, related_name="certifications")
     name = models.CharField(max_length=250, null=False, blank=False)
     file = models.FileField(upload_to="certifications/attachment", null=False, default=1)
+
+    @property
+    def url(self):
+        return reverse('company:certification_attachment_view', kwargs={
+            "id": self.id
+        })

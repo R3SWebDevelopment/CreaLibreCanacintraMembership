@@ -35,7 +35,7 @@ class CertificationSerializerWrite(serializers.ModelSerializer):
 
 class CertificationSerializer(serializers.ModelSerializer):
     is_public = serializers.BooleanField(write_only=True, required=True)
-    # certifications = CertificationSerializerWrite(write_only=True, many=True)
+    url = serializers.URLField(read_only=True)
     names = serializers.ListField(
         child=serializers.CharField(),
         write_only=True
