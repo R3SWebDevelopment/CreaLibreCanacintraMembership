@@ -4,6 +4,7 @@ from ..models import Company, ProductService, Certification
 from utils.api.serializers import UserSerializer
 from membership.api.serializers import MemberSerializer, MembershipRequestSerializer
 from django.contrib.auth.models import User
+from crum import get_current_user
 
 
 class ProductServiceSerializer(serializers.ModelSerializer):
@@ -21,10 +22,44 @@ class ProductServiceSerializer(serializers.ModelSerializer):
         read_only_fields = ('code', 'name')
 
 
+class CertificationSerializerWrite(serializers.ModelSerializer):
+
+    class Meta:
+        model = Certification
+        fields = ('name', 'file')
+
+    def create(self, validated_data):
+        print("write validated_data: {}".format(validated_data))
+        return [1, 2]
+
+
 class CertificationSerializer(serializers.ModelSerializer):
+    is_public = serializers.BooleanField(write_only=True, required=True)
+    # certifications = CertificationSerializerWrite(write_only=True, many=True)
+    names = serializers.ListField(
+        child=serializers.CharField(),
+        write_only=True
+    )
+    files = serializers.ListField(
+        child=serializers.FileField(),
+        write_only=True
+    )
+
     class Meta:
         model = Certification
         fields = '__all__'
+        read_only_fields = ('code', 'name', 'id')
+
+    def create(self, validated_data):
+        user = get_current_user()
+        if user is not None and user.profile is not None:
+            company = user.profile.my_company
+            if company is not None:
+                company.certification_is_public = validated_data.get('is_public', False)
+                company.save()
+                for item in zip(validated_data.get('names', []), validated_data.get('files', [])):
+                    Certification.objects.create(company=company, name=item[0], file=item[1])
+        return []
 
 
 class CompanySerializer(serializers.ModelSerializer):

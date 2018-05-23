@@ -5,7 +5,7 @@ from rest_framework import status
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 from .serializers import CommentSerializer
-from customer.api.serializers import ProductServiceSerializer
+from customer.api.serializers import ProductServiceSerializer, CertificationSerializer
 
 
 class FacebookLogin(SocialLoginView):
@@ -63,6 +63,38 @@ class ProductsServicesView(APIView):
                     company.product_service.add(ps)
                 serializer = ProductServiceSerializer(company.product_service, many=True)
                 return Response(serializer.data)
+            return Response({
+                "message": "This user does not have company"
+            }, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CertificationView(APIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CertificationSerializer
+
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        return user.profile
+
+    def get(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        company = object.my_company
+        if company:
+            serializer = CertificationSerializer(company.certifications, many=True)
+            return Response(serializer.data)
+        return Response({
+            "message": "This user does not have company"
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request, *args, **kwargs):
+        serializer = CertificationSerializer(data=request.data)
+        if serializer.is_valid():
+            object = self.get_object(*args, **kwargs)
+            company = object.my_company
+            if company:
+                serializer.save()
+                return self.get(request, args, kwargs)
             return Response({
                 "message": "This user does not have company"
             }, status=status.HTTP_400_BAD_REQUEST)
