@@ -21,6 +21,7 @@ class Company(models.Model):
     sat_tax_payer_type = models.IntegerField(null=True, default=None, choices=SAT_TAXPAYER_TYPE)
     state = models.CharField(max_length=250, null=False, blank=True, verbose_name=_('State Name'))
     delegation = models.CharField(max_length=250, null=False, blank=True, verbose_name=_('Delegation Name'))
+    certification_is_public = models.BooleanField(null=False, default=True)
 
     @cached_property
     def get_delegation(self):
@@ -112,5 +113,4 @@ class ProductService(CompanyList):
 class Certification(models.Model):
     company = models.ForeignKey(Company, null=False, default=1, related_name="certifications")
     name = models.CharField(max_length=250, null=False, blank=False)
-    public = models.BooleanField(null=False, default=True)
     file = models.FileField(upload_to="certifications/attachment", null=False, default=1)
