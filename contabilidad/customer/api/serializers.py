@@ -22,6 +22,40 @@ class ProductServiceSerializer(serializers.ModelSerializer):
         read_only_fields = ('code', 'name')
 
 
+class ProductServiceCertificationSerializer(serializers.Serializer):
+    selected_products = serializers.ListField(child=serializers.IntegerField(), write_only=True, required=True)
+    selected_certifications = serializers.ListField(child=serializers.IntegerField(), write_only=True, required=True)
+    certifications = serializers.SerializerMethodField(read_only=True)
+    product_services = serializers.SerializerMethodField(read_only=True)
+
+    def validate_selected_products(self, value):
+        qs = ProductService.objects.filter(pk__in=value)
+        if qs.count() != len(set(value)):
+            raise serializers.ValidationError("Uno de los productos o servicios no estan registrados")
+        return qs
+
+    def validate_selected_certifications(self, value):
+        user = get_current_user()
+        if user is not None and user.profile is not None:
+            company = user.profile.my_company
+            if company is not None:
+                certifications = company.certifications.filter(pk__in=value)
+                return certifications
+        return []
+
+    def get_certifications(self, obj):
+        serializer = CertificationSerializer(obj.certifications, many=True)
+        return serializer.data
+
+    def get_product_services(self, obj):
+        serializer = ProductServiceSerializer(obj.product_service, many=True)
+        return serializer.data
+
+    class Meta:
+        model = Company
+        fields = ('selected_products', 'selected_certifications', 'certifications', 'product_services')
+
+
 class CertificationSerializerWrite(serializers.ModelSerializer):
 
     class Meta:
@@ -47,7 +81,7 @@ class CertificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Certification
-        fields = '__all__'
+        fields = ('id', 'names', 'files', 'name', 'url', 'is_public')
         read_only_fields = ('code', 'name', 'id')
 
     def create(self, validated_data):
