@@ -198,8 +198,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
 
-         'rest_framework.authentication.BasicAuthentication',
-         'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend', ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -378,3 +378,4 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CLIENT_APP_DOMAIN = os.environ.get('CLIENT_APP_DOMAIN', 'http://localhost:3000')
 FRONT_END_SIGNUP_VERIFICATION_URL = os.environ.get('FRONT_END_SIGNUP_VERIFICATION_URL', '/signup/verification/')
+FRONT_END_PASSWORD_RESET_URL = os.environ.get('FRONT_END_PASSWORD_RESET_URL', '/password_recovery/reset/')
