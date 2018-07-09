@@ -1,9 +1,14 @@
 from django.contrib import admin
 from .models import MembershipRequest, Member, State, Municipality, Suburb, Sector, Branch, SCIAN, TariffFraction, \
-    AttachedFile, Region, RegionDelegation
+    AttachedFile, Region, RegionDelegation, UpdateRequest
 from django.core.urlresolvers import reverse
 from django.utils.text import force_text
 from django.utils.translation import ugettext_lazy as _
+
+
+@admin.register(UpdateRequest)
+class UpdateRequestAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(RegionDelegation)
