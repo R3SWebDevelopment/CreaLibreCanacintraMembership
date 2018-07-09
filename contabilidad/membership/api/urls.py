@@ -2,7 +2,7 @@ from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import MyMembershipRequestView, StateView, SectorView, SCIANView, TariffFractionView, \
     MyMembershipRequestAttachmentView, MembershipRequestAcceptanceView, MembershipRequestsView, MemberView, \
-    MyMembershipView, MyMembershipAttachmentView
+    MyMembershipView, MyMembershipAttachmentView, MembershipUpdateView
 
 urlpatterns = [
     url(r'^$', MyMembershipView.as_view()),
@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^request/$', MyMembershipRequestView.as_view()),
     url(r'^members/$', MemberView.as_view()),
     url(r'^requests/$', MembershipRequestsView.as_view()),
+    url(r'^update/$', MembershipUpdateView.as_view()),
     url(r'^requests/acceptance/$', MembershipRequestAcceptanceView.as_view()),
     url(r'^request/attachment/$', MyMembershipRequestAttachmentView.as_view()),
     url(r'^states/$', StateView.as_view()),

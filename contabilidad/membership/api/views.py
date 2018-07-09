@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from .serializers import MembershipRequestSerializer, StateSerializer, SectorSerializer, SCIANSerializer, \
     TariffFractionSerializer, SuburbSerializer, SuburbWithoutZipCodeSerializer, SuburbMunicipalitySerializer, \
     SuburbSimpleSerializer, MembershipRequestAttachment, MembershipRequestAcceptance, MemberSerializer, \
-    MembershipAttachment
-from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction, Member
+    MembershipAttachment, MembershipUpdateSerializer
+from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction, Member, \
+    UpdateRequest
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework import status
 
@@ -57,6 +58,62 @@ class MembershipRequestAcceptanceView(APIView):
         if serializer.is_valid():
             member = serializer.save()
             return Response(MemberSerializer(member).data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MembershipUpdateView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        profile = user.profile
+        if profile is None:
+            raise ValueError('Este usuario no tiene perfil')
+        company = profile.my_company
+        if company is None:
+            raise ValueError('Este usuario no tiene compañia')
+        object = company.membership
+        if object is None:
+            raise ValueError('Esta compañia no tiene afiliación')
+        update_request = UpdateRequest.objects.filter(member=object).first()
+        if update_request is not None:
+            return update_request
+        return object
+
+    def get(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        if isinstance(object, Member):
+            #  The member does not have a update request
+            serializer = MemberSerializer(object)
+            response_data = serializer.data
+            response_data.update({
+                'can_edit': True,
+                'can_load_attachment': True,
+                'can_download_form': True,
+                'can_submit': False,
+            })
+            return Response(response_data)
+
+        serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
+        member_serializer = MemberSerializer(object)
+        return Response({
+            "attachments": serializer.data,
+            "request": member_serializer .data,
+        })
+
+    def patch(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        if isinstance(object, Member):
+            request_data = request.data
+            request_data.update({
+                'member': object.pk
+            })
+            serializer = MembershipUpdateSerializer(data=request_data)
+        else:
+            serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
