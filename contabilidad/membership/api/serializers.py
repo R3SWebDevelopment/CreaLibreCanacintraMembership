@@ -83,7 +83,7 @@ class MembershipRequestAcceptance(serializers.ModelSerializer):
     def create(self, validated_data):
         data = self.request.pdf_data
         other_representative = data.get('other_representative', [])
-        for key in ['other_representative', 'is_company', 'is_person']:
+        for key in ['other_representative', 'is_company', 'is_person', 'attachment', ]:
             del data[key]
         del validated_data['membership_request']
         for key in ['ceo', 'legal', 'main']:
