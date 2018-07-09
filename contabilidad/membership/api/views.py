@@ -94,12 +94,8 @@ class MembershipUpdateView(APIView):
             })
             return Response(response_data)
 
-        serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
-        member_serializer = MemberSerializer(object)
-        return Response({
-            "attachments": serializer.data,
-            "request": member_serializer .data,
-        })
+        response_data = MembershipUpdateSerializer(object)
+        return Response(response_data.data)
 
     def patch(self, request, *args, **kwargs):
         object = self.get_object(*args, **kwargs)

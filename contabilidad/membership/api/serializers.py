@@ -1,5 +1,5 @@
 from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Suburb, Sector, \
-    Branch, SCIAN, TariffFraction, AttachedFile, Member, Region, RegionDelegation
+    Branch, SCIAN, TariffFraction, AttachedFile, Member, Region, RegionDelegation, UpdateRequest
 from rest_framework import serializers
 
 
@@ -191,6 +191,85 @@ class MembershipRequestSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         return super(MembershipRequestSerializer, self).update(instance, validated_data)
+
+
+class MembershipUpdateSerializer(serializers.ModelSerializer):
+    is_submitted = serializers.NullBooleanField(required=False, read_only=True)
+    can_edit = serializers.NullBooleanField(required=False, read_only=True)
+    has_change_form = serializers.NullBooleanField(required=False, read_only=True)
+    can_load_attachment = serializers.NullBooleanField(required=False, read_only=True)
+    has_create_pdf = serializers.NullBooleanField(required=False, read_only=True)
+    can_download_form = serializers.NullBooleanField(required=False, read_only=True)
+    can_submit = serializers.NullBooleanField(required=False, read_only=True)
+    is_required_field_fulfilled = serializers.NullBooleanField(required=False, read_only=True)
+    form_pdf_url = serializers.URLField(required=False, read_only=True)
+
+    is_person = serializers.NullBooleanField(required=False)
+    is_company = serializers.NullBooleanField(required=False)
+    ceo_name = serializers.CharField(required=False, allow_blank=True)
+    ceo_email = serializers.CharField(required=False, allow_blank=True)
+    ceo_phone = serializers.CharField(required=False, allow_blank=True)
+    legal_name = serializers.CharField(required=False, allow_blank=True)
+    legal_email = serializers.CharField(required=False, allow_blank=True)
+    legal_phone = serializers.CharField(required=False, allow_blank=True)
+    main_name = serializers.CharField(required=False, allow_blank=True)
+    main_email = serializers.CharField(required=False, allow_blank=True)
+    main_phone = serializers.CharField(required=False, allow_blank=True)
+    attachment = MembershipRequestAttachment(read_only=True, many=True)
+
+    class Meta:
+        model = UpdateRequest
+        fields = '__all__'
+
+    def validate(self, data):
+
+        is_person = data.get('is_person', None)
+        if is_person is not None:
+            del data['is_person']
+        is_company = data.get('is_company', None)
+        if is_company is not None:
+            del data['is_company']
+
+        if (is_person and is_company) or (not is_person and not is_company):
+            raise serializers.ValidationError("Debe de seleccionar Persona Física o Persona Moral")
+
+        if is_person is not None or is_company is not None:
+            data['sat_taxpayer_type'] = SAT_PERSON_TYPE if is_person else SAT_ORGANIZATION_TYPE if is_company else None
+
+        data['ceo'] = {
+            'name': data.get('ceo_name', ''),
+            'email': data.get('ceo_email', ''),
+            'phone': data.get('ceo_phone', ''),
+        }
+        del data['ceo_name']
+        del data['ceo_email']
+        del data['ceo_phone']
+
+        data['legal_representative'] = {
+            'name': data.get('legal_name', ''),
+            'email': data.get('legal_email', ''),
+            'phone': data.get('legal_phone', ''),
+        }
+        del data['legal_name']
+        del data['legal_email']
+        del data['legal_phone']
+
+        data['main_representative'] = {
+            'name': data.get('main_name', ''),
+            'email': data.get('main_email', ''),
+            'phone': data.get('main_phone', ''),
+        }
+        del data['main_name']
+        del data['main_email']
+        del data['main_phone']
+
+        return data
+
+    def update(self, instance, validated_data):
+        return super(MembershipRequestSerializer, self).update(instance, validated_data)
+
+    def create(self, validated_data):
+        return UpdateRequest.objects.create(**validated_data)
 
 
 class MembershipRequestPdfSerializer(MembershipRequestSerializer):
