@@ -1,16 +1,22 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
+from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import MyMembershipRequestView, StateView, SectorView, SCIANView, TariffFractionView, \
     MyMembershipRequestAttachmentView, MembershipRequestAcceptanceView, MembershipRequestsView, MemberView, \
     MyMembershipView, MyMembershipAttachmentView, MembershipUpdateView
 
-urlpatterns = [
+router = routers.SimpleRouter()
+
+router.register(r'update', MembershipUpdateView, base_name='membership_update')
+
+urlpatterns = router.urls
+
+urlpatterns += [
     url(r'^$', MyMembershipView.as_view()),
     url(r'^attachment/$', MyMembershipAttachmentView.as_view()),
     url(r'^request/$', MyMembershipRequestView.as_view()),
     url(r'^members/$', MemberView.as_view()),
     url(r'^requests/$', MembershipRequestsView.as_view()),
-    url(r'^update/$', MembershipUpdateView.as_view()),
     url(r'^requests/acceptance/$', MembershipRequestAcceptanceView.as_view()),
     url(r'^request/attachment/$', MyMembershipRequestAttachmentView.as_view()),
     url(r'^states/$', StateView.as_view()),

@@ -7,7 +7,9 @@ from .serializers import MembershipRequestSerializer, StateSerializer, SectorSer
 from ..models import MembershipRequest, State, Municipality, Suburb, Sector, SCIAN, TariffFraction, Member, \
     UpdateRequest
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from rest_framework import status
+from rest_framework import status, viewsets
+from rest_framework.decorators import detail_route, list_route
+from .permissions import MembershipUpdatePermission
 
 
 class MemberView(APIView):
@@ -61,10 +63,13 @@ class MembershipRequestAcceptanceView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class MembershipUpdateView(APIView):
-    permission_classes = (IsAuthenticated,)
+class MembershipUpdateView(viewsets.ModelViewSet):
+    permission_classes = (MembershipUpdatePermission,)
+    serializer_class = MembershipUpdateSerializer
+    queryset = UpdateRequest.objects.all()
+    http_method_names = ['get', 'post', 'patch']
 
-    def get_object(self, *args, **kwargs):
+    def get_my_request(self, *args, **kwargs):
         user = self.request.user
         profile = user.profile
         if profile is None:
@@ -98,6 +103,7 @@ class MembershipUpdateView(APIView):
         return Response(response_data.data)
 
     def patch(self, request, *args, **kwargs):
+        created = False
         object = self.get_object(*args, **kwargs)
         if isinstance(object, Member):
             request_data = request.data
@@ -105,12 +111,67 @@ class MembershipUpdateView(APIView):
                 'member': object.pk
             })
             serializer = MembershipUpdateSerializer(data=request_data)
+            created = True
         else:
             serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @list_route(methods=['get', 'patch'])
+    def mine(self, request, pk=None, *args, **kwargs):
+        if request.method == 'PATCH':
+            created = False
+            object = self.get_my_request(*args, **kwargs)
+            if isinstance(object, Member):
+                request_data = request.data
+                request_data.update({
+                    'member': object.pk
+                })
+                serializer = MembershipUpdateSerializer(data=request_data)
+                created = True
+            else:
+                serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
+            if serializer.is_valid():
+                request = serializer.save()
+                if created:
+                    for attachment in object.attachment.all():
+                        request.attachment.add(attachment)
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            object = self.get_my_request(*args, **kwargs)
+            if isinstance(object, Member):
+                #  The member does not have a update request
+                serializer = MemberSerializer(object)
+                response_data = serializer.data
+                response_data.update({
+                    'can_edit': True,
+                    'can_load_attachment': True,
+                    'can_download_form': True,
+                    'can_submit': False,
+                })
+                return Response(response_data)
+
+            response_data = MembershipUpdateSerializer(object)
+            return Response(response_data.data)
+
+    @list_route(methods=['get', 'post'])
+    def attachments(self, request, *args, **kwargs):
+        object = self.get_object(*args, **kwargs)
+        if request.method == 'post':
+            if isinstance(object, Member):
+                pass
+            else:
+                pass
+        serializer = MembershipAttachment(object.attachment.all(), many=True)
+        request_serializer = MemberSerializer(object) if isinstance(object, Member) \
+            else MembershipUpdateSerializer(object)
+        return Response({
+            "attachments": serializer.data,
+            "request": request_serializer.data,
+        })
 
 
 class MyMembershipAttachmentView(APIView):
