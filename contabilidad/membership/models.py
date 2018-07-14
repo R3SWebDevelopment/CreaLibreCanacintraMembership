@@ -589,6 +589,7 @@ class Payment(models.Model):
     bank_account = models.CharField(max_length=250, null=False)
     bank_account_clabe = models.CharField(max_length=250, null=False)
     bank_reference = models.CharField(max_length=250, null=False)
+    payment_submitted = models.NullBooleanField(default=None)
 
     class Meta:
         ordering = ('member', 'creation_datetime')
