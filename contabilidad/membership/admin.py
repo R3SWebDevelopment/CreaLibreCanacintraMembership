@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import MembershipRequest, Member, State, Municipality, Suburb, Sector, Branch, SCIAN, TariffFraction, \
-    AttachedFile, Region, RegionDelegation, UpdateRequest
+    AttachedFile, Region, RegionDelegation, UpdateRequest, Payment
 from django.core.urlresolvers import reverse
 from django.utils.text import force_text
 from django.utils.translation import ugettext_lazy as _
@@ -106,4 +106,9 @@ class SCIANAdmin(admin.ModelAdmin):
 
 @admin.register(TariffFraction)
 class TariffFractionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
     pass
