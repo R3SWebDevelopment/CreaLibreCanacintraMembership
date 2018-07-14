@@ -389,6 +389,7 @@ class UpdateRequest(MemberInfo):
     attended_by = models.ForeignKey(User, related_name="update_requests_approved", null=True)
     validated = models.NullBooleanField(null=True, default=None)
     hidden = models.NullBooleanField(default=False)
+    attachment = models.ManyToManyField(AttachedFile)
 
     objects = HiddenModelManager()
 
