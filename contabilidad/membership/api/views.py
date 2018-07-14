@@ -157,9 +157,9 @@ class MembershipUpdateView(viewsets.ModelViewSet):
             response_data = MembershipUpdateSerializer(object)
             return Response(response_data.data)
 
-    @list_route(methods=['get', 'post'])
+    @list_route(methods=['get', 'post'], url_path='mine/attachments')
     def attachments(self, request, *args, **kwargs):
-        object = self.get_object(*args, **kwargs)
+        object = self.get_my_request(*args, **kwargs)
         if request.method == 'post':
             if isinstance(object, Member):
                 pass
