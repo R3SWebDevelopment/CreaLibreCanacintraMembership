@@ -574,3 +574,24 @@ class RegionDelegation(models.Model):
 
     def __str__(self):
         return "{} - {} - {}".format(self.region, self.code, self.description)
+
+
+class Payment(models.Model):
+    member = models.ForeignKey(Member, related_name="payments")
+    amount = models.DecimalField(null=True, default=None, max_digits=12, decimal_places=2)
+    paid = models.NullBooleanField(default=False)
+    creation_datetime = models.DateTimeField(auto_now_add=True)
+    voucher = models.FileField(upload_to="payments", null=True)
+    payment_date = models.DateField(null=False)
+    invoice_pdf = models.FileField(upload_to="invoices", null=True)
+    invoice_xml = models.FileField(upload_to="invoices", null=True)
+    bank_name = models.CharField(max_length=250, null=False)
+    bank_account = models.CharField(max_length=250, null=False)
+    bank_account_clabe = models.CharField(max_length=250, null=False)
+    bank_reference = models.CharField(max_length=250, null=False)
+
+    class Meta:
+        ordering = ('member', 'creation_datetime')
+
+    def __str__(self):
+        return "Member: {} - Amount: {} - Paid: {}".format(self.member, self.amount, self.paid)
