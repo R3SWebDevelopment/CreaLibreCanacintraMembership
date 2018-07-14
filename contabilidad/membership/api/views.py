@@ -69,6 +69,14 @@ class MembershipUpdateView(viewsets.ModelViewSet):
     queryset = UpdateRequest.objects.all()
     http_method_names = ['get', 'post', 'patch']
 
+    def get_serializer_class(self, request=None, *args, **kwargs):
+        print("self.action: {}".format(self.action))
+        if self.action in ['list', 'mine']:
+            return self.serializer_class
+        if self.action in ['attachments']:
+            return MembershipRequestAttachment
+        return self.serializer_class
+
     def get_my_request(self, *args, **kwargs):
         user = self.request.user
         profile = user.profile
@@ -131,6 +139,31 @@ class MembershipUpdateView(viewsets.ModelViewSet):
                 pass
             else:
                 pass
+
+            file_serializer = MembershipRequestAttachment(data=request.data)
+            if file_serializer.is_valid():
+                attachments = file_serializer.save()
+                errors = []
+                for attachment in attachments:
+                    try:
+                        object.add_attachment(attachment)
+                    except Exception as e:
+                        error = {
+                            e.args[1]: e.args[0]
+                        }
+                        attachment.delete()
+                        errors.append(error)
+                serializer = MembershipRequestAttachment(object.attachment.all(), many=True)
+                request_serializer = MembershipRequestSerializer(object)
+                return Response({
+                    "errors": errors,
+                    "attachments": serializer.data,
+                    "request": request_serializer.data,
+                })
+            else:
+                return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
         serializer = MembershipAttachment(object.attachment.all(), many=True)
         request_serializer = MemberSerializer(object) if isinstance(object, Member) \
             else MembershipUpdateSerializer(object)
