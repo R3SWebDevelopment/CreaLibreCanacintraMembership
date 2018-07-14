@@ -1,6 +1,34 @@
 from ..models import MembershipRequest, SAT_PERSON_TYPE, SAT_ORGANIZATION_TYPE, State, Municipality, Suburb, Sector, \
-    Branch, SCIAN, TariffFraction, AttachedFile, Member, Region, RegionDelegation, UpdateRequest
+    Branch, SCIAN, TariffFraction, AttachedFile, Member, Region, RegionDelegation, UpdateRequest, Payment
 from rest_framework import serializers
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payment
+        fields = '__all__'
+
+
+class PaymentCreatePayment(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payment
+        fields = ('amount', 'bank_name', 'bank_account', 'bank_account_clabe', 'bank_reference')
+
+
+class PaymentAddInvoice(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payment
+        fields = ('invoice_pdf', 'invoice_xml')
+
+
+class PaymentPaid(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payment
+        fields = ('voucher',)
 
 
 class RegionDelegationSerializer(serializers.ModelSerializer):
