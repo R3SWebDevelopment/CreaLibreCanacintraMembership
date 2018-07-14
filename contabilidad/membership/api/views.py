@@ -115,7 +115,10 @@ class MembershipUpdateView(viewsets.ModelViewSet):
         else:
             serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save()
+            request = serializer.save()
+            if created:
+                for attachment in object.attachment.all():
+                    request.attachment.add(attachment)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
