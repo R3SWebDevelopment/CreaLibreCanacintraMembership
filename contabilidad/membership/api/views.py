@@ -85,43 +85,6 @@ class MembershipUpdateView(viewsets.ModelViewSet):
             return update_request
         return object
 
-    def get(self, request, *args, **kwargs):
-        object = self.get_object(*args, **kwargs)
-        if isinstance(object, Member):
-            #  The member does not have a update request
-            serializer = MemberSerializer(object)
-            response_data = serializer.data
-            response_data.update({
-                'can_edit': True,
-                'can_load_attachment': True,
-                'can_download_form': True,
-                'can_submit': False,
-            })
-            return Response(response_data)
-
-        response_data = MembershipUpdateSerializer(object)
-        return Response(response_data.data)
-
-    def patch(self, request, *args, **kwargs):
-        created = False
-        object = self.get_object(*args, **kwargs)
-        if isinstance(object, Member):
-            request_data = request.data
-            request_data.update({
-                'member': object.pk
-            })
-            serializer = MembershipUpdateSerializer(data=request_data)
-            created = True
-        else:
-            serializer = MembershipRequestSerializer(object, data=request.data, partial=True)
-        if serializer.is_valid():
-            request = serializer.save()
-            if created:
-                for attachment in object.attachment.all():
-                    request.attachment.add(attachment)
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     @list_route(methods=['get', 'patch'])
     def mine(self, request, pk=None, *args, **kwargs):
         if request.method == 'PATCH':
