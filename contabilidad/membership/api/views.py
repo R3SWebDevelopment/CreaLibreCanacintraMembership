@@ -163,7 +163,6 @@ class MembershipUpdateView(viewsets.ModelViewSet):
             else:
                 return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
         serializer = MembershipAttachment(object.attachment.all(), many=True)
         request_serializer = MemberSerializer(object) if isinstance(object, Member) \
             else MembershipUpdateSerializer(object)
