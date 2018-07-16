@@ -63,6 +63,10 @@ class MembershipRequestAcceptanceView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class MembershipPaymentView(viewsets.ModelViewSet):
+    pass
+
+
 class MembershipUpdateView(viewsets.ModelViewSet):
     permission_classes = (MembershipUpdatePermission,)
     serializer_class = MembershipUpdateSerializer
